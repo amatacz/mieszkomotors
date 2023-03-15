@@ -1,0 +1,18 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+<div class="content-container">
+        <p class="h2 py-3">{{ insurance.car.brand }} {{ insurance.car.model }} {{ insurance.car.owner }} details</p>
+        <li class="m-2"> Price: {{ insurance.price }}</li>
+        <li class="m-2">Offer: {{ insurance.offer }}</li>
+        <li class="m-2"> Date: {{ insurance.purchase_date }}</li>
+        <li class="m-2"> Additional info: {{ insurance.notes }}</li>
+        <li class="m-2"> Attachements: {{ insurance.attachements }}</li>
+    <div class="py-3 justify-between">
+        <ul class="m-2"><a class="btn btn-info" href="{% url 'insurance_update' insurance.id %}"> Update insurance info</a>
+            <a class="btn btn-info" href="{% url 'insurance_delete' insurance.pk %}"> Delete insurance </a></ul>
+        <ul class="m-2"><a class="btn btn-info" href="{% url 'insurance_list'%}"> Return to insurance list</a>
+            <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a></ul>
+    </div>
+</div>
+{% endblock %}

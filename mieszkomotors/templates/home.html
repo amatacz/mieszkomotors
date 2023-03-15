@@ -1,0 +1,12 @@
+{% extends "./base.html" %}
+
+{% block content %}
+
+    <ul>
+        <li><a href="{% url 'car_list' %}">Lista samochodów</a></li>
+        <li><a href="{% url 'owner_list' %}">Lista klientów</a></li>
+        <li><a href="{% url 'insurance_list' %}">Lista ubezpieczeń</a></li>
+        <li><a href="{% url 'calendar' %}">Kalendarz</a></li>
+     </ul>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+<div class="content-container">
+    <p class="h2 py-3">Insurances</p>
+
+    {% for insurance in object_list %}
+        <li class="m-2 font-weight-bold"><a href="{% url 'insurance_detail' insurance.id %}">{{ insurance }}</a></li>
+    {% endfor %}
+    <div class="py-3 justify-between">
+        <a class="btn btn-info" href="{% url 'insurance_create'%}"> Add new insurance </a>
+        <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+    </div>
+</div>
+{% endblock %}

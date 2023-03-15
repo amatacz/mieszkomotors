@@ -1,0 +1,15 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+<div class="content-container">
+    <p class="h2 py-3">Delete the owner</p>
+    <form method="post">
+        {% csrf_token %}
+        <p class="h2 py-3">Please confirm delete of {{ owner }}?</p>
+        <button class="btn btn-info my-3" type="submit">Delete</button>
+    </form>
+    <a class="btn btn-info" href="{% url 'owner_detail' owner.id %}"> Return to owner details </a>
+    <a class="btn btn-info" href="{% url 'owner_list'%}"> Return to owner list</a>
+    <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+</div>
+{% endblock %}

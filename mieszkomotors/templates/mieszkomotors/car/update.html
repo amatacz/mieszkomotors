@@ -1,0 +1,17 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+<div class="content-container">
+    <p class="h2 py-3">Update car info</p>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_div}}
+    <button class="btn btn-info mt-3" type="submit">Save</button>
+</form>
+<div class="py-3 justify-between">
+    <a class="btn btn-info" href="{% url 'car_detail' car.id %}"> Return to car details </a>
+    <a class="btn btn-info" href="{% url 'car_list'%}"> Return to car list</a>
+    <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+</div>
+</div>
+{% endblock %}
