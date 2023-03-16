@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from . import models
 from django.forms import ModelForm, TextInput, EmailInput, FileInput, NumberInput, DateInput, Select
 from django.conf import settings
@@ -36,7 +37,7 @@ class OwnerForm(ModelForm):
 class InsuranceForm(ModelForm):
     class Meta:
         model = models.Insurance
-        fields = ['car', 'price', 'offer', 'date', 'notes', 'attachements']
+        fields = ['car', 'price', 'offer', 'current_insurance_date', 'notes', 'attachements']
         widgets = {
             "car": Select(attrs={
                 "class": "form-control",
@@ -53,10 +54,10 @@ class InsuranceForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Offer"
             }),
-            "date": DateInput(attrs={
+            "current_insurance_date": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Date"
+                "placeholder": "Current insurance date"
             }),
             "notes": TextInput(attrs={
                 "class": "form-control",
@@ -75,7 +76,7 @@ class InsuranceForm(ModelForm):
 class CarForm(ModelForm):
     class Meta:
         model = models.Car
-        fields = ['owner', 'model', 'brand', 'vin', 'license_plates', 'insurance', 'car_review_date', 'purchase_date', 'notes', 'attachements']
+        fields = ['owner', 'brand', 'model', 'vin', 'license_plates', 'insurance', 'current_car_review_date', 'car_review_renewal_date' ,'purchase_date', 'notes', 'attachements']
         widgets = {
             "owner": Select(attrs={
                 "class": "form-control",
@@ -107,10 +108,15 @@ class CarForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Insurance"
             }),
-            "car_review_date": DateInput(attrs={
+            "current_car_review_date": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Car Review Date"
+                "placeholder": "Current Car Review Date"
+            }),
+            "car_review_renewal_date": DateInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Next Car Review Date"
             }),
             "purchase_date": DateInput(attrs={
                 "class": "form-control",
@@ -131,4 +137,67 @@ class CarForm(ModelForm):
 
         }
 
-        
+# SignUpForm is not used 16.03.2023
+
+class SignUpForm(UserCreationForm):
+    username = forms.CharField(max_length=150, label="Username")
+    first_name = forms.CharField(max_length=150, label="First Name")
+    last_name = forms.CharField(max_length=150, label = "Last Name")
+    email = forms.EmailInput()
+    password1 = forms.CharField(widget=forms.PasswordInput, label="Password")
+    password2 = forms.CharField(widget=forms.PasswordInput, label="Password confirm")
+
+    class Meta:
+        model = models.User
+        fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
+        widget = {
+            "username": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Username"
+            }),
+
+            "first_name": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "First Name"
+            }),
+            "last_name": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Last Name"
+            }),
+            "email": EmailInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Email address"
+            }),
+            "password1": forms.PasswordInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Password"
+            }),
+            "password2": forms.PasswordInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Password confirm"
+            }),
+        }
+
+class LoginForm(AuthenticationForm):
+    class Meta:
+        model = models.User
+        fields = ['username', 'password']
+        widget = {
+            "username": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Username"
+            }),
+            "password": forms.PasswordInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Password"
+            })
+        }
+

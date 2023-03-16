@@ -44,6 +44,23 @@
                     </ol>
                 </nav>
                 </div>
+                <nav aria-label="breadcrumb">
+                    <div class="container-flex right mx-3">
+                        {% if user.is_authenticated %}
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <a href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </ol>
+                        {% else %}
+                        <ol class="breadcrumb">
+                            <li cclass="breadcrumb-item active" aria-current="page">
+                                <a href="{% url 'login' %}">Login</a>
+                            </li>
+                        </ol>
+                        {% endif %}
+                    </div>
+                </nav>
             </nav>
         </div>
 

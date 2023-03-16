@@ -3,32 +3,32 @@ import calendar
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
-from django.views.generic import ListView
+from django.views.generic import ListView, View
 from django.utils.safestring import mark_safe
-
-
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.mail import EmailMessage, get_connection
-from django.conf import settings
+from django.contrib import messages
 
 from . import models
 from . import forms
 from .utils import Calendar
 
 # Home
-def home_view(request):
-    return render(request, 'home.html')
+class Home(View):
+    def get(self, request):
+        if request.user.is_authenticated:     
+            return redirect('calendar')
+        return render(request, 'home.html')
 
 # Cars Views 
 class CarCreate(LoginRequiredMixin, CreateView):
     model = models.Car
     form_class = forms.CarForm
     template_name = 'mieszkomotors/car/create.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('car_list')
     success_message = 'Samochód dodany do bazy'
 
 class CarDetail(LoginRequiredMixin, DetailView):
@@ -56,7 +56,7 @@ class OwnerCreate(LoginRequiredMixin, CreateView):
     model = models.Owner
     template_name = 'mieszkomotors/owner/create.html'
     form_class = forms.OwnerForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('owner_list')
     success_message = 'Właściciel dodany do bazy'
 
 class OwnerDetail(LoginRequiredMixin, DetailView):
@@ -107,7 +107,7 @@ class InsuranceDelete(LoginRequiredMixin, DeleteView):
 
 # Calendar Views
 
-class CalendarView(LoginRequiredMixin, ListView):
+class CalendarView(ListView):
     model = models.CarEvent
     template_name = 'calendar.html'
 
@@ -152,21 +152,58 @@ def next_month(d):
     return month
 
 
-# Email function
 
-def send_email(request):
-    if request.method == "POST":
-        with get_connection(
-            host = settings.EMAIL_HOST,
-            port = settings.EMAIL_PORT,
-            username = settings.EMAIL_HOST_USER,
-            password = settings.EMAIL_HOST_PASSWORD,
-            use_tls = settings.EMAIL_USE_TLS
-        ) as connection:
-            subject = request.POST.get("subject")
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [request.POST.get("email"), ]
-            message = request.POST.get("message")
-            EmailMessage(subject, message, email_from, recipient_list, connection=connection).send()
+# LogIn, LogOut, SignUp views
 
-    return render(request, 'home.html')
+class signUp(View):
+    form_class = forms.SignUpForm
+    template_name = 'registration/register.hmtl'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = form.save()
+
+            return redirect('login')
+        return render(request, self.template_name, {'form': form })
+
+
+class loginView(View):
+    form_class = forms.LoginForm
+    template_name = 'registration/login.html'
+
+    def get(self, request):
+        form = self.form_class
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request):
+        if request.method == "POST":
+            form = forms.LoginForm(request, data = request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
+
+                user = authenticate(username=username, password=password)
+
+                if user is not None:
+                    login(request, user)
+                    messages.success(
+                        request, f"Zalogowałeś się jako {username}"
+                    )
+                    return redirect('home')
+                else:
+                    messages.error(request, "Błąd")
+            else:
+                messages.error(request, "Nieprawidłowa nazwa użytkownika lub hasło")
+        form = forms.LoginForm()
+        return render(request, 'registration/login.html', {'form': form})
+    
+
+class logoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('home')

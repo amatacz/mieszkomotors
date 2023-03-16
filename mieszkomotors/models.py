@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import date
 from dateutil.relativedelta import relativedelta
-
+from django.contrib.auth.models import User
 
 
 class Owner(models.Model):
@@ -21,31 +21,39 @@ class Owner(models.Model):
     
 class Insurance(models.Model):
     car = models.OneToOneField('Car', on_delete=models.CASCADE, related_name='car', default=666)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     offer = models.TextField(max_length=500, null=True, blank=True)
-    date = models.DateField()
+    current_insurance_date = models.DateField()
+    insurance_renewal_date = models.DateField(null=True, blank=True)
+    payment_1 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    payment_2 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    payment_3 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    payment_4 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     notes = models.TextField(max_length=500, null=True, blank=True)
     attachements = models.FileField(upload_to='documents', max_length=200, blank=True)
+    # insurance renewal date which will be trigger for email notifcation ?
 
     def __str__(self) -> str:
-         return f'Ubezpieczenie {self.car}'
+         return f'Insurance {self.car}'
 	
 	
 class Car(models.Model):
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True, related_name='car_owner')
-    model = models.CharField(max_length=30)
     brand = models.CharField(max_length=30)
+    model = models.CharField(max_length=30)
     vin = models.CharField(max_length=17, unique=True)
     license_plates = models.CharField(max_length=8, unique=True)
-    insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE, related_name='car_insurance', null=True, blank=True, default='TBU')
-    car_review_date = models.DateField()
+    insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE, related_name='car_insurance', null=True, blank=True)
+    current_car_review_date = models.DateField()
+    car_review_renewal_date = models.DateField(null=True, blank=True)
     purchase_date = models.DateField()
     notes = models.TextField(max_length=500, null=True, blank=True)
     in_mieszkomotors_since = models.DateField(auto_created=True, auto_now=True)
     attachements = models.FileField(upload_to='documents', max_length=200, blank=True)
+    # car review renewal date which will be trigger for email notifcation ?
 
     def __str__(self) -> str:
-         return f'{self.brand} {self.model}, właściciel {self.owner}'
+         return f'{self.brand} {self.model}, owner {self.owner}'
     
 
 class CarEvent(models.Model):
@@ -54,14 +62,14 @@ class CarEvent(models.Model):
 
     @property
     def get_next_review_date(self):
-        return self.car.car_review_date + relativedelta(months=+11)
+        return self.car.current_car_review_date + relativedelta(months=+11)
     
     def save(self, *args, **kwargs):
          self.next_review_date = self.get_next_review_date
          super(CarEvent, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f'Właściciel {self.car.owner} informacja kolejnym przeglądzie: {self.next_review_date}'
+        return f'Owner {self.car.owner} next car review notification: {self.next_review_date}'
 
 class InsuranceEvent(models.Model):
     insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
@@ -69,12 +77,12 @@ class InsuranceEvent(models.Model):
 
     @property
     def get_next_insurance_date(self):
-        return self.insurance.date + relativedelta(months=+11)
+        return self.insurance.current_insurance_date + relativedelta(months=+11)
     
     def save(self, *args, **kwargs):
         self.next_insurance_date = self.get_next_insurance_date
         super(InsuranceEvent, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.insurance} informacja kolejnym okresie ubezpieczeniowym: {self.next_insurance_date}'
+        return f'{self.insurance} next insurance period notification: {self.next_insurance_date}'
 	

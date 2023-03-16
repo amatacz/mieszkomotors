@@ -1,8 +1,8 @@
-from django.urls import path, include, re_path
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
-    path('', views.CalendarView.as_view(), name='home'),
+    path('', views.Home.as_view(), name='home'),
 
     # Cars urls
     path('car/create', views.CarCreate.as_view(), name='car_create'),
@@ -27,5 +27,9 @@ urlpatterns = [
 
     # Calendar urls
     re_path(r'^calendar/$', views.CalendarView.as_view(), name='calendar'),
+
+    # Login, logout urls
+    path("login/", views.loginView.as_view(), name="login"),
+    path("logout/", views.logoutView.as_view(), name="logout"),
 
 ]
