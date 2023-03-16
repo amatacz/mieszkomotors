@@ -15,11 +15,10 @@ class Owner(models.Model):
     notes = models.TextField(max_length=500, null=True, blank=True)
     in_mieszkomotors_since = models.DateField(auto_created=True, auto_now=True)
 
-	
     def __str__(self):
 	    return f'{self.first_name} {self.last_name}'
-
-
+    
+    
 class Insurance(models.Model):
     car = models.OneToOneField('Car', on_delete=models.CASCADE, related_name='car', default=666)
     price = models.FloatField()
@@ -33,7 +32,7 @@ class Insurance(models.Model):
 	
 	
 class Car(models.Model):
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True, related_name='car_owner')
     model = models.CharField(max_length=30)
     brand = models.CharField(max_length=30)
     vin = models.CharField(max_length=17, unique=True)

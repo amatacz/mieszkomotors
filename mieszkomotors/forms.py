@@ -1,6 +1,9 @@
 from django import forms
 from . import models
 from django.forms import ModelForm, TextInput, EmailInput, FileInput, NumberInput, DateInput, Select
+from django.conf import settings
+from django.core.mail import send_mail
+
 
 class OwnerForm(ModelForm):
     class Meta:
@@ -127,3 +130,5 @@ class CarForm(ModelForm):
 
 
         }
+
+        

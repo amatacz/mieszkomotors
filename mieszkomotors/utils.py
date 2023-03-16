@@ -19,7 +19,7 @@ class Calendar(HTMLCalendar):
         for car_event in car_events_per_day:
             d += f"<li> Przegląd {car_event.car.owner} {car_event.car.brand} {car_event.car.model} {car_event.next_review_date}</li>"
         for insurance_event in insuance_events_per_day:
-            d += f"<li> Ubezpieczenie {insurance_event.insurance.car.owner} {insurance_event.insurance.car.brand} {insurance_event.insurance.car.model}{insurance_event.next_insurance_date}</li>"
+            d += f"<li> Ubezpieczenie {insurance_event.insurance.car.owner} {insurance_event.insurance.car.brand} {insurance_event.insurance.car.model} {insurance_event.next_insurance_date} </li>"
 
         if day != 0:
             return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"

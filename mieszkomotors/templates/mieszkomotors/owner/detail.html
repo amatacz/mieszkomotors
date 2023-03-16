@@ -2,14 +2,16 @@
 
 {% block content %}
 <div class="content-container">
-        <p class="h2 py-3">{{ owner.first_name }} {{ owner.last_name }} details/p>
+        <p class="h2 py-3">{{ owner.first_name }} {{ owner.last_name }} details</p>
         <li class="m-2"> Email: {{ owner.email }}</li>
         <li class="m-2"> Phone number: {{ owner.phone_number }}</li>
         <li class="m-2"> Address: {{ owner.address }}</li>
         <li class="m-2"> NIP: {{ owner.nip_number }}</li>
-        <li class="m-2"> Birthdat: {{ owner.birthday }}</li>
+        <li class="m-2"> Birthday: {{ owner.birthday }}</li>
         <li class="m-2"> Additional info: {{ owner.notes }}</li>
         <li class="m-2"> Client since: {{ owner.in_mieszkomotors_since }}</li>
+
+        <li class="m-2"> Owner of: {{ owner.get_owner_cars }}</li>
     <div class="py-3 justify-between">
         <ul class="m-2"><a class="btn btn-info" href="{% url 'owner_update' owner.id %}"> Update owner info</a>
             <a class="btn btn-info" href="{% url 'owner_delete' owner.pk %}"> Delete owner </a></ul>
