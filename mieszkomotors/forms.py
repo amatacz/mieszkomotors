@@ -116,7 +116,7 @@ class CarForm(ModelForm):
             "car_review_renewal_date": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Next Car Review Date"
+                "placeholder": "Next Car Review Date",
             }),
             "purchase_date": DateInput(attrs={
                 "class": "form-control",

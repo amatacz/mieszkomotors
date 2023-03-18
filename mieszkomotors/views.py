@@ -108,13 +108,13 @@ class InsuranceDelete(LoginRequiredMixin, DeleteView):
 # Calendar Views
 
 class CalendarView(ListView):
-    model = models.CarEvent
+    model = models.Car
     template_name = 'calendar.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['carevents'] = models.Car.objects.all()
-        context['insuranceevents'] = models.InsuranceEvent.objects.all()
+        context['insuranceevents'] = models.Insurance.objects.all()
         
         # use today's date for the calendar
         d = get_date(self.request.GET.get('month', None))

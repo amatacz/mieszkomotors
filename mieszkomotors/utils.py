@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+import datetime
 from calendar import HTMLCalendar
 from . import models
 
@@ -13,13 +13,14 @@ class Calendar(HTMLCalendar):
     # formats a day as a td
     # filter events by day
     def formatday(self, day, car_events, insurance_events):
-        car_events_per_day = car_events.filter(next_review_date__day = day)
-        insuance_events_per_day = insurance_events.filter(next_insurance_date__day = day)
+
+        car_events_per_day = car_events.filter(car_review_renewal_date__day = day)
+        insuance_events_per_day = insurance_events.filter(insurance_renewal_date__day = day)
         d = ""
         for car_event in car_events_per_day:
-            d += f"<li> Przegląd {car_event.car.owner} {car_event.car.brand} {car_event.car.model} {car_event.next_review_date}</li>"
+            d += f"<li> Przegląd {car_event.owner} {car_event.brand} {car_event.model} {car_event.car_review_renewal_date}</li>"
         for insurance_event in insuance_events_per_day:
-            d += f"<li> Ubezpieczenie {insurance_event.insurance.car.owner} {insurance_event.insurance.car.brand} {insurance_event.insurance.car.model} {insurance_event.next_insurance_date} </li>"
+            d += f"<li> Ubezpieczenie {insurance_event.car.owner} {insurance_event.car.brand} {insurance_event.car.model} {insurance_event.insurance_renewal_date} </li>"
 
         if day != 0:
             return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
@@ -37,8 +38,8 @@ class Calendar(HTMLCalendar):
     # formats a month as a table
     # filter events by year and month
     def formatmonth(self, withyear=True):
-        car_events = models.CarEvent.objects.filter(next_review_date__year=self.year, next_review_date__month = self.month)
-        insurance_events = models.InsuranceEvent.objects.filter(next_insurance_date__year=self.year, next_insurance_date__month = self.month)
+        car_events = models.Car.objects.filter(car_review_renewal_date__year=self.year, car_review_renewal_date__month = self.month)
+        insurance_events = models.Insurance.objects.filter(insurance_renewal_date__year=self.year, insurance_renewal_date__month = self.month)
 
 
         cal = f"<table borde='0' cellpadding='0' cellspacing='0' class='calendar'>\n"
