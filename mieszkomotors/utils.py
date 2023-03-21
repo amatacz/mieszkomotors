@@ -15,11 +15,11 @@ class Calendar(HTMLCalendar):
     def formatday(self, day, car_events, insurance_events):
 
         car_events_per_day = car_events.filter(car_review_renewal_date__day = day)
-        insuance_events_per_day = insurance_events.filter(insurance_renewal_date__day = day)
+        insurance_events_per_day = insurance_events.filter(insurance_renewal_date__day = day)
         d = ""
         for car_event in car_events_per_day:
             d += f"<li> Przegląd {car_event.owner} {car_event.brand} {car_event.model} {car_event.car_review_renewal_date}</li>"
-        for insurance_event in insuance_events_per_day:
+        for insurance_event in insurance_events_per_day:
             d += f"<li> Ubezpieczenie {insurance_event.car.owner} {insurance_event.car.brand} {insurance_event.car.model} {insurance_event.insurance_renewal_date} </li>"
 
         if day != 0:

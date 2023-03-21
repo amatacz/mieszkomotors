@@ -3,7 +3,7 @@
 {% block content %}
 <div class="content-container">
     <p class="h2 py-3">Update insurance info</p>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <button class="btn btn-info mt-3" type="submit">Save</button>

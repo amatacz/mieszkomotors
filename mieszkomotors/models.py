@@ -21,7 +21,7 @@ class Owner(models.Model):
     
     
 class Insurance(models.Model):
-    car = models.OneToOneField('Car', on_delete=models.CASCADE, related_name='car', default=666)
+    car = models.OneToOneField('Car', on_delete=models.CASCADE, related_name='car')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     offer = models.TextField(max_length=500, null=True, blank=True)
     current_insurance_date = models.DateField()
@@ -32,7 +32,7 @@ class Insurance(models.Model):
     payment_3 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     payment_4 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     notes = models.TextField(max_length=500, null=True, blank=True)
-    attachements = models.FileField(upload_to='documents', max_length=200, blank=True)
+    attachements = models.FileField(upload_to='documents/', blank=True)
 
     def __str__(self) -> str:
          return f'Insurance {self.car}'
@@ -51,8 +51,7 @@ class Car(models.Model):
     purchase_date = models.DateField()
     notes = models.TextField(max_length=500, null=True, blank=True)
     in_mieszkomotors_since = models.DateField(auto_created=True, auto_now=True)
-    attachements = models.FileField(upload_to='documents', max_length=200, blank=True)
+    attachements = models.FileField(upload_to='documents/', blank=True)
 
     def __str__(self) -> str:
          return f'{self.brand} {self.model}, owner {self.owner}'
-    

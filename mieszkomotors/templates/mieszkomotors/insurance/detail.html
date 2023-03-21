@@ -8,7 +8,7 @@
         <li class="m-2"> Date: {{ insurance.current_insurance_date }}</li>
         <li class="m-2"> Renewal date: {{ insurance.insurance_renewal_date }} - notification will be send on {{ insurance.insurance_renewal_date_notification }}</li>
         <li class="m-2"> Additional info: {{ insurance.notes }}</li>
-        <li class="m-2"> Attachements: {{ insurance.attachements }}</li>
+        <li class="m-2"> Attachements: <a download href="{{ insurance.attachements }}">{{ insurance.attachements }}</a></li>
     <div class="py-3 justify-between">
         <ul class="m-2"><a class="btn btn-info" href="{% url 'insurance_update' insurance.id %}"> Update insurance info</a>
             <a class="btn btn-info" href="{% url 'insurance_delete' insurance.pk %}"> Delete insurance </a></ul>

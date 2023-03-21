@@ -79,11 +79,12 @@ class OwnerDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('owner_list')
 
 # Insurance Views
+
 class InsuranceCreate(LoginRequiredMixin, CreateView):
     model = models.Insurance
     template_name = 'mieszkomotors/insurance/create.html'
     form_class = forms.InsuranceForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('insurance_list')
     success_message = 'Ubezpieczenie dodane do bazy'
 
 class InsuranceDetail(LoginRequiredMixin, DetailView):
