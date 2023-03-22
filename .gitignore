@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@amatacz 
-amatacz
-/
-mieszkomotors
-Private
-Cannot fork because you own this repository and are not a member of any organizations.
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-Settings
-mieszkomotors/.gitignore
-@amatacz
-amatacz Initial commit
-Latest commit 5390501 6 minutes ago
- History
- 1 contributor
-129 lines (105 sloc)  1.76 KB
-
 # Byte-compiled / optimized / DLL files
 *__pycache__/
 */*/__pycache__/
@@ -93,6 +63,7 @@ local_settings.py
 sitesettings.py
 db.sqlite3
 db.sqlite3-journal
+mieszkomotors/migrations/*
 
 # Flask stuff:
 instance/
