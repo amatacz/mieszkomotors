@@ -8,7 +8,7 @@ import json
 class Command(BaseCommand):
     def handle(self, *args, **options):
         today = datetime.date.today()
-        next_month = today + relativedelta(months=+1)
+        next_month = today + models.RENEWAL_INTERVAL
         cars = models.Car.objects.all().filter(car_review_renewal_date=next_month)
         insurances = models.Insurance.objects.all().filter(insurance_renewal_date = next_month)
 
