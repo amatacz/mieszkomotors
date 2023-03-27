@@ -3,6 +3,9 @@ from mieszkomotors.models.car import Car
 from mieszkomotors.models.owner import IndividualOwner
 from mieszkomotors.models.base import PublicationTracker, get_upload_path, RENEWAL_INTERVAL
 
+
+# czy tu zrobić też 3 modele, żeby FK owner mógł przyjmować wartość dla każdego z rodzajów klientów?
+
 class Insurance(PublicationTracker):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='car')
     owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE, related_name='owner')
@@ -10,7 +13,7 @@ class Insurance(PublicationTracker):
     offer = models.TextField(max_length=500, null=True, blank=True)
     current_insurance_date = models.DateField()
     insurance_renewal_date = models.DateField(null=True, blank=True)
-    partial_payments = models.ForeignKey("InsurancePartialPayments", on_delete=models.CASCADE, related_name="partial_payment")
+    partial_payments = models.ForeignKey("InsurancePartialPayments", on_delete=models.CASCADE, related_name="partial_payment", null=True, blank=True)
 
     def __str__(self) -> str:
          return f'Insurance {self.car}'

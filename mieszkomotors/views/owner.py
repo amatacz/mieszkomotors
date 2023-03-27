@@ -144,13 +144,13 @@ class SelfEmployedOwnerDetail(LoginRequiredMixin, TemplateView):
         context['notes'] = SelfEmployedOwnerNotes.objects.all().filter(owner = self.kwargs['pk'])
         return context
 
-class SelfEmployedOwnerOwnerUpdate(LoginRequiredMixin, UpdateView):
+class SelfEmployedOwnerUpdate(LoginRequiredMixin, UpdateView):
     model = SelfEmployedOwner
     template_name = 'mieszkomotors/self_employed_owner/update.html'
     form_class = SelfEmployedOwnerForm
     success_url = reverse_lazy('owner_list')
 
-class SelfEmployedOwnerOwnerDelete(LoginRequiredMixin, DeleteView):
+class SelfEmployedOwnerDelete(LoginRequiredMixin, DeleteView):
     model = SelfEmployedOwner
     template_name = 'mieszkomotors/self_employed_owner/delete.html'
     success_url = reverse_lazy('owner_list')
@@ -218,3 +218,100 @@ class SelfEmployedOwnerNotesDelete(LoginRequiredMixin, DeleteView):
     model = SelfEmployedOwnerNotes
     template_name = 'mieszkomotors/self_employed_owner/notes/delete.html'
     success_url = reverse_lazy('self_employed_owner_detail')
+
+
+# Enterprise Owner Views 
+class EnterpriseOwnerCreate(LoginRequiredMixin, CreateView):
+    model = EnterpriseOwner
+    template_name = 'mieszkomotors/enterprise_owner/create.html'
+    form_class = EnterpriseOwnerForm
+    success_url = reverse_lazy('owner_list')
+    success_message = 'Właściciel dodany do bazy'
+
+def get_initial(self):
+        return {"created_by": self.request.user}
+
+class EnterpriseOwnerDetail(LoginRequiredMixin, TemplateView):
+    model = EnterpriseOwner
+    context_object_name = 'owner'
+    template_name = 'mieszkomotors/enterprise_owner/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['enterprise_owners'] = EnterpriseOwner.objects.all().filter(id = self.kwargs['pk'])
+        context['attachments'] = EnterpriseOwnerAttachment.objects.all().filter(owner = self.kwargs['pk'])
+        context['notes'] = EnterpriseOwnerNotes.objects.all().filter(owner = self.kwargs['pk'])
+        return context
+
+class EnterpriseOwnerUpdate(LoginRequiredMixin, UpdateView):
+    model = EnterpriseOwner
+    template_name = 'mieszkomotors/enterprise_owner/update.html'
+    form_class = EnterpriseOwnerForm
+    success_url = reverse_lazy('owner_list')
+
+class EnterpriseOwnerDelete(LoginRequiredMixin, DeleteView):
+    model = EnterpriseOwner
+    template_name = 'mieszkomotors/enterprise_owner/delete.html'
+    success_url = reverse_lazy('owner_list')
+
+# Enterprise Owner Attachment Views
+class EnterpriseOwnerAttachmentCreate(LoginRequiredMixin, CreateView):
+    model = EnterpriseOwnerAttachment
+    template_name = 'mieszkomotors/enterprise_owner/attachments/create.html'
+    form_class = EnterpriseOwnerAttachmentForm
+
+    def get_success_url(self):
+        return reverse_lazy('enterprise_owner_detail', kwargs={'pk': self.object.owner_id})
+
+    def get_initial(self):
+        return {"created_by": self.request.user}
+
+class EnterpriseOwnerAttachmentDetail(LoginRequiredMixin, DetailView):
+    model = EnterpriseOwnerAttachment
+    template_name = 'mieszkomotors/enterprise_owner/attachments/detail.html'
+
+class EnterpriseOwnerAttachmentUpdate(LoginRequiredMixin, UpdateView):
+    model = EnterpriseOwnerAttachment
+    template_name = 'mieszkomotors/enterprise_owner/attachments/update.html'
+    form_class = EnterpriseOwnerAttachmentForm
+    success_url = reverse_lazy('enterprise_owner_detail')
+
+class EnterpriseOwnerAttachmentList(LoginRequiredMixin, ListView):
+    model = EnterpriseOwnerAttachment
+    template_name = 'mieszkomotors/enterprise_owner/attachments/list.html'
+
+class EnterpriseOwnerAttachmentDelete(LoginRequiredMixin, DeleteView):
+    model = EnterpriseOwnerAttachment
+    template_name = 'mieszkomotors/enterprise_owner/attachments/delete.html'
+    success_url = reverse_lazy('enterprise_owner_detail')
+
+# Individual Owner Notes Views
+class EnterpriseOwnerNotesCreate(LoginRequiredMixin, CreateView):
+    model = EnterpriseOwnerNotes
+    template_name = 'mieszkomotors/enterprise_owner/notes/create.html'
+    form_class = EnterpriseOwnerNotesForm
+
+    def get_success_url(self):
+        return reverse_lazy('enterprise_owner_detail', kwargs={'pk': self.object.owner_id})
+
+    def get_initial(self):
+        return {"created_by": self.request.user}
+
+class EnterpriseOwnerNotesDetail(LoginRequiredMixin, DetailView):
+    model = EnterpriseOwnerNotes
+    template_name = 'mieszkomotors/enterprise_owner/notes/detail.html'
+
+class EnterpriseOwnerNotesUpdate(LoginRequiredMixin, UpdateView):
+    model = EnterpriseOwnerNotes
+    template_name = 'mieszkomotors/enterprise_owner/notes/update.html'
+    form_class = EnterpriseOwnerNotesForm
+    success_url = reverse_lazy('enterprise_owner_detail')
+
+class EnterpriseOwnerNotesList(LoginRequiredMixin, ListView):
+    model = EnterpriseOwnerNotes
+    template_name = 'mieszkomotors/enterprise_owner/notes/list.html'
+
+class EnterpriseOwnerNotesDelete(LoginRequiredMixin, DeleteView):
+    model = EnterpriseOwnerNotes
+    template_name = 'mieszkomotors/enterprise_owner/notes/delete.html'
+    success_url = reverse_lazy('enterprise_owner_detail')

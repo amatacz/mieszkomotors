@@ -1,6 +1,6 @@
 from django.db import models
 
-from .base import PublicationTracker, get_upload_path
+from .base import PublicationTracker, get_upload_path, get_upload_path_enterprise_owner
 
 
 class EnterpriseOwner(PublicationTracker):
@@ -22,14 +22,26 @@ class EnterpriseOwner(PublicationTracker):
     nip = models.CharField(max_length=10, null=True, blank=True)
     regon = models.CharField(max_length=10, null=True, blank=True)
     client_since = models.DateField()
-    
+    created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
+
+    def __str__(self):
+	    return f'{self.company_name}'
+
 class EnterpriseOwnerAttachment(PublicationTracker):
     owner = models.ForeignKey(EnterpriseOwner, on_delete=models.CASCADE)
-    attachment = models.FileField(upload_to=get_upload_path)
-
+    attachment = models.FileField(upload_to=get_upload_path_enterprise_owner)
+    created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
+    
+    def __str__(self):
+	    return f'{self.attachment.name}'
+    
 class EnterpriseOwnerNotes(PublicationTracker):
     owner = models.ForeignKey(EnterpriseOwner, on_delete=models.CASCADE)
     note = models.TextField(max_length=500)
+    created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
+    
+    def __str__(self):
+	    return f'{self.note}'
     
 
 class SelfEmployedOwner(PublicationTracker):
@@ -70,7 +82,6 @@ class SelfEmployedOwnerNotes(PublicationTracker):
     owner = models.ForeignKey(SelfEmployedOwner, on_delete=models.CASCADE)
     note = models.TextField(max_length=500)
     created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
-
 
     def __str__(self):
 	    return f'{self.note}'

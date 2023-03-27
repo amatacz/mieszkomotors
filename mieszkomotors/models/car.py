@@ -38,7 +38,7 @@ class CarEnterpriseOwner(PublicationTracker):
     status = models.CharField(max_length=3, choices=STATUSES)
     assign_date = models.DateTimeField(auto_now_add=True)
 
-class CarSelfEmploedOwner(PublicationTracker):
+class CarSelfEmployedOwner(PublicationTracker):
     STATUSES = (
          ("a", "Aktywny"),
          ("n", "Nieaktywny")

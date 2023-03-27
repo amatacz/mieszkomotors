@@ -32,10 +32,10 @@ urlpatterns = [
     path('owner/<pk>/note/detail/<note_pk>', owner.IndividualOwnerNotesDetail.as_view(), name='owner_note_detail'),
     path('owner/<pk>/note/list', owner.IndividualOwnerNotesList.as_view(), name='owner_note_list'),
 
-         # Self Employeed Owners urls
+     # Self Employeed Owners urls
     path('self_employed_owner/create', owner.SelfEmployedOwnerCreate.as_view(), name='self_employed_owner_create'),
-    path('self_employed_owner/update/<pk>', owner.SelfEmployedOwnerOwnerUpdate.as_view(), name='self_employed_owner_update'),
-    path('self_employed_owner/delete/<pk>', owner.SelfEmployedOwnerOwnerDelete.as_view(), name='self_employed_owner_delete'),
+    path('self_employed_owner/update/<pk>', owner.SelfEmployedOwnerUpdate.as_view(), name='self_employed_owner_update'),
+    path('self_employed_owner/delete/<pk>', owner.SelfEmployedOwnerDelete.as_view(), name='self_employed_owner_delete'),
     path('self_employed_owner/detail/<pk>', owner.SelfEmployedOwnerDetail.as_view(), name='self_employed_owner_detail'),
     path('self_employed_owner/list', owner.OwnersList.as_view(), name='owner_list'),
 
@@ -53,6 +53,26 @@ urlpatterns = [
     path('self_employed_owner/<pk>/note/detail/<note_pk>', owner.SelfEmployedOwnerNotesDetail.as_view(), name='self_employed_owner_note_detail'),
     path('self_employed_owner/<pk>/note/list', owner.SelfEmployedOwnerNotesList.as_view(), name='self_employed_owner_note_list'),
 
+     # Enterprise Owners urls
+    path('enterprise_owner/create', owner.EnterpriseOwnerCreate.as_view(), name='enterprise_owner_create'),
+    path('enterprise_owner/update/<pk>', owner.EnterpriseOwnerUpdate.as_view(), name='enterprise_owner_update'),
+    path('enterprise_owner/delete/<pk>', owner.EnterpriseOwnerDelete.as_view(), name='enterprise_owner_delete'),
+    path('enterprise_owner/detail/<pk>', owner.EnterpriseOwnerDetail.as_view(), name='enterprise_owner_detail'),
+    path('enterprise_owner/list', owner.OwnersList.as_view(), name='owner_list'),
+
+    # Enterprise Owners Attachment urls
+    path('enterprise_owner/<pk>/attachment/create', owner.EnterpriseOwnerAttachmentCreate.as_view(), name='enterprise_owner_attachment_create'),
+    path('enterprise_owner/<pk>/attachment/update', owner.EnterpriseOwnerAttachmentUpdate.as_view(), name='enterprise_owner_attachment_update'),
+    path('enterprise_owner/<pk>/attachment/delete', owner.EnterpriseOwnerAttachmentDelete.as_view(), name='enterprise_owner_attachment_delete'),
+    path('enterprise_owner/<pk>/attachment/detail', owner.EnterpriseOwnerAttachmentDetail.as_view(), name='enterprise_owner_attachment_detail'),
+    path('enterprise_owner/<pk>/attachment/list', owner.EnterpriseOwnerAttachmentList.as_view(), name='enterprise_owner_attachment_list'),
+
+    # Enterprise Owners Notes urls
+    path('enterprise_owner/<pk>/note/create', owner.EnterpriseOwnerNotesCreate.as_view(), name='enterprise_owner_note_create'),
+    path('enterprise_owner/<pk>/note/update/<note_pk>', owner.EnterpriseOwnerNotesUpdate.as_view(), name='enterprise_owner_note_update'),
+    path('enterprise_owner/<pk>/note/delete/<note_pk>', owner.EnterpriseOwnerNotesDelete.as_view(), name='enterprise_owner_note_delete'),
+    path('enterprise_owner/<pk>/note/detail/<note_pk>', owner.EnterpriseOwnerNotesDetail.as_view(), name='enterprise_owner_note_detail'),
+    path('enterprise_owner/<pk>/note/list', owner.EnterpriseOwnerNotesList.as_view(), name='enterprise_owner_note_list'),
 
 #     # Insurances urls
 #     path('insurance/create', views.InsuranceCreate.as_view(), name='insurance_create'),

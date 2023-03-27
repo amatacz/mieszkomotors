@@ -3,10 +3,16 @@ import os
 
 RENEWAL_INTERVAL = 30
 
+def get_upload_path_enterprise_owner(instance, filename):
+    return os.path.join("documents",
+            f"{instance.owner.company_name}", filename
+        )
+
 def get_upload_path(instance, filename):
-	return os.path.join("documents",
-        f"{instance.owner.first_name}_{instance.owner.last_name}", filename
-    )
+    return os.path.join("documents",
+            f"{instance.owner.first_name}_{instance.owner.last_name}", filename
+        )
+             
 
 class PublicationTracker(models.Model):
     publication_datetime = models.DateTimeField(auto_now_add=True)

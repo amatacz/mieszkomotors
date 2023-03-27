@@ -6,6 +6,7 @@ from django.forms import ModelForm, TextInput, EmailInput, FileInput, NumberInpu
 
 from mieszkomotors.models.owner import IndividualOwner, IndividualOwnerAttachment, IndividualOwnerNotes
 from mieszkomotors.models.owner import SelfEmployedOwner, SelfEmployedOwnerAttachment, SelfEmployedOwnerNotes
+from mieszkomotors.models.owner import EnterpriseOwner, EnterpriseOwnerNotes, EnterpriseOwnerAttachment
 from mieszkomotors.models.car import Car
 
 # Individual Owner Forms
@@ -252,6 +253,124 @@ class SelfEmployedNotesForm(ModelForm):
             })
         }
         
+
+# Enterprise Owner Forms
+
+class EnterpriseOwnerForm(ModelForm):
+    class Meta:
+        model = EnterpriseOwner
+        fields = ['created_by', 'company_name', 'email', 'phone_number', 
+                  'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'nip', 'regon', 'client_since']
+        widgets = {
+            "created_by": forms.Select(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Created By"
+            }),            
+            "company_name": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Company Name"
+            }),
+            "email": EmailInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Email"
+            }),
+            "phone_number": NumberInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Phone Number"
+            }),
+            'address_prefix': forms.Select(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Address prefix"
+            }),
+            'street': TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Street"
+            }),
+            'building': TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Building"
+            }),
+            'apartment': TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Apartment"
+            }),
+            'city' : TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "City"
+            }),
+            'zip_code': TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Zip Code"
+            }),
+            'nip': NumberInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "NIP"
+            }),
+            'regon': NumberInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "REGON"
+            }),
+            'client_since' : DateInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Client since"
+            }),
+        }
+
+class EnterpriseOwnerAttachmentForm(ModelForm):
+    class Meta:
+        model = EnterpriseOwnerAttachment
+        fields = ['created_by', 'owner', 'attachment']
+        widgets = {
+            "created_by": forms.Select(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Created By"
+            }),
+            'owner': forms.Select(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Owner"
+                }),
+            'attachment': FileInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Attachment"
+            })
+        }
+class EnterpriseOwnerNotesForm(ModelForm):
+    class Meta:
+        model = EnterpriseOwnerNotes
+        fields = ['created_by','owner', 'note']
+        widgets = {
+            "created_by": forms.Select(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Created By"
+            }),
+            'owner': forms.Select(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Owner"
+                }),
+            'note': TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Note"
+            })
+        }
 # class InsuranceForm(ModelForm):
 #     class Meta:
 #         model = models.Insurance

@@ -1,0 +1,38 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+<div class="content-container">
+    <div class="row">
+        <div class="col-4">
+    <p class="h2 py-3">Individual Owners</p>
+    {% for individual_owner in individual_owners %}
+        <li class="m-2 font-weight-bold"><a href="{% url 'owner_detail' individual_owner.id %}">{{ individual_owner }}</a></li>
+    {% endfor %}
+    <div class="py-3 justify-between">
+        <a class="btn btn-info" href="{% url 'owner_create'%}"> Add new individual owner </a>
+    </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+    <p class="h2 py-3">Self Employeed Owners</p>
+    {% for self_employeed_owner in self_employeed_owners %}
+        <li class="m-2 font-weight-bold"><a href="{% url 'owner_detail' self_employeed_owner.id %}">{{ self_employeed_owner }}</a></li>
+    {% endfor %}        
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+    <p class="h2 py-3">Enterprise Owners</p>
+    {% for enterprise_owner in enterprise_owner %}
+        <li class="m-2 font-weight-bold"><a href="{% url 'owner_detail' enterprise_owner.id %}">{{ enterprise_owner }}</a></li>
+    {% endfor %}        
+        </div>
+    </div>
+
+    <div class="py-3 justify-between">
+        <a class="btn btn-info" href="{% url 'owner_create'%}"> Add new owner </a>
+        <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+    </div>
+</div>
+{% endblock %}
