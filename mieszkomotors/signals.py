@@ -46,7 +46,6 @@ def change_insurance_dates(sender, instance, **kwargs):
         return None
 
 # Assignes insurance as FK to Car object when Insurance obj is created
-
 @receiver(post_save, sender=Insurance)
 def assign_insurance_to_car(sender, instance, created, **kwargs):
     if created:
@@ -55,16 +54,15 @@ def assign_insurance_to_car(sender, instance, created, **kwargs):
         updated_car.save(update_fields=['insurance'])
 
 # Create events when Car or Insurance is created
-
 @receiver(post_save, sender=Car)
 def create_car_event(sender, instance, created, **kwargs):
     if created:
         title = f'Zbliża się termin odnowienia przeglądu technicznego dla samochodu'
-        start_date = datetime.today()
+        start = datetime.today()
 
-        car_event = CarEvent.objects.create(car=instance, title=title, start_date=start_date)
+        car_event = CarEvent.objects.create(car=instance, title=title, start=start)
         car_event.title = f'Zbliża się termin odnowienia przeglądu technicznego dla samochodu {car_event.car.license_plates}'
-        car_event.start_date = car_event.car.car_review_renewal_date - timedelta(days=RENEWAL_INTERVAL)
+        car_event.start = car_event.car.car_review_renewal_date - timedelta(days=RENEWAL_INTERVAL)
 
         car_event.save()
 
@@ -72,23 +70,26 @@ def create_car_event(sender, instance, created, **kwargs):
 def create_insurance_event(sender, instance, created, **kwargs):
     if created:
         title = f'Zbliża się termin odnowienia ubezpieczenia dla samochodu'
-        start_date = datetime.today()
+        start = datetime.today()
 
-        insurance_event = InsuranceEvent.objects.create(insurance=instance, title=title, start_date=start_date)
+        insurance_event = InsuranceEvent.objects.create(insurance=instance, title=title, start=start)
         insurance_event.title = f'Zbliża się termin odnowienia ubezpieczenia dla samochodu {insurance_event.insurance.car.license_plates}'
-        insurance_event.start_date = insurance_event.insurance.insurance_renewal_date - timedelta(days=RENEWAL_INTERVAL)
+        insurance_event.start = insurance_event.insurance.insurance_renewal_date - timedelta(days=RENEWAL_INTERVAL)
 
         insurance_event.save()
 
-# Update Events dates when Car or Insurance dates are updated
 
+
+# do poprawy!!!!
+# Update Events dates when Car or Insurance dates are updated
 @receiver(pre_save, sender=Insurance)
 def change_insurance_event_dates(sender, instance, **kwargs):
     try:
         updated_insurance_event = InsuranceEvent.objects.get(id=instance.id)
         if updated_insurance_event.insurance.current_insurance_date != instance.current_insurance_date:
-            updated_insurance_event.start_date = updated_insurance_event.insurance.insurance_renewal_date - timedelta(days=RENEWAL_INTERVAL)
+            updated_insurance_event.start = updated_insurance_event.insurance.insurance_renewal_date - timedelta(days=RENEWAL_INTERVAL)
             updated_insurance_event.save()
+
     except InsuranceEvent.DoesNotExist:
         return None
     
@@ -96,10 +97,10 @@ def change_insurance_event_dates(sender, instance, **kwargs):
 def change_car_event_dates(sender, instance, **kwargs):
     try:
         updated_car_event = CarEvent.objects.get(id=instance.id)
-        if updated_car_event.insurance.current_insurance_date != instance.current_insurance_date:
-            updated_car_event.start_date = updated_car_event.insurance.insurance_renewal_date - timedelta(days=RENEWAL_INTERVAL)
+        if updated_car_event.car.current_car_review_date != instance.current_car_review_date:
+            updated_car_event.start = updated_car_event.car.car_review_renewal_date - timedelta(days=RENEWAL_INTERVAL)
             updated_car_event.save()
-    except updated_car_event.DoesNotExist:
+    except CarEvent.DoesNotExist:
         return None
 
 
