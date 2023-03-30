@@ -8,6 +8,7 @@ from mieszkomotors.models.owner import IndividualOwner, IndividualOwnerAttachmen
 from mieszkomotors.models.owner import SelfEmployedOwner, SelfEmployedOwnerAttachment, SelfEmployedOwnerNotes
 from mieszkomotors.models.owner import EnterpriseOwner, EnterpriseOwnerNotes, EnterpriseOwnerAttachment
 from mieszkomotors.models.car import Car
+from django.contrib.auth.models import User
 
 # Individual Owner Forms
 class IndividualOwnerForm(ModelForm):
@@ -458,65 +459,65 @@ class CarForm(ModelForm):
 
 # # SignUpForm is not used 16.03.2023
 
-# class SignUpForm(UserCreationForm):
-#     username = forms.CharField(max_length=150, label="Username")
-#     first_name = forms.CharField(max_length=150, label="First Name")
-#     last_name = forms.CharField(max_length=150, label = "Last Name")
-#     email = forms.EmailInput()
-#     password1 = forms.CharField(widget=forms.PasswordInput, label="Password")
-#     password2 = forms.CharField(widget=forms.PasswordInput, label="Password confirm")
+class SignUpForm(UserCreationForm):
+    username = forms.CharField(max_length=150, label="Username")
+    first_name = forms.CharField(max_length=150, label="First Name")
+    last_name = forms.CharField(max_length=150, label = "Last Name")
+    email = forms.EmailInput()
+    password1 = forms.CharField(widget=forms.PasswordInput, label="Password")
+    password2 = forms.CharField(widget=forms.PasswordInput, label="Password confirm")
 
-#     class Meta:
-#         model = models.User
-#         fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
-#         widget = {
-#             "username": TextInput(attrs={
-#                 "class": "form-control",
-#                 "style": "max-width: 300px",
-#                 "placeholder": "Username"
-#             }),
+    class Meta:
+        model = User
+        fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
+        widget = {
+            "username": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Username"
+            }),
 
-#             "first_name": TextInput(attrs={
-#                 "class": "form-control",
-#                 "style": "max-width: 300px",
-#                 "placeholder": "First Name"
-#             }),
-#             "last_name": TextInput(attrs={
-#                 "class": "form-control",
-#                 "style": "max-width: 300px",
-#                 "placeholder": "Last Name"
-#             }),
-#             "email": EmailInput(attrs={
-#                 "class": "form-control",
-#                 "style": "max-width: 300px",
-#                 "placeholder": "Email address"
-#             }),
-#             "password1": forms.PasswordInput(attrs={
-#                 "class": "form-control",
-#                 "style": "max-width: 300px",
-#                 "placeholder": "Password"
-#             }),
-#             "password2": forms.PasswordInput(attrs={
-#                 "class": "form-control",
-#                 "style": "max-width: 300px",
-#                 "placeholder": "Password confirm"
-#             }),
-#         }
+            "first_name": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "First Name"
+            }),
+            "last_name": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Last Name"
+            }),
+            "email": EmailInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Email address"
+            }),
+            "password1": forms.PasswordInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Password"
+            }),
+            "password2": forms.PasswordInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Password confirm"
+            }),
+        }
 
-# class LoginForm(AuthenticationForm):
-#     class Meta:
-#         model = models.User
-#         fields = ['username', 'password']
-#         widget = {
-#             "username": TextInput(attrs={
-#                 "class": "form-control",
-#                 "style": "max-width: 300px",
-#                 "placeholder": "Username"
-#             }),
-#             "password": forms.PasswordInput(attrs={
-#                 "class": "form-control",
-#                 "style": "max-width: 300px",
-#                 "placeholder": "Password"
-#             })
-#         }
+class LoginForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        widget = {
+            "username": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Username"
+            }),
+            "password": forms.PasswordInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Password"
+            })
+        }
 

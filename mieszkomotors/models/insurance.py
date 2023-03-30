@@ -34,6 +34,9 @@ class InsurancePartialPayments(PublicationTracker):
     payment_4 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     payment_4_status = models.CharField(max_length=2, choices=STATUSES)
 
+    def __str__(self) -> str:
+        return f'{self.insurance} partial payments'
+
 class InsuranceAttachement(PublicationTracker):
     insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
     attachement = models.FileField(upload_to=get_upload_path)

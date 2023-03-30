@@ -17,12 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
             url: '/api/v1/car_events/',
             color: 'gold',
             textColor: 'black',
-            eventDisplay: 'block',
           },
           {
             url: '/api/v1/insurance_events/',
-            color: '#378006',
-
+            color: 'darkblue',
+            textColor: 'white',
           }
         ],
       eventClick: function(info) {

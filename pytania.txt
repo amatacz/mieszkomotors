@@ -1,0 +1,5 @@
+1. Modele - mam 3 rodzaje klientów, czy mogę jakoś wszystkie 3 podpiąć do CarOwner, czy musze mieć wszystkie obiekty potrójnie jak teraz?
+    Czy zrobić wszystko tak, jak w modelu CarOwnerTest z fakultatywnymi polami FK?
+2. Kalendarz - ogarnęłam to na bardzo pdst. poziomie -> jak zrobić tak, żeby wyskakiwał popup z detalami eventu na klik?
+3. Postawiłam APi na eventy i tak zaciągam dane do kalendarza. Czy lepiej brac te dane bezpośrednio z db? Jeśli tak, to jak, bo template tagi mi nie działały w skrypcie js?
+

@@ -1,12 +1,16 @@
 {% extends "./base.html" %}
 
 {% block content %}
-    <div class="d-flex justify-content-center">
-        <div class="row pt-5 col-6">
-            <img src="https://drive.google.com/uc?export=view&id=15OaArbk9oBITPwdFmb0i-4LpvZJw_bGX" style="width: 450px; height: auto;" alt="logo MieszkoMotors">
+    <div class="d-flex justify-content-center align-items-center" >
+        <div class="row row-centered pt-5">
+            <div class="col-12 col-centered">
+                <img src="https://drive.google.com/uc?export=view&id=15OaArbk9oBITPwdFmb0i-4LpvZJw_bGX" style="width: 450px; height: auto;" alt="logo MieszkoMotors">
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="row pt-5 col-12">
-                <a href="{% url 'login' %}" class="btn btn-outline-dark btn-lg" role="button">Log in</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-dark btn-lg" role="button">Log in</a>
         </div>
     </div>
 {% endblock %}

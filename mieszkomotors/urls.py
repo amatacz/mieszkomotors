@@ -1,19 +1,18 @@
 from django.urls import path, re_path
-from .views import home, calendar, car, owner
+from .views import home, calendar, car, owner, user
 
 urlpatterns = [
-     path('', home.Home.as_view(), name='home'),
+    path('', home.Home.as_view(), name='home'),
 
      # Cars urls
-     path('car/create', car.CarCreate.as_view(), name='car_create'),
-     path('car/update/<pk>', car.CarUpdate.as_view(), name='car_update'),
-     path('car/delete/<pk>', car.CarDelete.as_view(), name='car_delete'),
-     path('car/detail/<pk>', car.CarDetail.as_view(), name='car_detail'),
-     path('car/list', car.CarList.as_view(), name='car_list'),
+    path('car/create', car.CarCreate.as_view(), name='car_create'),
+    path('car/update/<pk>', car.CarUpdate.as_view(), name='car_update'),
+    path('car/delete/<pk>', car.CarDelete.as_view(), name='car_delete'),
+    path('car/detail/<pk>', car.CarDetail.as_view(), name='car_detail'),
+    path('car/list', car.CarList.as_view(), name='car_list'),
 
     # All Owners list
-        path('owner/list', owner.OwnersList.as_view(), name='owner_list'),
-
+    path('owner/list', owner.OwnersList.as_view(), name='owner_list'),
 
     # Individual Owners urls
     path('owner/create', owner.IndividualOwnerCreate.as_view(), name='owner_create'),
@@ -76,17 +75,17 @@ urlpatterns = [
     path('enterprise_owner/<pk>/note/list', owner.EnterpriseOwnerNotesList.as_view(), name='enterprise_owner_note_list'),
 
 #     # Insurances urls
-#     path('insurance/create', views.InsuranceCreate.as_view(), name='insurance_create'),
-#     path('insurance/update/<pk>', views.InsuranceUpdate.as_view(), name='insurance_update'),
-#     path('insurance/delete/<pk>', views.InsuranceDelete.as_view(), name='insurance_delete'),
-#     path('insurance/detail/<pk>', views.InsuranceDetail.as_view(), name='insurance_detail'),
-#     path('insurance/list', views.InsuranceList.as_view(), name='insurance_list'),
+    # path('insurance/create', views.InsuranceCreate.as_view(), name='insurance_create'),
+    # path('insurance/update/<pk>', views.InsuranceUpdate.as_view(), name='insurance_update'),
+    # path('insurance/delete/<pk>', views.InsuranceDelete.as_view(), name='insurance_delete'),
+    # path('insurance/detail/<pk>', views.InsuranceDetail.as_view(), name='insurance_detail'),
+    # path('insurance/list', views.InsuranceList.as_view(), name='insurance_list'),
 
      # Calendar urls
      re_path(r'^calendar/$', calendar.CalendarView.as_view(), name='calendar'),
 
 #     # Login, logout urls
-#     path("login/", views.loginView.as_view(), name="login"),
-#     path("logout/", views.logoutView.as_view(), name="logout"),
+    path("login/", user.loginView.as_view(), name="login"),
+    path("logout/", user.logoutView.as_view(), name="logout"),
 
 ]

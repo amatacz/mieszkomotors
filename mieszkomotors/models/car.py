@@ -18,7 +18,7 @@ class Car(PublicationTracker):
     in_mieszkomotors_since = models.DateField(auto_created=True, auto_now=True)
 
     def __str__(self) -> str:
-         return f'{self.brand} {self.model}'
+         return f'{self.brand} {self.model} ({self.license_plates})'
 
 class CarAttachements(PublicationTracker):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
@@ -63,3 +63,18 @@ class CarIndividualOwner(PublicationTracker):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     status = models.CharField(max_length=3, choices=STATUSES)
     assign_date = models.DateTimeField(auto_now_add=True)
+
+
+    class CarOwnerTest(PublicationTracker):
+        STATUSES = (
+            ("a", "Aktywny"),
+            ("n", "Nieaktywny")
+        )
+
+        client_individual = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE, null=True, blank=True)
+        client_self_employed = models.ForeignKey(SelfEmployedOwner, on_delete=models.CASCADE, null=True, blank=True)
+        client_enterprise = models.ForeignKey(EnterpriseOwner, on_delete=models.CASCADE, null=True, blank=True)
+
+        car = models.ForeignKey(Car, on_delete=models.CASCADE)
+        status = models.CharField(max_length=3, choices=STATUSES)
+        assign_date = models.DateTimeField(auto_now_add=True)

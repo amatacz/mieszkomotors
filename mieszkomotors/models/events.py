@@ -12,7 +12,7 @@ class CarEvent(models.Model):
     end = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.car} {self.car.license_plates}: {self.start.strftime("%Y-%m-%d")}'
+        return f'{self.car}: {self.start.strftime("%Y-%m-%d")}'
 
 class InsuranceEvent(models.Model):
     insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
@@ -21,4 +21,4 @@ class InsuranceEvent(models.Model):
     end = models.DateField(null=True,blank=True)
 
     def __str__(self):
-        return f'{self.insurance.car} {self.insurance.car.license_plates}: {self.start.strftime("%Y-%m-%d")}'
+        return f'{self.insurance.car}: {self.start.strftime("%Y-%m-%d")}'

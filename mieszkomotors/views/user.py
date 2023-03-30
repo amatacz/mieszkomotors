@@ -3,13 +3,13 @@ from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from forms import *
+from mieszkomotors.forms import SignUpForm, LoginForm
 
 
 # LogIn, LogOut, SignUp views
 
 class signUp(View):
-    form_class = forms.SignUpForm
+    form_class = SignUpForm
     template_name = 'registration/register.hmtl'
 
     def get(self, request, *args, **kwargs):
@@ -26,7 +26,7 @@ class signUp(View):
 
 
 class loginView(View):
-    form_class = forms.LoginForm
+    form_class = LoginForm
     template_name = 'registration/login.html'
 
     def get(self, request):
@@ -35,7 +35,7 @@ class loginView(View):
     
     def post(self, request):
         if request.method == "POST":
-            form = forms.LoginForm(request, data = request.POST)
+            form = LoginForm(request, data = request.POST)
             if form.is_valid():
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password')
@@ -52,7 +52,7 @@ class loginView(View):
                     messages.error(request, "Błąd")
             else:
                 messages.error(request, "Nieprawidłowa nazwa użytkownika lub hasło")
-        form = forms.LoginForm()
+        form = LoginForm()
         return render(request, 'registration/login.html', {'form': form})
     
 
