@@ -81,8 +81,8 @@ urlpatterns = [
     # path('insurance/detail/<pk>', views.InsuranceDetail.as_view(), name='insurance_detail'),
     # path('insurance/list', views.InsuranceList.as_view(), name='insurance_list'),
 
-     # Calendar urls
-     re_path(r'^calendar/$', calendar.CalendarView.as_view(), name='calendar'),
+    # Calendar urls
+    re_path(r'^calendar/$', calendar.CalendarView.as_view(), name='calendar'),
 
 #     # Login, logout urls
     path("login/", user.loginView.as_view(), name="login"),
