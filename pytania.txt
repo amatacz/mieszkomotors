@@ -1,5 +1,8 @@
-1. Modele - mam 3 rodzaje klientów, czy mogę jakoś wszystkie 3 podpiąć do CarOwner, czy musze mieć wszystkie obiekty potrójnie jak teraz?
-    Czy zrobić wszystko tak, jak w modelu CarOwnerTest z fakultatywnymi polami FK? Próbowałam GenericRelation, ale tam jest wyszukiwanie po obj id
-2. Kalendarz - ogarnęłam to na bardzo pdst. poziomie -> jak zrobić tak, żeby wyskakiwał popup z detalami eventu na klik?
-3. Postawiłam APi na eventy i tak zaciągam dane do kalendarza. Czy lepiej brac te dane bezpośrednio z db? Jeśli tak, to jak, bo template tagi mi nie działały w skrypcie js?
+wyodrebnic clase Customer i po niej podziedziczyc
+phone number validacja -> phone numbers bibl
+
+test baza z bd iloscia dane biblioteka faker ->
+datatables django -> serializacja bedzie potrzebna
+potencjalny problem -> tabele z paginacjami
+
 

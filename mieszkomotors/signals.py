@@ -1,14 +1,17 @@
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
 
 from mieszkomotors.models.base import RENEWAL_INTERVAL
 from mieszkomotors.models.car import Car
 from mieszkomotors.models.events import CarEvent, InsuranceEvent
 from mieszkomotors.models.insurance import Insurance, InsurancePartialPayments
+from mieszkomotors.models.owner import IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer, Customer
 
+
+# CAR SIGNALS
 
 # Set all car review date related fields when car review date is set
 @receiver(post_save, sender=Car)
@@ -27,6 +30,9 @@ def change_car_review_dates(sender, instance, **kwargs):
             updated_car.save()
     except Car.DoesNotExist:
         return None
+
+
+# INSURANCE SIGNALS
 
 # Set all insurance related date fields when insurance date is set
 @receiver(post_save, sender=Insurance)
@@ -61,6 +67,9 @@ def assign_partial_payments_to_insurance(sender, instance, created, **kwargs):
         updated_insurance = Insurance.objects.get(pk=instance.insurance.id)
         updated_insurance.partial_payments = instance
         updated_insurance.save(update_fields=['partial_payments'])
+
+
+# EVENTS SIGNALS
 
 # Create events when Car or Insurance is created
 @receiver(post_save, sender=Car)
@@ -108,3 +117,51 @@ def change_car_event_dates(sender, instance, **kwargs):
             updated_car_event.save(update_fields=['start'])
     except CarEvent.DoesNotExist:
         return None
+
+
+# CUSTOMER SIGNALS
+
+# Create customer when IndividualCustomer is created
+@receiver(post_save, sender=IndividualCustomer)
+def create_customer_when_individual_owner_is_created(sender, created, instance, **kwargs):
+    if created:
+        customer = Customer.objects.create(identifier = instance.pesel)
+        instance.customer = customer
+        instance.save(update_fields=['customer'])
+
+
+# Create customer when SelfEmployedCustomer is created
+@receiver(post_save, sender=SelfEmployedCustomer)
+def create_customer_when_self_employed_owner_is_created(sender, created, instance, **kwargs):
+    if created:
+        customer = Customer.objects.create(identifier = instance.regon)
+        instance.customer = customer
+        instance.save(update_fields=['customer'])
+
+
+# Create customer when EnterpriseCustomer is created
+@receiver(post_save, sender=EnterpriseCustomer)
+def create_customer_when_enterprise_owner_is_created(sender, created, instance, **kwargs):
+    if created:
+        customer = Customer.objects.create(identifier = instance.regon)
+        instance.customer = customer
+        instance.save(update_fields=['customer'])
+
+# Delete customer when IndividualCustomer is deleted
+@receiver(post_delete, sender=IndividualCustomer)
+def post_delete_customer(sender, instance, *args, **kwargs):
+    customer = Customer.objects.get(identifier = instance.pesel)
+    customer.delete()
+
+# Delete customer when SelfEmployedCustomer is deleted
+@receiver(post_delete, sender=SelfEmployedCustomer)
+def post_delete_customer(sender, instance, *args, **kwargs):
+    customer = Customer.objects.get(identifier = instance.regon)
+    customer.delete()
+
+
+# Delete customer when EnterpriseCustomer is deleted
+@receiver(post_delete, sender=EnterpriseCustomer)
+def post_delete_customer(sender, instance, *args, **kwargs):
+    customer = Customer.objects.get(identifier = instance.regon)
+    customer.delete()

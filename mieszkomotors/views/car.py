@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from mieszkomotors.models.car import Car, CarAttachements, CarNotes, CarIndividualOwner, CarEnterpriseOwner, CarSelfEmployedOwner
+from mieszkomotors.models.car import Car, CarAttachements, CarNotes
 
 
 

@@ -1,14 +1,12 @@
 from django.db import models
 from mieszkomotors.models.car import Car
-from mieszkomotors.models.owner import IndividualOwner
+from mieszkomotors.models.owner import Customer
 from mieszkomotors.models.base import PublicationTracker, get_upload_path, RENEWAL_INTERVAL
 
 
-# czy tu zrobić też 3 modele, żeby FK owner mógł przyjmować wartość dla każdego z rodzajów klientów?
-
 class Insurance(PublicationTracker):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='car')
-    owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE, related_name='owner')
+    owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='owner')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     offer = models.TextField(max_length=500, null=True, blank=True)
     current_insurance_date = models.DateField()
