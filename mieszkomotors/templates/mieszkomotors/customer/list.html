@@ -1,0 +1,38 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+<div class="content-container">
+    <div class="row">
+    <div class="col-md-4">
+        <p class="h2 py-3">Individual Customers</p>
+        {% for individual_customer in individual_customers %}
+            <li class="m-2 font-weight-bold"><a href="{% url 'individual_customer_detail' individual_customer.id %}">{{ individual_customer }}</a></li>
+        {% endfor %}
+        <div class="py-3 justify-between">
+            <a class="btn btn-info" href="{% url 'individual_customer_create'%}"> Add new individual customer </a>
+        </div>
+    </div>
+    <div class="col-4">
+        <p class="h2 py-3">Self Employed customers</p>
+        {% for self_employed_customer in self_employed_customers %}
+            <li class="m-2 font-weight-bold"><a href="{% url 'self_employed_customer_detail' self_employed_customer.id %}">{{ self_employed_customer }}</a></li>
+        {% endfor %}   
+        <div class="py-3 justify-between">
+            <a class="btn btn-info" href="{% url 'self_employed_customer_create'%}"> Add new self employed customer </a>
+        </div>     
+    </div>
+    <div class="col-4">
+        <p class="h2 py-3">Enterprise customers</p>
+        {% for enterprise_customer in enterprise_customers %}
+            <li class="m-2 font-weight-bold"><a href="{% url 'enterprise_customer_detail' enterprise_customer.id %}">{{ enterprise_customer }}</a></li>
+        {% endfor %} 
+        <div class="py-3 justify-between">
+            <a class="btn btn-info" href="{% url 'enterprise_customer_create'%}"> Add new enterprise customer </a>
+        </div>        
+    </div>
+    </div>
+    <div class="py-3 justify-between">
+        <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+    </div>
+</div>
+{% endblock %}

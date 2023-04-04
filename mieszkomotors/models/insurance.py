@@ -35,10 +35,13 @@ class InsurancePartialPayments(PublicationTracker):
     def __str__(self) -> str:
         return f'{self.insurance} partial payments'
 
-class InsuranceAttachement(PublicationTracker):
+class InsuranceAttachment(PublicationTracker):
     insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
-    attachement = models.FileField(upload_to=get_upload_path)
+    attachment = models.FileField(upload_to=get_upload_path)
+    created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
 
-class InsuranceNotes(PublicationTracker):
+
+class InsuranceNote(PublicationTracker):
     insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
-    notes = models.TextField(max_length=500)
+    note = models.TextField(max_length=500)
+    created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")

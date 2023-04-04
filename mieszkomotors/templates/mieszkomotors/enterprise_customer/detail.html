@@ -1,0 +1,58 @@
+{% extends "../../base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="content-container">
+    <div class="row">
+        <div class="col-4">
+    {% for enterprise_customer in enterprise_customers %}
+    <p class="h2 py-3 mx-3">{{ enterprise_customer.company_name }}</p>
+    <li class="m-2"> Email: {{ enterprise_customer.email }}</li>
+    <li class="m-2"> Phone number: {{ enterprise_customer.phone_number }}</li>
+    <li class="m-2"> Address: {{enterprise_customer.address_prefix}}{{ enterprise_customer.street }}<br>{{ enterprise_customer.building }}
+        {{ enterprise_customer.apartment }} {{ enterprise_customer.city }} {{ enterprise_customer.zip_code }}
+    </li>
+    <li class="m-2"> REGON: {{ enterprise_customer.regon }}</li>
+    <li class="m-2"> NIP: {{ enterprise_customer.nip }}</li>
+    <li class="m-2"> Client since: {{ enterprise_customer.client_since }}</li>
+        
+        {% if forloop.last %}
+        <div class="py-3">
+            <ul class="my-2"><a class="btn btn-info mt-3" href="{% url 'enterprise_customer_update' enterprise_customer.id %}"> Update customer info</a>
+                <a class="btn btn-info mt-3" href="{% url 'enterprise_customer_delete' enterprise_customer.pk %}"> Delete customer </a></ul>
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>      
+    <div class="col-4"> 
+        <p class="h2 py-3 mx-3">Client files </p>
+        {% for attachment in attachments %}
+            <li class="m-2"><a download href="{{ attachment.attachment.url }}">{{ attachment.attachment.name }}</a></li>
+        {% empty %}
+        <div class="py-3">
+            <ul class="m-2"><a class="btn btn-info" href="{% url 'customer_attachment_create' %}">Add attachment</a>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="col-4">  
+        <p class="h2 py-3 mx-3">Client notes</p>
+    {% for note in notes %}
+        <li class="m-2">{{ note.note|safe }}</li>
+        {% empty %}
+        <div class="py-3">
+            <ul class="m-2"><a class="btn btn-info" href="{% url 'customer_note_create' %}">Add note</a>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+
+    <div class="row my-4">
+        <div class="col-12">
+            <ul><a class="btn btn-info" href="{% url 'customers_list'%}"> Return to customer list</a>
+            <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a></ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

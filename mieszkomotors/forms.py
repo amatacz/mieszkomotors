@@ -3,12 +3,12 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelForm, TextInput, EmailInput, FileInput, NumberInput, DateInput, Select
 
 from mieszkomotors.models.owner import IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer, CustomerAttachment, CustomerNote
-from mieszkomotors.models.car import Car, CarNote, CarAttachement, CarOwner
+from mieszkomotors.models.car import Car, CarNote, CarAttachment, CarOwner
 from django.contrib.auth.models import User
-from mieszkomotors.models.insurance import Insurance, InsuranceAttachement, InsuranceNote
+from mieszkomotors.models.insurance import Insurance, InsuranceAttachment, InsuranceNote
 
 # Individual Owner Form
-class IndividualOwnerForm(ModelForm):
+class IndividualCustomerForm(ModelForm):
     class Meta:
         model = IndividualCustomer
         fields = ['created_by','first_name', 'last_name', 'email', 'phone_number', 'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'pesel', 'customer_type', 'client_since']
@@ -273,7 +273,7 @@ class CustomerAttachmentForm(ModelForm):
             })
         }
 
-class CustomerNotesForm(ModelForm):
+class CustomerNoteForm(ModelForm):
     class Meta:
         model = CustomerNote
         fields = ['created_by','customer', 'note']
@@ -331,7 +331,7 @@ class InsuranceForm(ModelForm):
 
 class InsuranceAttachmentForm(ModelForm):
     class Meta:
-        model = InsuranceAttachement
+        model = InsuranceAttachment
         fields = ['created_by', 'insurance', 'attachment']
         widgets = {
             "created_by": forms.Select(attrs={
@@ -424,7 +424,7 @@ class CarForm(ModelForm):
 class CarOwnerForm(ModelForm):
     class Meta:
         model = CarOwner
-        fields = ['client', 'car', 'status', 'assign_date']
+        fields = ['client', 'car', 'status']
         widgets = {
             'client': Select(attrs={
                 "class": "form-control",
@@ -441,18 +441,12 @@ class CarOwnerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Status"
             }),
-            'assign_date': DateInput(attrs={
-                "class": "form-control",
-                "style": "max-width: 300px",
-                "placeholder": "Assign Date"
-            })
         }
-
 
 
 class CarAttachmentForm(ModelForm):
     class Meta:
-        model = CarAttachement
+        model = CarAttachment
         fields = ['created_by', 'car', 'attachment']
         widgets = {
             "created_by": forms.Select(attrs={

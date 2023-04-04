@@ -1,16 +1,6 @@
 {% extends "./base.html" %}
 {% load static %}
 {% block content %}
-<!-- <div>
-	<div class="clearfix py-2">	
-		<a class="btn btn-info" href="{% url 'calendar'%}"> Current Month</a><br>
-		<a class="btn btn-info left" href="{% url 'calendar' %}?{{ prev_month }}"> Previous Month </a>
-		<a class="btn btn-info right" href="{% url 'calendar' %}?{{ next_month }}"> Next Month </a>
-	</div>
-	<div class="py-2">	
-		{{ calendar }}
-	</div>
-</div> -->
 
 <div id='calendar'></div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

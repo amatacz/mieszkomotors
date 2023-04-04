@@ -18,13 +18,17 @@ class Car(PublicationTracker):
     def __str__(self) -> str:
          return f'{self.brand} {self.model} ({self.license_plates})'
 
-class CarAttachements(PublicationTracker):
+class CarAttachment(PublicationTracker):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    attachements = models.FileField(upload_to=get_upload_path)
+    attachment = models.FileField(upload_to=get_upload_path)
+    created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
 
-class CarNotes(PublicationTracker):
+
+class CarNote(PublicationTracker):
     car = models.ForeignKey(Car, on_delete=models.CASCADE) 
-    notes = models.TextField(max_length=500)
+    note = models.TextField(max_length=500)
+    created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
+
     
 class CarOwner(PublicationTracker):
     STATUSES = (

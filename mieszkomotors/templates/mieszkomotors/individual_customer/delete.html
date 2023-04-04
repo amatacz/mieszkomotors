@@ -1,0 +1,17 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+<div class="content-container">
+    <p class="h2 py-3">Delete the customer</p>
+    <form method="post">
+        {% csrf_token %}
+        <p class="h2">Please confirm deletion of {{ individualcustomer.first_name }} {{ individualcustomer.last_name }}?</p>
+        <button class="btn btn-info mt-3" type="submit">Delete</button>
+    </form>
+    <div class="mt-3 justify-between">
+        <a class="btn btn-info" href="{% url 'individual_customer_detail' individualcustomer.id %}"> Return to customers details</a>
+        <a class="btn btn-info" href="{% url 'customers_list'%}"> Return to customers list</a>
+        <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+    </div>
+</div>
+{% endblock %}

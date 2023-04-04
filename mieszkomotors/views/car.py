@@ -12,14 +12,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from mieszkomotors.models.car import Car, CarAttachements, CarNotes
+from mieszkomotors.models.car import Car, CarAttachment, CarNote
+from mieszkomotors.forms import *
 
 
 
 # Car Views 
 class CarCreate(LoginRequiredMixin, CreateView):
     model = Car
-    #form_class = CarForm
+    form_class = CarForm
     template_name = 'mieszkomotors/car/create.html'
     success_url = reverse_lazy('car_list')
     success_message = 'Samochód dodany do bazy'
@@ -34,7 +35,7 @@ class CarDetail(LoginRequiredMixin, DetailView):
 class CarUpdate(LoginRequiredMixin, UpdateView):
     model = Car
     template_name = 'mieszkomotors/car/update.html'
-    #form_class = forms.CarForm
+    form_class = CarForm
     success_url = reverse_lazy('car_list')
 
 class CarList(LoginRequiredMixin, ListView):
@@ -48,38 +49,92 @@ class CarDelete(LoginRequiredMixin, DeleteView):
 
 # Car Attachements Views
 class CarAttachementsCreate(LoginRequiredMixin, CreateView):
-    model = CarAttachements
-    #form_class = forms.CarForm
+    model = CarAttachment
+    form_class = CarAttachmentForm
     template_name = 'mieszkomotors/car/attachements/create.html'
     success_url = reverse_lazy('car_list')
-    success_message = 'Samochód dodany do bazy'
+    success_message = 'Załącznik dodany do samochodu'
 
     def get_initial(self):
         return {"created_by": self.request.user}
 
 class CarAttachementsDetail(LoginRequiredMixin, DetailView):
-    model = CarAttachements
+    model = CarAttachment
     template_name = 'mieszkomotors/car/attachements/detail.html'
 
 class CarAttachementsUpdate(LoginRequiredMixin, UpdateView):
-    model = CarAttachements
+    model = CarAttachment
     template_name = 'mieszkomotors/car/attachements/update.html'
-    #form_class = forms.CarForm
+    form_class = CarAttachmentForm
     success_url = reverse_lazy('car_list')
 
 class CarAttachementsList(LoginRequiredMixin, ListView):
-    model = CarAttachements
+    model = CarAttachment
     template_name = 'mieszkomotors/car/attachements/list.html'
 
 class CarAttachementsDelete(LoginRequiredMixin, DeleteView):
-    model = CarAttachements
+    model = CarAttachment
     template_name = 'mieszkomotors/car/attachements/delete.html'
     success_url = reverse_lazy('car_list')
 
 # Car Notes Views
+class CarNoteCreate(LoginRequiredMixin, CreateView):
+    model = CarAttachment
+    form_class = CarNoteForm
+    template_name = 'mieszkomotors/car/notes/create.html'
+    success_url = reverse_lazy('car_list')
+    success_message = 'Notatka dodana do samochodu'
 
-# Car EnterpriseOwner Views
+    def get_initial(self):
+        return {"created_by": self.request.user}
 
-# Car SelfEmployed Owner Views
+class CarNoteDetail(LoginRequiredMixin, DetailView):
+    model = CarNote
+    template_name = 'mieszkomotors/car/notes/detail.html'
+
+class CarAttachementsUpdate(LoginRequiredMixin, UpdateView):
+    model = CarNote
+    template_name = 'mieszkomotors/car/notes/update.html'
+    form_class = CarNoteForm
+    success_url = reverse_lazy('car_list')
+
+class CarAttachementsList(LoginRequiredMixin, ListView):
+    model = CarNote
+    template_name = 'mieszkomotors/car/notes/list.html'
+
+class CarNoteDelete(LoginRequiredMixin, DeleteView):
+    model = CarNote
+    template_name = 'mieszkomotors/car/notes/delete.html'
+    success_url = reverse_lazy('car_list')
 
 # Car Owner Views
+class CarOwnerCreate(LoginRequiredMixin, CreateView):
+    model = CarOwner
+    form_class = CarOwnerForm
+    template_name = 'mieszkomotors/car/owner/create.html'
+    success_url = reverse_lazy('car_list')
+    success_message = 'Właściciel dodany do bazy'
+
+    def get_initial(self):
+        return {"created_by": self.request.user}
+
+class CarOwnerDetail(LoginRequiredMixin, DetailView):
+    model = CarOwner
+    template_name = 'mieszkomotors/car/owner/detail.html'
+
+class CarOwnerUpdate(LoginRequiredMixin, UpdateView):
+    model = CarOwner
+    template_name = 'mieszkomotors/car/owner/update.html'
+    form_class = CarOwnerForm
+    success_url = reverse_lazy('car_list')
+
+class CarOwnersList(LoginRequiredMixin, ListView):
+    model = CarOwner
+    template_name = 'mieszkomotors/car/owner/list.html'
+
+class CarOwnerDelete(LoginRequiredMixin, DeleteView):
+    model = CarOwner
+    template_name = 'mieszkomotors/car/owner/delete.html'
+    success_url = reverse_lazy('car_list')
+
+

@@ -207,6 +207,7 @@ class SelfEmployedCustomer(ContactData):
     )
 
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name= 'self_employed_owner', null=True, blank=True)
+    company_name = models.CharField(max_length=80)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=50)
     nip = models.CharField(max_length=10, verbose_name='NIP')
@@ -216,7 +217,7 @@ class SelfEmployedCustomer(ContactData):
 
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.first_name} {self.last_name} {self.company_name}'
     
 class EnterpriseCustomer(ContactData):
     CUSTOMER_TYPE = (
