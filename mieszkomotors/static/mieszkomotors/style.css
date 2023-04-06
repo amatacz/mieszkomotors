@@ -1,52 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap');
+  
+  body {
+    background-color: #0f1746;
+  }
 
-/* Calendar styling  */
-.calendar {
-    width: 98%;
-    margin: auto;
-    font-size: 13px;
+  #main-container {
+    background-color: #ffffff;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 45px;
+    padding-right: 45px;
+    max-width: 80%;
+    min-height: 80vh;
+
   }
-  
-  .calendar tr, .calendar td {
-    border: 1px solid black;
-  }
-  
-  .calendar th {
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-  }
-  
-  .calendar td {
-    width: 200px;
-    height: 150px;
-    padding: 20px 0px 0px 5px;
-  }
-  
-  .month {
-    font-size: 25px;
-  }
-  
-  .date {
-    font-size: 16px;
-  }
-  
+
   ul {
     height: 100%;
     padding: 0px 5px 0px 20px;
   }
   
   a {
-    color: #17a2b8;
+    color: #0f1746;
   }
 
-  .left {
-    float: left;
+  #header-link {
+    color: #e1eff1;
+    font-size: 19px;
+    text-decoration: none;
   }
-  
-  .right {
-    float: right;
+
+  #header-link:hover {
+    color: #3844af;
+    font-size: 19px;
+    text-decoration: none;
   }
-  
+
   .btn {
     outline: none;
     color: black;
@@ -54,7 +43,8 @@
     box-shadow: 0 0 0 0;
     font-weight: bold !important;
   }
-  
-  .clearfix {
-    margin: 15px;
+
+  .contact-icon {
+    width: 70px;
+    height: 70px;
   }

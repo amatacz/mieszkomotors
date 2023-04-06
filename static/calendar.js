@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
       [
         {
           url: '/api/v1/car_events/',
-          backgroundColor: '#ffed47',
+          backgroundColor: '#e1eff1',
           textColor: 'black',
         },
         {
           url: '/api/v1/insurance_events/',
-          backgroundColor: '#3717b5',
+          backgroundColor: '#0f1746',
           textColor: 'white',
         }
       ],
