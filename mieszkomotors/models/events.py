@@ -8,6 +8,7 @@ from mieszkomotors.models.insurance import *
 class CarEvent(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, default="Default description")
     start = models.DateField(blank=True)
     end = models.DateField(null=True, blank=True)
 
@@ -17,6 +18,7 @@ class CarEvent(models.Model):
 class InsuranceEvent(models.Model):
     insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, default="Default description")
     start = models.DateField(blank=True)
     end = models.DateField(null=True,blank=True)
 

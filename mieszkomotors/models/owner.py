@@ -2,6 +2,8 @@ from django.db import models
 
 from .base import PublicationTracker, get_upload_path, get_upload_path_enterprise_owner
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 # class EnterpriseOwner(PublicationTracker):
 #     ADDRES_PREFIXES = (
@@ -172,7 +174,7 @@ class ContactData(PublicationTracker):
         )
 
     email = models.EmailField(max_length=120, unique=True)
-    phone_number = models.CharField(max_length=12) # tu dodac walidację jakąś
+    phone_number = PhoneNumberField()
     address_prefix = models.CharField(max_length=3, choices=ADDRES_PREFIXES, default="ul.")
     street = models.CharField(max_length=128, null=True, blank=True)
     building = models.CharField(max_length=10)

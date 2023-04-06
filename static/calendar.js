@@ -3,24 +3,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
-    themeSystem: 'bootstrap5',
     navLinks: true,
     height: "auto",
     headerToolbar: {
-      left: 'prev, next, today',
+      left: 'prev,next,today',
       center: 'title',
-      right: 'dayGridMonth, timeGridWeek, timeGridDay'
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
     eventSources:
       [
         {
           url: '/api/v1/car_events/',
-          color: 'gold',
+          backgroundColor: '#ffed47',
           textColor: 'black',
         },
         {
           url: '/api/v1/insurance_events/',
-          color: 'darkblue',
+          backgroundColor: '#3717b5',
           textColor: 'white',
         }
       ],
@@ -40,9 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
           html: true,
           template: `<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header bg-dark text-white"></h3><div class="popover-body"></div></div>`
       });
-  },
-
+    },
   });
-
   calendar.render();
 });

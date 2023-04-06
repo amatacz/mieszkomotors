@@ -5,12 +5,14 @@
         <p class="h2 py-3">{{ car.brand }} {{ car.model }} {{ car.owner }} details </p>
         <li class="m-2"> VIN: {{ car.vin }}</li>
         <li class="m-2"> License Plates: {{ car.license_plates }}</li>
-        <li class="m-2"><a href="{% url 'insurance_detail' car.insurance.id %}">Insurance Date: {{ car.insurance.current_insurance_date }}</a></li>
+        {% if car.insurance %}
+        <li class="m-2"><a href="{% url 'insurance_detail' car.insurance.pk %}">Insurance Date: {{ car.insurance.current_insurance_date }}</a></li>
+        {% else %}        
+        <li class="m-2">Insurance Date: <i>will be updated</i></a></li>
+        {% endif %}
         <li class="m-2">Technical Review Date: {{ car.current_car_review_date }}</li>
-        <li class="m-2">Next Technical Review Date: {{ car.car_review_renewal_date }} - email notification on {{ car.car_review_renewal_date_notification }}</li>
+        <li class="m-2">Next Technical Review Date: {{ car.car_review_renewal_date }}</li>
         <li class="m-2"> Purchase Date: {{ car.purchase_date }}</li>
-        <li class="m-2"> Additional info: {{ car.notes }}</li>
-        <li class="m-2"> Attachements: <a download href="{{ car.attachements }}">{{ car.attachements }}</a></li>
         <li class="m-2"> Client since: {{ car.in_mieszkomotors_since }}</li>
     <div class="py-3 justify-between">
         <ul class="m-2"><a class="btn btn-info" href="{% url 'car_update' car.id %}"> Update car info</a>

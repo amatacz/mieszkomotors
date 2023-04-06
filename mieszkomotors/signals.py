@@ -75,11 +75,13 @@ def assign_partial_payments_to_insurance(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Car)
 def create_car_event(sender, instance, created, **kwargs):
     if created:
-        title = f'{RENEWAL_INTERVAL} dni do odnowienia przeglądu '
+        title = ''
+        description = ''
         start = datetime.today()
 
         car_event = CarEvent.objects.create(car=instance, title=title, start=start)
-        car_event.title = f'{RENEWAL_INTERVAL} dni do odnowienia przeglądu {car_event.car.license_plates}'
+        car_event.title = f'Przegląd techniczny {car_event.car.license_plates}'
+        car_event.description = f'{RENEWAL_INTERVAL} dni do odnowienia przeglądu {car_event.car.license_plates}. Skontaktu się z właścicielem samochodu.'
         car_event.start = car_event.car.car_review_renewal_date - relativedelta(days=RENEWAL_INTERVAL)
 
         car_event.save()
@@ -88,10 +90,12 @@ def create_car_event(sender, instance, created, **kwargs):
 def create_insurance_event(sender, instance, created, **kwargs):
     if created:
         title = f'{RENEWAL_INTERVAL} dni do odnowienia ubezpieczenia '
+        description = ''
         start = datetime.today()
 
         insurance_event = InsuranceEvent.objects.create(insurance=instance, title=title, start=start)
-        insurance_event.title = f'{RENEWAL_INTERVAL} dni do odnowienia ubezpieczenia {insurance_event.insurance.car.license_plates}'
+        insurance_event.title = f'Odnowienie ubezpieczenia {insurance_event.insurance.car.license_plates}'
+        insurance_event.description = f'{RENEWAL_INTERVAL} dni do odnowienia ubezpieczenia {insurance_event.insurance.car.license_plates}. Skontaktuj się z właścicielem samochodu.'
         insurance_event.start = insurance_event.insurance.insurance_renewal_date - relativedelta(days=RENEWAL_INTERVAL)
 
         insurance_event.save()
