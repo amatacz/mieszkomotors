@@ -56,12 +56,21 @@
   .btn {
     outline: none;
     color: black;
-    background-color: transparent;
+    background-color: #e1eff1;
     box-shadow: 0 0 0 0;
     font-weight: bold !important;
   }
 
+  .btn:hover{
+    background-color: #ffd400;
+  }
+  
   .contact-icon {
     width: 70px;
     height: 70px;
+  }
+
+  p {
+    font-weight: bold;
+    margin-bottom: 5px;
   }

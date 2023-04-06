@@ -1,21 +1,24 @@
 {% extends "../../base.html" %}
 
 {% block content %}
-<div class="content-container">
-    <div class="row">
-    <div class="col-md-4">
-        <p class="h2 py-3">Individual Owners</p>
-        {% for individual_owner in individual_owners %}
-            <li class="m-2 font-weight-bold"><a href="{% url 'enterprise_customer_detail' enterprisecustomer.id %}">{{ enterprisecustomer }}</a></li>
-        {% endfor %}
-        <div class="py-3 justify-between">
-            <a class="btn btn-info" href="{% url 'enterprise_customer_create'%}"> Add new enterprise customer </a>        
+<div class="d-flex justify-content-left mx-3">
+    <div class="row row-centered pt-3">
+        <div class="col-12 col-centered">
+            <p class="h2 py-3">Enterprise Customers</p>
+            {% for enterprise_customer in enterprise_customers %}
+                <li class="m-2 font-weight-bold"><a href="{% url 'enterprise_customer_detail' enterprisecustomer.id %}">{{ enterprisecustomer }}</a></li>
+            {% endfor %}
+            <div class="py-3 justify-between">
+                <a class="btn" href="{% url 'enterprise_customer_create'%}"> Add new enterprise customer </a>        
+            </div>
         </div>
     </div>
-    </div>
-    </div>
-    <div class="py-3 justify-between">
-        <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+</div>
+<div class="d-flex justify-content-left mx-3">
+    <div class="row row-centered pt-3">
+        <div class="col-12 col-centered">
+            <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+        </div>
     </div>
 </div>
 {% endblock %}

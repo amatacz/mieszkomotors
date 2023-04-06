@@ -1,16 +1,29 @@
 {% extends "../../base.html" %}
 
 {% block content %}
-<div class="content-container">
-<p class="h2 py-3">Cars</p>
+<div class="d-flex justify-content-left">
+    <div class="row row-centered pt-3">
+        <div class="col-12 col-centered">
+            <p class="h1">Cars</p>
+        </div>
+    </div>
+</div>
 
-
+<div class="d-flex justify-content-left" >
 {% for car in object_list %}
-    <li class="m-2 font-weight-bold"><a href="{% url 'car_detail' car.pk  %}">{{ car }}</a></li>
+<div class="row pt-2">
+    <div class="col-12">
+        <li class="m-2 font-weight-bold"><a href="{% url 'car_detail' car.pk  %}">{{ car }}</a></li>
+    </div>
+</div>
+</div>
+<div class="d-flex justify-content-left" >
 {% endfor %}
-    <div class="py-3 justify-between">
-        <a class="btn btn-info" href="{% url 'car_create'%}"> Add new car </a>
-        <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+<div class="row pt-5">
+    <div class="col-12">
+        <a class="btn" href="{% url 'car_create'%}"> Add new car </a>
+        <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
     </div>
 </div>
 {% endblock %}
+</div>
