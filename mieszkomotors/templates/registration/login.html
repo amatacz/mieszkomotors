@@ -1,12 +1,22 @@
 {% extends "../base.html" %}
 
 {% block content %}
-<div class="content-container">
-    <p class="h2 py-3">Log in</p>
-<form class="m-2" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-info mt-3" type="submit">Login</button>
-</form>
+<div class="d-flex justify-content-left">
+    <div class="row row-centered pt-3">
+        <div class="col-12 col-centered">
+            <p class="h1 py-3">Login</p>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-left">
+    <div class="row row-centered pt-3">
+        <div class="col-12 col-centered">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn mt-3" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

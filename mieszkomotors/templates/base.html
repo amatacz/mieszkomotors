@@ -26,6 +26,7 @@
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js"></script>
 
     </head>
+
     <body class="d-flex flex-column min-vh-100">
         <!-- Nav bar -->
         <nav class="navbar navbar-expand-lg py-4">
@@ -65,10 +66,11 @@
             </div>
           </nav>
 
+        <!-- Content section -->
         <div class="container bg-body rounded" id="main-container">
             <div class="row pt-5">
                 <div class="col-12">
-                    <div class="container-flex align-items-center">
+                    <div class="container-flex align-items-center py-3">
                         {% block content %}
                         {% endblock %}
                     </div>
@@ -76,10 +78,8 @@
             </div>
         </div>
 
-
-
+        <!-- Footer -->
         {% include "./footer.html" %}
-
 
     </body>
 </html>
