@@ -1,15 +1,28 @@
 {% extends "../../base.html" %}
 
 {% block content %}
-<div class="content-container">
-    <p class="h2 py-3">Insurances</p>
-
+<div class="d-flex justify-content-left">
+    <div class="row row-centered pt-3">
+        <div class="col-12 col-centered">
+            <p class="h1">Insurances</p>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-left" >
     {% for insurance in object_list %}
-        <li class="m-2 font-weight-bold"><a href="{% url 'insurance_detail' insurance.id %}">{{ insurance }}</a></li>
+    <div class="row pt-2">
+        <div class="col-12">
+            <li class="m-2 font-weight-bold"><a href="{% url 'insurance_detail' insurance.id %}">{{ insurance }}</a></li>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-left" >
     {% endfor %}
-    <div class="py-3 justify-between">
-        <a class="btn btn-info" href="{% url 'insurance_create'%}"> Add new insurance </a>
-        <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+    <div class="row pt-5">
+        <div class="col-12">
+            <a class="btn" href="{% url 'insurance_create'%}"> Add new insurance </a>
+            <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+        </div>
     </div>
 </div>
 {% endblock %}

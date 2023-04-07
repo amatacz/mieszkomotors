@@ -1,19 +1,41 @@
 {% extends "../../base.html" %}
 
 {% block content %}
-<div class="content-container">
-        <p class="h2 py-3">{{ insurance.car.brand }} {{ insurance.car.model }} {{ insurance.car.owner }} details</p>
-        <li class="m-2"> Price: {{ insurance.price }}</li>
-        <li class="m-2">Offer: {{ insurance.offer }}</li>
-        <li class="m-2"> Date: {{ insurance.current_insurance_date }}</li>
-        <li class="m-2"> Renewal date: {{ insurance.insurance_renewal_date }} - notification will be send on {{ insurance.insurance_renewal_date_notification }}</li>
-        <li class="m-2"> Additional info: {{ insurance.notes }}</li>
-        <li class="m-2"> Attachements: <a download href="{{ insurance.attachements }}">{{ insurance.attachements }}</a></li>
-    <div class="py-3 justify-between">
-        <ul class="m-2"><a class="btn btn-info" href="{% url 'insurance_update' insurance.id %}"> Update insurance info</a>
-            <a class="btn btn-info" href="{% url 'insurance_delete' insurance.pk %}"> Delete insurance </a></ul>
-        <ul class="m-2"><a class="btn btn-info" href="{% url 'insurance_list'%}"> Return to insurance list</a>
-            <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a></ul>
+<div class="d-flex justify-content-left">
+    <div class="row row-centered pt-3">
+        <div class="col-12 col-centered">
+            <p class="h1 py-3">{{ insurance.car.brand }} {{ insurance.car.model }} {{ insurance.car.owner }} details</p>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-left">
+    <div class="row row-centered pt-3">
+        <div class="col-12 col-centered">
+            <li class="m-2"> Price: {{ insurance.price }}</li>
+            <li class="m-2">Offer: {{ insurance.offer }}</li>
+            <li class="m-2"> Date: {{ insurance.current_insurance_date }}</li>
+            <li class="m-2"> Renewal date: {{ insurance.insurance_renewal_date }}</li>
+            <li class="m-2"> Additional info: {{ insurance.notes }}</li>
+            <li class="m-2"> Attachements: <a download href="{{ insurance.attachements }}">{{ insurance.attachements }}</a></li>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-left">
+    <div class="row row-centered py-3">
+        <div class="col-12 col-centered">        
+            <ul>
+                <a class="btn" href="{% url 'insurance_update' insurance.id %}"> Update insurance info</a>
+                <a class="btn" href="{% url 'insurance_delete' insurance.pk %}"> Delete insurance </a>
+            </ul>
+        </div>
+    </div>
+    <div class="row row-centered col-centered pt-3">
+        <div class="col-12"> 
+            <ul>
+                <a class="btn" href="{% url 'insurance_list'%}"> Return to insurance list</a>
+                <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}
