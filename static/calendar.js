@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
           textColor: '#ffffff',
           borderColor: '#ffffff',
 
+        },
+        {
+          url: '/api/v1/generic_events/',
+          backgroundColor: '#e1eff1',
+          textColor: '#000000',
+          borderColor: '#ffffff',
         }
       ],
     eventClick: function(info) {

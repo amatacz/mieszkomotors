@@ -2,6 +2,7 @@ from rest_framework import viewsets, permissions
 
 from mieszkomotors.models.events import CarEvent, InsuranceEvent
 from mieszkomotors.models.car import Car, CarOwner
+from mieszkomotors.models.events import GenericEvent
 from mieszkomotors.serializers import *
 from mieszkomotors.permissions import IsStaffOrReadOnly
 
@@ -50,4 +51,8 @@ class EnterpriseCustomerViewset(viewsets.ModelViewSet):
     serializer_class = EnterpriseCustomerSerializer
     permission_classes = [permissions.IsAuthenticated, IsStaffOrReadOnly]
 
+class GenericEventsViewset(viewsets.ModelViewSet):
+    queryset = GenericEvent.objects.all()
+    serializer_class = GenericEventSerializer
+    permission_classes = [permissions.IsAuthenticated, IsStaffOrReadOnly]
 

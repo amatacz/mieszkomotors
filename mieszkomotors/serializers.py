@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from mieszkomotors.models.events import CarEvent, InsuranceEvent
+from mieszkomotors.models.events import CarEvent, InsuranceEvent, GenericEvent
 from mieszkomotors.models.car import Car, CarOwner
 from mieszkomotors.models.insurance import Insurance
 from mieszkomotors.models.owner import Customer, IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer
@@ -12,6 +12,11 @@ class CarEventsSerializer(serializers.ModelSerializer):
 class InsuranceEventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = InsuranceEvent
+        fields = "__all__"
+
+class GenericEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GenericEvent
         fields = "__all__"
     
 class CarSerializer(serializers.ModelSerializer):

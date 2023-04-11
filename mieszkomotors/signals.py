@@ -89,7 +89,7 @@ def create_car_event(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Insurance)
 def create_insurance_event(sender, instance, created, **kwargs):
     if created:
-        title = f'{RENEWAL_INTERVAL} dni do odnowienia ubezpieczenia '
+        title = ''
         description = ''
         start = datetime.today()
 
@@ -151,6 +151,7 @@ def create_customer_when_enterprise_owner_is_created(sender, created, instance, 
         instance.customer = customer
         instance.save(update_fields=['customer'])
 
+
 # Delete customer when IndividualCustomer is deleted
 @receiver(post_delete, sender=IndividualCustomer)
 def post_delete_customer(sender, instance, *args, **kwargs):
@@ -162,7 +163,6 @@ def post_delete_customer(sender, instance, *args, **kwargs):
 def post_delete_customer(sender, instance, *args, **kwargs):
     customer = Customer.objects.get(identifier = instance.regon)
     customer.delete()
-
 
 # Delete customer when EnterpriseCustomer is deleted
 @receiver(post_delete, sender=EnterpriseCustomer)

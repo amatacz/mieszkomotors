@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import home, calendar, car, owner, user, insurance
+from .views import home, calendar, car, owner, user, insurance, events
 
 urlpatterns = [
     path('', home.Home.as_view(), name='home'),
@@ -51,10 +51,23 @@ urlpatterns = [
     path('insurance/detail/<pk>', insurance.InsuranceDetail.as_view(), name='insurance_detail'),
     path('insurance/list', insurance.InsuranceList.as_view(), name='insurance_list'),
 
+    # GenericEvents urls
+    path('events/create', events.GenericEventCreateView.as_view(), name='generic_event_create'),
+    path('events/list', events.EventList.as_view(), name='events_list'),
+    path('events/generic/detail/<pk>', events.GenericEventDetailView.as_view(), name = "generic_event_detail"),
+    path('events/generic/delete/<pk>', events.GenericEventDeleteView.as_view(), name = "generic_event_delete"),
+    path('events/generic/update/<pk>', events.GenericEventUpdateView.as_view(), name = "generic_event_update"),
+
+    # CarEvent urls
+    path('events/car/detail/<pk>', events.CarEventDetailView.as_view(), name = "car_event_detail"),
+
+    # InsuranceEnevent urls
+    path('events/insurance/detail/<pk>', events.InsuranceEventDetailView.as_view(), name = "insurance_event_detail"),
+
     # Calendar urls
     re_path(r'^calendar/$', calendar.CalendarView.as_view(), name='calendar'),
 
-#     # Login, logout urls
+    # Login, logout urls
     path("login/", user.loginView.as_view(), name="login"),
     path("logout/", user.logoutView.as_view(), name="logout"),
 

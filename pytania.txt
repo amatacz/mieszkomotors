@@ -3,8 +3,9 @@ datatables django -> serializacja bedzie potrzebna
 potencjalny problem -> tabele z paginacjami
 
 
-Jak ustawić format DateTimeField?                                                                                                                                                                                                                                      
-dodać custom event -> np na sezonową wymianę opon
-dodac stronę i view na ręczne dodawanie ww. eventów
+Jak ustawić format DateTimeField?
 
+
+usuwanie eventów?
+list view i wtedy wybieranie konkretnych eventów na usunięcie
 

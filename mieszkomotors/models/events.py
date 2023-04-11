@@ -24,3 +24,12 @@ class InsuranceEvent(models.Model):
 
     def __str__(self):
         return f'{self.insurance.car}: {self.start.strftime("%Y-%m-%d")}'
+    
+class GenericEvent(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, default="Default description")
+    start = models.DateField(blank=True)
+    end = models.DateField(null=True,blank=True)
+
+    def __str__(self) -> str:
+        return f'{self.title} {self.start.strftime("%Y-%m-%d")}'

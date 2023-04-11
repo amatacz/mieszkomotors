@@ -1,12 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-
 from django.forms import ModelForm, TextInput, EmailInput, FileInput, NumberInput, DateInput, Select
 
-from mieszkomotors.models.owner import IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer, CustomerAttachment, CustomerNote
 from mieszkomotors.models.car import Car, CarNote, CarAttachment, CarOwner
+from mieszkomotors.models.events import GenericEvent
 from mieszkomotors.models.insurance import Insurance, InsuranceAttachment, InsuranceNote
+from mieszkomotors.models.owner import IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer, CustomerAttachment, CustomerNote
 
 from phonenumber_field.formfields import PhoneNumberField
 
@@ -491,6 +491,34 @@ class CarNoteForm(ModelForm):
             })
         }
 
+# GenericEvent Form
+
+class GenericEventForm(ModelForm):
+    class Meta:
+        model = GenericEvent
+        fields = ['title', 'description', 'start', 'end']
+        widget = {
+            "title": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Title"
+            }),
+            "description": TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Description"
+            }),
+            "start": DateInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "Start Date"
+            }),
+            "end": DateInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "End Date"
+            })
+        }
 
 # SignUpForm is not used 16.03.2023
 

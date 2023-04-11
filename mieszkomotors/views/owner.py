@@ -18,7 +18,7 @@ class CustomersList(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['individual_customers'] = IndividualCustomer.objects.all()
         context['self_employed_customers'] = SelfEmployedCustomer.objects.all()
-        context['enterprise_customers'] =EnterpriseCustomer.objects.all()
+        context['enterprise_customers'] = EnterpriseCustomer.objects.all()
         return context
 
 # Individual Customer Views 

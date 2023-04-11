@@ -2,7 +2,12 @@
 {% load static %}
 {% block content %}
 <div id='calendar-container'>
-    <div id='calendar'></div>
+    <div id='calendar'>
+        <ul>
+            <a href="{% url 'generic_event_create' %}" class="btn my-3" style = "max-width: 170px;" type="submit">Add other event</a>
+            <a href="{% url 'events_list' %}" class="btn my-3" style = "max-width: 170px;" type="submit">See all events</a>
+        </ul>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'calendar.js' %}"></script>
 </div>

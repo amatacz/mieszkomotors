@@ -52,7 +52,7 @@ class ContactData(PublicationTracker):
     address_prefix = models.CharField(max_length=3, choices=ADDRES_PREFIXES, default="ul.")
     street = models.CharField(max_length=128, null=True, blank=True)
     building = models.CharField(max_length=10)
-    apartment = models.CharField(max_length=12)
+    apartment = models.CharField(max_length=12, null=True, blank=True)
     city = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=10)  
 
