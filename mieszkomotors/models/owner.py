@@ -65,7 +65,7 @@ class IndividualCustomer(ContactData):
           ('selfemployed', 'SelfEmployedCustomer'),
           ('enterprise', 'EnterpriseCustomer')
     )
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name= 'individual_owner', null=True, blank=True)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name= 'individual_customer', null=True, blank=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=50)
     pesel = models.CharField(max_length=11, unique=True, verbose_name="Identyfikator - PESEL")
@@ -82,7 +82,7 @@ class SelfEmployedCustomer(ContactData):
           ('enterprise', 'EnterpriseCustomer')
     )
 
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name= 'self_employed_owner', null=True, blank=True)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name= 'self_employed_customer', null=True, blank=True)
     company_name = models.CharField(max_length=80)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=50)
@@ -102,7 +102,7 @@ class EnterpriseCustomer(ContactData):
           ('enterprise', 'EnterpriseCustomer')
     )
     
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name= 'enterprise_owner', null=True, blank=True)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name= 'enterprise_customer', null=True, blank=True)
     company_name = models.CharField(max_length=100)
     nip = models.CharField(max_length=10, null=True, blank=True)
     regon = models.CharField(max_length=11, unique=True, verbose_name="Identyfikator - REGON")

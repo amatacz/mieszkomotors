@@ -14,13 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
       [
         {
           url: '/api/v1/car_events/',
-          backgroundColor: '#fffff',
-          textColor: '#ffffff',
+          backgroundColor: '#ffd400',
+          textColor: '#000000',
+          borderColor: '#ffffff',
         },
         {
           url: '/api/v1/insurance_events/',
           backgroundColor: '#091661',
-          textColor: 'white',
+          textColor: '#ffffff',
+          borderColor: '#ffffff',
+
         }
       ],
     eventClick: function(info) {
@@ -40,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
           template: `<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header bg-dark text-white"></h3><div class="popover-body"></div></div>`
       });
     },
+
   });
   calendar.render();
 });
+
+
