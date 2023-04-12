@@ -1,16 +1,24 @@
-{% extends "../../base.html" %}
+{% extends "../../../base.html" %}
 
 {% block content %}
 <div class="content-container">
-    <p class="h2 py-3">Add a car</p>
+    <p class="h2 py-3">Przypisz właściciela samochodu</p>
 <form class="m-2" method="post">
     {% csrf_token %}
-    {{ form }}
-    <button class="btn btn-info mt-3" type="submit">Save</button>
+    {{ form.as_p }}
+    <button class="btn mt-3" type="submit">Zapisz</button>
 </form>
+<div class="pt-3 justify-between">
+    <p>Poprzedni właściciele (bear in mind, that car should have only one active owner at the time)</p>
+    {% for car_owner in car_owner_list %}
+    <ul>
+        <a href="{% url 'car_owner_update' car_owner.id %}"><p class="py-3">{{ car_owner }} {{ car_owner.get_status_display }}</a> Właściciel od {{ car_owner.assign_date }}</p>
+    </ul>
+    {% endfor %}
+</div>
 <div class="py-3 justify-between">
-    <a class="btn btn-info" href="{% url 'car_list'%}"> Return to cars list</a>
-    <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+    <a class="btn" href="{% url 'car_list'%}">Wróć do listy samochodów</a>
+    <a class="btn" href="{% url 'home'%}"> Wróć do strony głównej</a>
 </div>
 </div>
 {% endblock %}

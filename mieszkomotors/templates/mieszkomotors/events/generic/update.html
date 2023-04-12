@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">Update event info</p>
+            <p class="h1 py-3">Zaktualizuj wydarzenie</p>
         </div>
     </div>
 </div>
@@ -14,7 +14,7 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn mt-3" type="submit">Save</button>
+                <button class="btn mt-3" type="submit">Zapisz</button>
             </form>
         </div>
     </div>
@@ -22,9 +22,9 @@
 <div class="d-flex justify-content-left py-3">
     <div class="row row-centered py-3">
         <div class="col-12 col-centered">
-            <a class="btn" href="{% url 'generic_event_detail' genericevent.id %}"> Return to event details </a>
-            <a class="btn" href="{% url 'events_list'%}"> Return to events list</a>
-            <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+            <a class="btn" href="{% url 'generic_event_detail' genericevent.id %}"> Wróć na stronę Wydarzenia </a>
+            <a class="btn" href="{% url 'events_list'%}"> Wróć do listy wydarzeń</a>
+            <a class="btn" href="{% url 'home'%}"> Wróć na stronę główną</a>
         </div>
     </div>
 </div>

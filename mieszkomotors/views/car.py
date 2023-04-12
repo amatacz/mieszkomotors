@@ -32,6 +32,19 @@ class CarDetail(LoginRequiredMixin, DetailView):
     model = Car
     template_name = 'mieszkomotors/car/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['car'] = Car.objects.get(id=self.kwargs['pk'])
+
+        try:
+            CarOwner.objects.all().filter(car=5).filter(status='a')[0]
+            active_owner = CarOwner.objects.all().filter(car=5).filter(status='a')[0]
+            context['car_owner'] = active_owner
+        except IndexError:
+            pass
+        return context
+
+
 class CarUpdate(LoginRequiredMixin, UpdateView):
     model = Car
     template_name = 'mieszkomotors/car/update.html'
@@ -108,12 +121,25 @@ class CarNoteDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('car_list')
 
 # Car Owner Views
+# class CarOwnerCreate(LoginRequiredMixin, CreateView):
+#     model = CarOwner
+#     form_class = CarOwnerForm
+#     template_name = 'mieszkomotors/car/owner/create.html'
+#     success_url = reverse_lazy('car_list')
+#     success_message = 'Właściciel dodany do bazy'
+
 class CarOwnerCreate(LoginRequiredMixin, CreateView):
     model = CarOwner
     form_class = CarOwnerForm
     template_name = 'mieszkomotors/car/owner/create.html'
     success_url = reverse_lazy('car_list')
     success_message = 'Właściciel dodany do bazy'
+
+    def get_context_data(self, **kwargs):
+        owners = CarOwner.objects.all().filter(car = self.kwargs['pk'])
+        context =  super().get_context_data(**kwargs)
+        context['car_owner_list'] = owners
+        return context
 
     def get_initial(self):
         return {"created_by": self.request.user}

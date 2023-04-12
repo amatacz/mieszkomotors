@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">{{ car.brand }} {{ car.model }} {{ car.owner }} details </p>
+            <p class="h1 py-3">{{ car.brand }} {{ car.model }} {{ car.owner }} </p>
         </div>
     </div>
 </div>
@@ -12,19 +12,24 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
+            {% if car_owner.client %}
+            <li class="mt-2"> Właściciel: {{ car_owner.client }} - <a href="{% url 'car_owner_create' car.pk %}">zaktualizuj właściciela pojazdu</a></li>
+            {% else %}
+                <li class="mt-2">Właściciel: Brak właściciela - <a href="{% url 'car_owner_create' car.pk %}">przypisz właściciela pojazdu</a> </li>
+            {% endif %}
             <li class="mt-2"> VIN: {{ car.vin }}</li>
-            <li class="mt-2"> License Plates: {{ car.license_plates }}</li>
+            <li class="mt-2"> Nr rejestracyjny: {{ car.license_plates }}</li>
 
             {% if car.insurance %}
-            <li class="mt-2"><a href="{% url 'insurance_detail' car.insurance.pk %}">Insurance Date: {{ car.insurance.current_insurance_date }}</a></li>
+            <li class="mt-2"><a href="{% url 'insurance_detail' car.insurance.pk %}">Data ubezpieczenia: {{ car.insurance.current_insurance_date }}</a></li>
             {% else %}        
-            <li class="mt-2">Insurance Date: <i>will be updated</i></a></li>
+            <li class="mt-2">>Data ubezpieczenia: <i>brak ubezpieczenia</i></a></li>
             {% endif %}
 
-            <li class="mt-2">Technical Review Date: {{ car.current_car_review_date }}</li>
-            <li class="mt-2">Next Technical Review Date: {{ car.car_review_renewal_date }}</li>
-            <li class="mt-2"> Purchase Date: {{ car.purchase_date }}</li>
-            <li class="mt-2"> Client since: {{ car.in_mieszkomotors_since }}</li>
+            <li class="mt-2">Data ostatniego przeglądu: {{ car.current_car_review_date }}</li>
+            <li class="mt-2">Data następnego przeglądu: {{ car.car_review_renewal_date }}</li>
+            <li class="mt-2">Data zakupu: {{ car.purchase_date }}</li>
+            <li class="mt-2">W bazie od: {{ car.in_mieszkomotors_since }}</li>
         </div>
     </div>
 </div>
@@ -33,16 +38,16 @@
     <div class="row row-centered py-3">
         <div class="col-12 col-centered">        
             <ul>
-                <a class="btn" href="{% url 'car_update' car.id %}"> Update car info</a>
-                <a class="btn" href="{% url 'car_delete' car.pk %}"> Delete car</a>
+                <a class="btn" href="{% url 'car_update' car.id %}">Zaktualizuj dane</a>
+                <a class="btn" href="{% url 'car_delete' car.pk %}">Usuń auto</a>
             </ul>
         </div>
     </div>
     <div class="row row-centered col-centered pt-3">
-        <div class="col-12"> 
+        <div class="col-12 col-centered"> 
             <ul>
-                <a class="btn" href="{% url 'car_list'%}"> Return to cars list</a>
-                <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+                <a class="btn" href="{% url 'car_list'%}">Wróć do listy samochodów</a>
+                <a class="btn" href="{% url 'home'%}">Wróć na stronę główną</a>
             </ul>
         </div>
     </div>

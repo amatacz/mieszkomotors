@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">{{ generic_event.title }} details </p>
+            <p class="h1 py-3">{{ generic_event.title }} </p>
         </div>
     </div>
 </div>
@@ -12,9 +12,9 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <li class="mt-2"> Description: {{ genericevent.description }}</li>
-            <li class="mt-2"> Start Date: {{ genericevent.start }}</li>
-            <li class="mt-2"> End Date: {{ genericevent.end }}</li>
+            <li class="mt-2"> Opis: {{ genericevent.description }}</li>
+            <li class="mt-2"> Początek: {{ genericevent.start }}</li>
+            <li class="mt-2"> Koniec: {{ genericevent.end }}</li>
         </div>
     </div>
 </div>
@@ -23,16 +23,16 @@
     <div class="row row-centered py-3">
         <div class="col-12 col-centered">        
             <ul>
-                <a class="btn" href="{% url 'generic_event_update' genericevent.id %}"> Update event info</a>
-                <a class="btn" href="{% url 'generic_event_delete' genericevent.pk %}"> Delete event</a>
+                <a class="btn" href="{% url 'generic_event_update' genericevent.id %}"> Zaktualizuj wydarzenie</a>
+                <a class="btn" href="{% url 'generic_event_delete' genericevent.pk %}"> Usuń wydarzenie</a>
             </ul>
         </div>
     </div>
     <div class="row row-centered col-centered pt-3">
         <div class="col-12"> 
             <ul>
-                <a class="btn" href="{% url 'events_list'%}"> Return to events list</a>
-                <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+                <a class="btn" href="{% url 'events_list'%}"> Wróć do listy wydarzeń</a>
+                <a class="btn" href="{% url 'home'%}"> Wróć na stronę główną</a>
             </ul>
         </div>
     </div>

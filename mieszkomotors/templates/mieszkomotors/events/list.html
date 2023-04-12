@@ -6,12 +6,12 @@
     <div class="d-flex justify-content-left mx-3">
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
-                <p class="h2 py-3">Generic Events</p>
+                <p class="h2 py-3">Wydarzenia ogólne</p>
                 {% for generic_event in generic_events %}
                     <li class="m-2 font-weight-bold"><a href="{% url 'generic_event_detail' generic_event.id %}">{{ generic_event }}</a></li>
                 {% endfor %} 
                 <div class="justify-between">
-                    <a class="btn mt-2" href="{% url 'generic_event_create'%}"> Add new generic event </a>
+                    <a class="btn mt-2" href="{% url 'generic_event_create'%}"> Dodaj wydarzenie </a>
                 </div>        
             </div>
         </div>
@@ -19,7 +19,7 @@
     <div class="d-flex justify-content-left mx-3">
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
-                <p class="h2 py-3">Car Events</p>
+                <p class="h2 py-3">Przeglądy techniczne</p>
                 {% for car_event in car_events %}
                     <li class="m-2 font-weight-bold"><a href="{% url 'car_event_detail' car_event.id %}">{{ car_event }}</a></li>
                 {% endfor %}
@@ -29,7 +29,7 @@
     <div class="d-flex justify-content-left mx-3">
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
-                <p class="h2 py-3">Insurance Events</p>
+                <p class="h2 py-3">Ubezpieczenia</p>
                 {% for insurance_event in insurance_events %}
                     <li class="m-2 font-weight-bold"><a href="{% url 'insurance_event_detail' insurance_event.id %}">{{ insurance_event }}</a></li>
                 {% endfor %}      
@@ -40,7 +40,7 @@
 <div class="d-flex justify-content-left m-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <a class="btn my-2" href="{% url 'home'%}"> Return to the main page</a>
+            <a class="btn my-2" href="{% url 'home'%}"> Wróć do strony głównej</a>
         </div>
     </div>
 </div>

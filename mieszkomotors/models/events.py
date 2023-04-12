@@ -25,6 +25,18 @@ class InsuranceEvent(models.Model):
     def __str__(self):
         return f'{self.insurance.car}: {self.start.strftime("%Y-%m-%d")}'
     
+class WinterTyresReplacement(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    start = models.DateField(default='2023-11-12')
+    end = models.DateField(blank=True)
+
+class SpringTyresReplacement(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    start = models.DateField(default='2023-03-15')
+    end = models.DateField(blank=True)
+
 class GenericEvent(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200, default="Default description")

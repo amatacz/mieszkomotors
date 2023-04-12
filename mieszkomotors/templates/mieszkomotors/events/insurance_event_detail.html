@@ -12,9 +12,9 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <li class="mt-2"> Description: {{ insuranceevent.description }}</li>
-            <li class="mt-2"> Start Date: {{ insuranceevent.start }}</li>
-            <li class="mt-2"> End Date: {{ insuranceevent.end }}</li>
+            <li class="mt-2"> Opis: {{ insuranceevent.description }}</li>
+            <li class="mt-2"> Początek: {{ insuranceevent.start }}</li>
+            <li class="mt-2"> Koniec: {{ insuranceevent.end }}</li>
         </div>
     </div>
 </div>
@@ -23,8 +23,8 @@
     <div class="row row-centered col-centered pt-3">
         <div class="col-12"> 
             <ul>
-                <a class="btn" href="{% url 'events_list'%}"> Return to events list</a>
-                <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+                <a class="btn" href="{% url 'events_list'%}"> Wróć do listy wydarzeń</a>
+                <a class="btn" href="{% url 'home'%}"> Wróć na stronę główną</a>
             </ul>
         </div>
     </div>

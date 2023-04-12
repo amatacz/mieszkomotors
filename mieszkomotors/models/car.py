@@ -42,4 +42,4 @@ class CarOwner(PublicationTracker):
     assign_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return f'{self.car} {self.client}'
+        return f'{self.client} {self.car}'

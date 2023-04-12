@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="content-container">
-    <p class="h2 py-3">Delete the car</p>
+    <p class="h2 py-3">Usuń włąściciela samochodu</p>
     <form method="post">
         {% csrf_token %}
-        <p class="h2 py-3">Please confirm delete of {{ car }}?</p>
+        <p class="h2 py-3">Czy na pewno chcesz usunąć {{ car_owner }}?</p>
         <button class="btn btn-info my-3" type="submit">Delete</button>
     </form>
-    <a class="btn btn-info" href="{% url 'car_detail' car.id %}"> Return to cars details </a>
-    <a class="btn btn-info" href="{% url 'car_list'%}"> Return to cars list</a>
-    <a class="btn btn-info" href="{% url 'home'%}"> Return to the main page</a>
+    <a class="btn btn-info" href="{% url 'car_detail' car.id %}"> Wróć do strony samochodu </a>
+    <a class="btn btn-info" href="{% url 'car_list'%}"> Wróć do listy samochodów</a>
+    <a class="btn btn-info" href="{% url 'home'%}"> Wróć do strony głównej</a>
 </div>
 {% endblock %}

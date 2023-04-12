@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
           template: `<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header bg-dark text-white"></h3><div class="popover-body"></div></div>`
       });
     },
-
   });
   calendar.render();
 });

@@ -10,17 +10,17 @@
             {% for individual_customer in individual_customers %}
             <p class="h1 py-3 mx-3">{{ individual_customer.first_name }} {{ individual_customer.last_name }}</p>
             <li class="m-2"> Email: {{ individual_customer.email }}</li>
-            <li class="m-2"> Phone number: {{ individual_customer.phone_number }}</li>
-            <li class="m-2"> Address: {{individual_customer.address_prefix}}{{ individual_customer.street }}<br>{{ individual_customer.building }}
+            <li class="m-2"> Numer telefonu: {{ individual_customer.phone_number }}</li>
+            <li class="m-2"> Adres: {{individual_customer.address_prefix}}{{ individual_customer.street }}<br>{{ individual_customer.building }}
                 {{ individual_customer.apartment }} {{ individual_customer.city }} {{ individual_customer.zip_code }}
             </li>
             <li class="m-2"> PESEL: {{ individual_customer.pesel }}</li>
-            <li class="m-2"> Client since: {{ individual_customer.client_since }}</li>
+            <li class="m-2"> Klient od: {{ individual_customer.client_since }}</li>
                 
                 {% if forloop.last %}
                 <div class="py-3">
-                    <ul class="my-2"><a class="btn mt-3" href="{% url 'individual_customer_update' individual_customer.id %}"> Update customer info</a>
-                        <a class="btn mt-3" href="{% url 'individual_customer_delete' individual_customer.pk %}"> Delete customer </a></ul>
+                    <ul class="my-2"><a class="btn mt-3" href="{% url 'individual_customer_update' individual_customer.id %}">Zaktualizuj dane</a>
+                        <a class="btn mt-3" href="{% url 'individual_customer_delete' individual_customer.pk %}"> Usuń klienta</a></ul>
                 </div>
                 {% endif %}
             {% endfor %}
@@ -30,12 +30,12 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3 mx-3">Client files </p>
+            <p class="h1 py-3 mx-3">Pliki klienta</p>
             {% for attachment in attachments %}
                 <li class="m-2"><a download href="{{ attachment.attachment.url }}">{{ attachment.attachment.name }}</a></li>
             {% empty %}
             <div class="py-3">
-                <ul class="m-2"><a class="btn" href="{% url 'customer_attachment_create' %}">Add attachment</a>
+                <ul class="m-2"><a class="btn" href="{% url 'customer_attachment_create' %}">Dodaj załącznik</a>
             </div>
             {% endfor %}
         </div>
@@ -44,12 +44,12 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3 mx-3">Client notes</p>
+            <p class="h1 py-3 mx-3">Notatki klienta</p>
             {% for note in notes %}
                 <li class="m-2">{{ note.note|safe }}</li>
             {% empty %}
             <div class="py-3">
-                <ul class="m-2"><a class="btn" href="{% url 'customer_note_create' %}">Add note</a>
+                <ul class="m-2"><a class="btn" href="{% url 'customer_note_create' %}">Dodaj notatkę</a>
             </div>
             {% endfor %}
         </div>
@@ -59,8 +59,8 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <ul><a class="btn" href="{% url 'customers_list'%}"> Return to customer list</a>
-            <a class="btn" href="{% url 'home'%}"> Return to the main page</a></ul>
+            <ul><a class="btn" href="{% url 'customers_list'%}">Wróć do listy klientów</a>
+            <a class="btn" href="{% url 'home'%}">Wróć na stronę główną</a></ul>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@
         <div class="col-12 col-centered">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{form.as_p}}
+                {{ form.as_p }}
                 <button class="btn mt-3" type="submit">Save</button>
             </form>
         </div>

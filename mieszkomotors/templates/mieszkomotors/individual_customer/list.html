@@ -4,13 +4,13 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">Individual Customers</p>
+            <p class="h1 py-3">Klienci Indywidualni</p>
             {% for individual_customer in individual_customers %}
                 <li class="m-2 font-weight-bold"><a href="{% url 'individual_customer_detail' individualcustomer.id %}">{{ individual_customer }}</a></li>
             {% endfor %}
 
             <div class="py-3 justify-between">
-                <a class="btn" href="{% url 'individual_customer_create'%}"> Add new individual owner </a>
+                <a class="btn" href="{% url 'individual_customer_create'%}">Dodaj klienta indywidualnego</a>
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+            <a class="btn" href="{% url 'home'%}">Wróć na stronę główną</a>
         </div>
     </div>
 </div>

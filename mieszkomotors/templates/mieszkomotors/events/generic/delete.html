@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">Delete the event</p>
+            <p class="h1 py-3">Usuń wydarzenie</p>
         </div>
     </div>
 </div>
@@ -13,8 +13,8 @@
         <div class="col-12 col-centered">
             <form method="post">
                 {% csrf_token %}
-                <p class="h3 py-3">Do you want to delete {{ genericevent }}?</p>
-                <button class="btn my-3" type="submit">Delete</button>
+                <p class="h3 py-3">Czy na pewno chcesz usunąć {{ genericevent }}?</p>
+                <button class="btn my-3" type="submit">Usuń</button>
             </form>
         </div>
     </div>
@@ -22,9 +22,9 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <a class="btn" href="{% url 'generic_event_detail' genericevent.id %}"> Return to cars details </a>
-            <a class="btn" href="{% url 'events_list'%}"> Return to cars list</a>
-            <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+            <a class="btn" href="{% url 'generic_event_detail' genericevent.id %}"> Wróć do strony Wydarzenia </a>
+            <a class="btn" href="{% url 'events_list'%}"> Wróć do listy wydarzeń</a>
+            <a class="btn" href="{% url 'home'%}"> Wróć na stronę główną</a>
         </div>
     </div>
 </div>

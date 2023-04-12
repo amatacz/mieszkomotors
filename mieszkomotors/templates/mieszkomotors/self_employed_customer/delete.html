@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">Delete the customer</p>
+            <p class="h1 py-3">Usuń klienta</p>
         </div>
     </div>
 </div>
@@ -13,8 +13,8 @@
         <div class="col-12 col-centered">
             <form method="post">
                 {% csrf_token %}
-                <p class="h2">Do you want to delete {{ selfemployedcustomer.company_name }}?</p>
-                <button class="btn mt-3" type="submit">Delete</button>
+                <p class="h2">Czy na pewno chcesz usunąć {{ selfemployedcustomer.company_name }}?</p>
+                <button class="btn mt-3" type="submit">Usuń</button>
             </form>
         </div>
     </div>
@@ -22,9 +22,9 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <a class="btn" href="{% url 'self_employed_customer_detail' selfemployedcustomer.id %}"> Return to customers details</a>
-            <a class="btn" href="{% url 'customers_list'%}"> Return to customers list</a>
-            <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+            <a class="btn" href="{% url 'self_employed_customer_detail' selfemployedcustomer.id %}">Wróć do strony klienta</a>
+            <a class="btn" href="{% url 'customers_list'%}"> Wróć do listy klientów</a>
+            <a class="btn" href="{% url 'home'%}"> Wróć na stronę główną</a>
         </div>
     </div>
 </div>

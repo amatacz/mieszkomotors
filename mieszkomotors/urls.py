@@ -4,12 +4,16 @@ from .views import home, calendar, car, owner, user, insurance, events
 urlpatterns = [
     path('', home.Home.as_view(), name='home'),
 
-     # Cars urls
+    # Cars urls
     path('car/create', car.CarCreate.as_view(), name='car_create'),
     path('car/update/<pk>', car.CarUpdate.as_view(), name='car_update'),
     path('car/delete/<pk>', car.CarDelete.as_view(), name='car_delete'),
     path('car/detail/<pk>', car.CarDetail.as_view(), name='car_detail'),
     path('car/list', car.CarList.as_view(), name='car_list'),
+
+    # Car Owner urls
+    path('car/<pk>/owner/create', car.CarOwnerCreate.as_view(), name='car_owner_create'),
+    path('car/owner/<pk>/update', car.CarOwnerUpdate.as_view(), name='car_owner_update'),
 
     # All Customers list
     path('customers/list', owner.CustomersList.as_view(), name='customers_list'),
@@ -61,7 +65,7 @@ urlpatterns = [
     # CarEvent urls
     path('events/car/detail/<pk>', events.CarEventDetailView.as_view(), name = "car_event_detail"),
 
-    # InsuranceEnevent urls
+    # InsuranceEvent urls
     path('events/insurance/detail/<pk>', events.InsuranceEventDetailView.as_view(), name = "insurance_event_detail"),
 
     # Calendar urls

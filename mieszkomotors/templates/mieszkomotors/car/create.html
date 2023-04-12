@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">Add a car</p>
+            <p class="h1 py-3">Dodaj samochód do bazy</p>
         </div>
     </div>
 </div>
@@ -14,7 +14,7 @@
             <form class="m-2" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn mt-3" type="submit">Save</button>
+                <button class="btn mt-3" type="submit">Zapisz</button>
             </form>
         </div>
     </div>
@@ -22,8 +22,8 @@
 <div class="d-flex justify-content-left py-3">
     <div class="row row-centered py-3">
         <div class="col-12 col-centered">
-            <a class="btn" href="{% url 'car_list'%}"> Return to cars list</a>
-            <a class="btn" href="{% url 'home'%}"> Return to the main page</a>
+            <a class="btn" href="{% url 'car_list'%}">Wróć do listy samochodów</a>
+            <a class="btn" href="{% url 'home'%}">Wróc na stronę główną</a>
         </div>
     </div>
 </div>
