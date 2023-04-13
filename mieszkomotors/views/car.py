@@ -34,13 +34,14 @@ class CarDetail(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['car'] = Car.objects.get(id=self.kwargs['pk'])
+        car = Car.objects.get(id=self.kwargs['pk'])
+        context['car'] = car
 
         try:
-            CarOwner.objects.all().filter(car=5).filter(status='a')[0]
-            active_owner = CarOwner.objects.all().filter(car=5).filter(status='a')[0]
+            CarOwner.objects.filter(car=self.kwargs['pk']).filter(status ='a')
+            active_owner = CarOwner.objects.filter(car=self.kwargs['pk']).filter(status ='a')[0]
             context['car_owner'] = active_owner
-        except IndexError:
+        except:
             pass
         return context
 

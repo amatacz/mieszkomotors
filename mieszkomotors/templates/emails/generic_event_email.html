@@ -153,23 +153,12 @@
         <table width="100%">
           <tr>
             <td style="text-align: left; padding: 15px;">
-              <p style="font-size: 20px; font-weight: bold;">Zbliża się termin corocznego przeglądu technicznego auta {{ license_plates }}</p>
+              <p style="font-size: 20px; font-weight: bold;">Przypomnienie: {{ title }}</p>
               <p style="line-height: 23px; font-size: 15px; padding: 5px 0 15px;">
                 Mieszko, <br>
-                zbliża się termin corocznego przeglądu auta {{ license_plates }} {{ brand }} {{ model }}.<br>
-                Przegląd jest ważny do {{ car_review_renewal_date }}.<br>
-                Skontaktuj się z właścicielem auta.<br><br>
-                <b>Dane kontaktowe:</b>
-                {% if owner_first_name %}
-                <ul>
-                  <li style="padding-top: 0;">{{ owner_first_name }} {{ owner_last_name }}<br></li>
-                  {% else %}
-                  <li>{{ company_name }}</li>
-                  {% endif %}
-                  <li><a class="mail-link" href="tel:{{ phone }}">{{ phone }}</a></li>
-                  <li><a class="mail-link" href="mailto:{{ email }}">{{ email }}</a></li>
-                </ul>
-            </p>
+                nie zapomnij o zadaniu na <i>{{ start }}</i>:<br>
+                <b>{{ description }}.</b><br>
+              </p>
             </td>
           </tr>
         </table>

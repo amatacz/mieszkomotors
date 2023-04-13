@@ -6,14 +6,13 @@
 <form class="m-2" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button class="btn mt-3" type="submit">Zapisz</button>
+    <button class="btn my-3" type="submit">Zapisz</button>
 </form>
-<div class="pt-3 justify-between">
-    <p>Poprzedni właściciele (bear in mind, that car should have only one active owner at the time)</p>
+<div class="pt-2 justify-between">
+    <ul><p class="h5">Poprzedni właściciele (samochód może mieć tylko jednego aktywnego właściciela)</p></ul>
     {% for car_owner in car_owner_list %}
-    <ul>
-        <a href="{% url 'car_owner_update' car_owner.id %}"><p class="py-3">{{ car_owner }} {{ car_owner.get_status_display }}</a> Właściciel od {{ car_owner.assign_date }}</p>
-    </ul>
+    <ul><a href="{% url 'car_owner_update' car_owner.id %}"><p class="pt-3">{{ car_owner }} {{ car_owner.get_status_display }}</a>
+            <br>Właściciel od {{ car_owner.assign_date }}</p></ul>
     {% endfor %}
 </div>
 <div class="py-3 justify-between">

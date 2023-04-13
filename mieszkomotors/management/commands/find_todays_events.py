@@ -12,13 +12,15 @@ class Command(BaseCommand):
         today = datetime.date.today()
         carevents = CarEvent.objects.all().filter(start=today)
         insurance_events = InsuranceEvent.objects.all().filter(start=today)
+        generic_events = GenericEvent.objects.all().filter(start=today)
 
         car_events_data = []
         insurance_events_data = []
+        generic_events_data = []
 
         if carevents:
             for carevent in carevents:
-                owner = CarOwner.objects.all().filter(car=carevent.car.pk)[0]
+                owner = CarOwner.objects.filter(car=carevent.car.pk).filter(status = 'a')[0]
                 
                 if hasattr(owner.client, 'individual_customer'):
                     car_events_data.append({str(today): {
@@ -58,12 +60,12 @@ class Command(BaseCommand):
                         }})
                 else:
                     pass
-            with open("mieszkomotors/data/car_events_data.json", 'w') as file:
-                json.dump(car_events_data, file)
+            with open("mieszkomotors/data/car_events_data.json", 'w', encoding="utf-8") as file:
+                json.dump(car_events_data, file, ensure_ascii=False)
 
         if insurance_events:
             for insurance_event in insurance_events:
-                owner = CarOwner.objects.all().filter(car=insurance_event.insurance.car.pk)[0]
+                owner = CarOwner.objects.filter(car=insurance_event.insurance.car.pk).filter(status = 'a')[0]
                 
                 if hasattr(owner.client, 'individual_customer'):
                     insurance_events_data.append({str(today): {
@@ -98,8 +100,20 @@ class Command(BaseCommand):
                         'current_insurance_date': str(insurance_event.insurance.current_insurance_date),
                         'insurance_renewal_date': str(insurance_event.insurance.insurance_renewal_date),
                     }})                   
-            with open("mieszkomotors/data/insurance_events_data.json", "w") as file:
-                json.dump(insurance_events_data, file)
+            with open("mieszkomotors/data/insurance_events_data.json", "w", encoding="utf-8") as file:
+                json.dump(insurance_events_data, file, ensure_ascii=False)
+        
+        if generic_events:
+            for generic_event in generic_events:
+                generic_events_data.append({str(today):{
+                    'title': generic_event.title,
+                    'description': generic_event.description,
+                    'start': str(generic_event.start),
+                    'end': str(generic_event.end)
+                }})
+            with open("mieszkomotors/data/generic_events_data.json", "w", encoding="utf-8") as file:
+                json.dump(generic_events_data, file, ensure_ascii=False)
+
                 
 
 
