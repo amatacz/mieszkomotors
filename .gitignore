@@ -63,7 +63,7 @@ local_settings.py
 sitesettings.py
 db.sqlite3
 db.sqlite3-journal
-mieszkomotors/migrations/*
+mieszkomotors/migrations/
 
 # Flask stuff:
 instance/
