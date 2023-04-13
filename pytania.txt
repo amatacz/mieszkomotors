@@ -8,7 +8,6 @@ Jak ustawić powtarzające się eventy -> np wymiana opon (mam 2 modele Wiosenna
     Najlepiej byłoby w przyszłości to podpiąć pod jakieś pogodowe API, gdzie jak osiągana jest średnia temperatura przez ostatnie 2 tyg, te eventy się uruchamiaja?
 
 Cookies?
-Get initial w CarOwnerCreateView -> żeby ładowało od razu ten samochod co trzeba
 Radio button do wybierania np załączników i usuwania ich hurtowo?
 
 Email -> na o2.pl obrazki sie nie ładują w ogole, a na gmailu czasem sie nie ładują -> jak się tego ustrzec?

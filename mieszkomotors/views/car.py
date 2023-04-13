@@ -17,7 +17,7 @@ from mieszkomotors.forms import *
 
 
 
-# Car Views 
+# Car Views
 class CarCreate(LoginRequiredMixin, CreateView):
     model = Car
     form_class = CarForm
@@ -122,12 +122,6 @@ class CarNoteDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('car_list')
 
 # Car Owner Views
-# class CarOwnerCreate(LoginRequiredMixin, CreateView):
-#     model = CarOwner
-#     form_class = CarOwnerForm
-#     template_name = 'mieszkomotors/car/owner/create.html'
-#     success_url = reverse_lazy('car_list')
-#     success_message = 'Właściciel dodany do bazy'
 
 class CarOwnerCreate(LoginRequiredMixin, CreateView):
     model = CarOwner
@@ -143,7 +137,7 @@ class CarOwnerCreate(LoginRequiredMixin, CreateView):
         return context
 
     def get_initial(self):
-        return {"created_by": self.request.user}
+        return {"created_by": self.request.user, "car" : self.kwargs['pk']}
 
 class CarOwnerDetail(LoginRequiredMixin, DetailView):
     model = CarOwner

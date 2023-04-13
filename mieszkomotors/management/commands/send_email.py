@@ -56,8 +56,7 @@ class Command(BaseCommand):
             html_body = render_to_string("../templates/emails/generic_event_email.html", generic_event[today])
 
             email_from = settings.EMAIL_HOST_USER
-            recipient_list = 'mieszkomotors@gmail.com'
-            #recipient_list = settings.EMAIL_HOST_USER
+            recipient_list = settings.EMAIL_HOST_USER
             message = EmailMultiAlternatives(subject, "text_body", email_from, [recipient_list])
             message.attach_alternative(html_body, "text/html")
             message.send()
