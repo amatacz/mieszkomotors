@@ -1,15 +1,22 @@
-test baza z bd iloscia dane biblioteka faker ->
+2. Radio button do wybierania np załączników i usuwania ich hurtowo?
+    model pod customer attachment delete request -> kto usuwa, co i kiedy, txtfield str(info co to bylo) / stworzyc formularz, ktory zbierze id attachmentów i na success usuwac attachmenty po id
+    view funkcyjny, form zwykły -> lista attachmentów (petla) wsadzic ta petle w formularz i kazdy link jest input typu checkbox, a value dla form byłby obj.id i submit tego formularza wysyła formularz na viewsa funkcyjne, z self.request.post wezme id checkboxowane i potem na querystet usuwam
+
+3. Email -> dodac nagłówki weryfikacyjne?
+https://www.cybsecurity.org/pl/jak-zobaczyc-naglowki-wiadomosci-e-mail-na-roznych-pocztach/
+
+4. Jak ustawić powtarzające się eventy -> np wymiana opon (mam 2 modele Wiosenna Wymiana Opon i Zimowa, każdy powinien powtarzać się co rok)
+    Najlepiej byłoby w przyszłości to podpiąć pod jakieś pogodowe API, gdzie jak osiągana jest średnia temperatura przez ostatnie 2 tyg, te eventy się uruchamiaja?
+    
+    Metoda mgmt w cronie, ktora odpala sie raz na miesiac -> przypiac model oponiarski do samochodu i sprawdza czy taki obiekt istnieje dla danego auta i jesli nie, to get_or_create i te obiekty ew tworzy
+	ale albo wtedy, gdy tworzy sie klienta to sygnal na create
+
+	i usuwanie sygnalem na post_delete
+
+
+
+
+TO DO:
+test baza z bd iloscia dane biblioteka faker -> pip install django-faker
 datatables django -> serializacja bedzie potrzebna
 potencjalny problem -> tabele z paginacjami
-
-
-Jak ustawić format DateTimeField?
-Jak ustawić powtarzające się eventy -> np wymiana opon (mam 2 modele Wiosenna Wymiana Opon i Zimowa, każdy powinien powtarzać się co rok)
-    Najlepiej byłoby w przyszłości to podpiąć pod jakieś pogodowe API, gdzie jak osiągana jest średnia temperatura przez ostatnie 2 tyg, te eventy się uruchamiaja?
-
-Cookies?
-Radio button do wybierania np załączników i usuwania ich hurtowo?
-
-Email -> na o2.pl obrazki sie nie ładują w ogole, a na gmailu czasem sie nie ładują -> jak się tego ustrzec?
-
-

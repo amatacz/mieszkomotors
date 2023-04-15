@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'localhost', '127.0.0.1:8000', '64.227.120.12' ]
+ALLOWED_HOSTS = [ 'localhost', '64.227.120.12', '127.0.0.1' ]
 
 
 # Application definition
@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -117,14 +117,10 @@ USE_I18N = True
 USE_TZ = True
 USE_L10N = True
 
-# Datetime format
-DATETIME_INPUT_FORMATS = [
-    '%Y-%m-%d %H:%M:%S',
-]
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
