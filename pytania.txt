@@ -15,6 +15,9 @@ https://www.cybsecurity.org/pl/jak-zobaczyc-naglowki-wiadomosci-e-mail-na-roznyc
 
 	i usuwanie sygnalem na post_delete
 
+https://www.digitalocean.com/community/tutorials/how-to-host-a-website-using-cloudflare-and-nginx-on-ubuntu-22-04
+https://flower.readthedocs.io/en/latest/
+https://www.aftermarket.pl/
 
 
 

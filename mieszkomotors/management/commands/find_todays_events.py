@@ -22,6 +22,8 @@ class Command(BaseCommand):
             for carevent in carevents:
                 owner = CarOwner.objects.filter(car=carevent.car.pk).filter(status = 'a')[0]
                 
+                # tworzy obiekt event_email, ze statusem p i potem te obiekty zaciaga celery i je przetwarza
+
                 if hasattr(owner.client, 'individual_customer'):
                     car_events_data.append({str(today): {
                             'owner_first_name': owner.client.individual_customer.first_name,
