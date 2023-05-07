@@ -12,7 +12,10 @@
             <li class="m-2"> Email: {{ individual_customer.email }}</li>
             <li class="m-2"> Numer telefonu: {{ individual_customer.phone_number }}</li>
             <li class="m-2"> Adres: {{individual_customer.address_prefix}}{{ individual_customer.street }}<br>{{ individual_customer.building }}
-                {{ individual_customer.apartment }} {{ individual_customer.city }} {{ individual_customer.zip_code }}
+                {% if individual_customer.apartment %}
+                    {{ individual_customer.apartment }}
+                {% endif %}
+                {{ individual_customer.city }} {{ individual_customer.zip_code }}
             </li>
             <li class="m-2"> PESEL: {{ individual_customer.pesel }}</li>
             <li class="m-2"> Klient od: {{ individual_customer.client_since }}</li>

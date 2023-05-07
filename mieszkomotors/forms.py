@@ -72,7 +72,7 @@ class IndividualCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Zip Code"
             }),
-            'pesel': NumberInput(attrs={
+            'pesel': TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "Pesel"
@@ -85,7 +85,7 @@ class IndividualCustomerForm(ModelForm):
             'client_since' : DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Client since"
+                "placeholder": "(YYYY-MM-DD)"
             }),
         }
 
@@ -155,12 +155,12 @@ class SelfEmployedCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Zip Code"
             }),
-            'nip': NumberInput(attrs={
+            'nip': TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "NIP"
             }),
-            'regon': NumberInput(attrs={
+            'regon': TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "REGON"
@@ -173,7 +173,7 @@ class SelfEmployedCustomerForm(ModelForm):
             'client_since' : DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Client since"
+                "placeholder": "(YYYY-MM-DD)"
             }),
         }
 
@@ -233,12 +233,12 @@ class EnterpriseCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Zip Code"
             }),
-            'nip': NumberInput(attrs={
+            'nip': TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "NIP"
             }),
-            'regon': NumberInput(attrs={
+            'regon': TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "REGON"
@@ -251,7 +251,7 @@ class EnterpriseCustomerForm(ModelForm):
             'client_since' : DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Client since"
+                "placeholder": "(YYYY-MM-DD)"
             }),
         }
 
@@ -329,7 +329,7 @@ class InsuranceForm(ModelForm):
             "current_insurance_date": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Current insurance date"
+                "placeholder": "(YYYY-MM-DD)"
             })
         }
 
@@ -393,7 +393,7 @@ class CarForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Model"
             }),
-            "vin": NumberInput(attrs={
+            "vin": TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "Vin"
@@ -411,17 +411,17 @@ class CarForm(ModelForm):
             "current_car_review_date": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Current Car Review Date"
+                "placeholder": "(YYYY-MM-DD)"
             }),
             "car_review_renewal_date": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Next Car Review Date",
+                "placeholder": "(YYYY-MM-DD)",
             }),
             "purchase_date": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Purchase Date"
+                "placeholder": "(YYYY-MM-DD)"
             }),
         }
 
@@ -511,12 +511,12 @@ class GenericEventForm(ModelForm):
             "start": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "Start Date"
+                "placeholder": "(YYYY-MM-DD)"
             }),
             "end": DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
-                "placeholder": "End Date"
+                "placeholder": "(YYYY-MM-DD)"
             })
         }
 

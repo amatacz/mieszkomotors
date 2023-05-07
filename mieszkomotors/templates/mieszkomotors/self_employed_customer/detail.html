@@ -12,7 +12,10 @@
                 <li class="m-2"> Email: {{ self_employed_customer.email }}</li>
                 <li class="m-2"> Numer telefonu: {{ self_employed_customer.phone_number }}</li>
                 <li class="m-2"> Adres: {{self_employed_customer.address_prefix}}{{ self_employed_customer.street }}<br>{{ self_employed_customer.building }}
-                    {{ self_employed_customer.apartment }} {{ self_employed_customer.city }} {{ self_employed_customer.zip_code }}
+                    {% if self_employed_customer.apartment %}
+                    {{ self_employed_customer.apartment }}
+                    {% endif %}
+                    {{ self_employed_customer.city }} {{ self_employed_customer.zip_code }}
                 </li>
                 <li class="m-2"> REGON: {{ self_employed_customer.regon }}</li>
                 <li class="m-2"> NIP: {{ self_employed_customer.nip }}</li>
