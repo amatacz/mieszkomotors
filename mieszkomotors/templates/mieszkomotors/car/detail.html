@@ -23,7 +23,7 @@
             {% if car.insurance %}
             <li class="mt-2"><a href="{% url 'insurance_detail' car.insurance.pk %}">Data ubezpieczenia: {{ car.insurance.current_insurance_date }}</a></li>
             {% else %}        
-            <li class="mt-2">>Data ubezpieczenia: <i>brak ubezpieczenia</i></a></li>
+            <li class="mt-2">Data ubezpieczenia: <i>brak ubezpieczenia</i></a></li>
             {% endif %}
 
             <li class="mt-2">Data ostatniego przeglądu: {{ car.current_car_review_date }}</li>

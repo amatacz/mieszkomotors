@@ -7,10 +7,10 @@ import json
 import datetime
 
 class Command(BaseCommand):
-
+    pass
     # Email sending function
-    def handle(self, *args, **options):  
-        today = str(datetime.date.today().strftime('%Y-%m-%d'))
+    # def handle(self, *args, **options):  
+    #     today = str(datetime.date.today().strftime('%Y-%m-%d'))
 
         # # Sending emails for car related events
         # with open("mieszkomotors/data/car_events_data.json", 'r') as file:
@@ -46,20 +46,20 @@ class Command(BaseCommand):
         #     message.attach_alternative(html_body, "text/html")
         #     message.send()
 
-        # Sending emails for generic events
-        with open("mieszkomotors/data/generic_events_data.json", 'r', encoding="utf-8") as file:
-            generic_events = json.load(file)
+        # # Sending emails for generic events
+        # with open("mieszkomotors/data/generic_events_data.json", 'r', encoding="utf-8") as file:
+        #     generic_events = json.load(file)
         
-        for generic_event in generic_events:
-            subject = f"Przypomnienie: {generic_event[today]['title']}"
+        # for generic_event in generic_events:
+        #     subject = f"Przypomnienie: {generic_event[today]['title']}"
 
-            html_body = render_to_string("../templates/emails/generic_event_email.html", generic_event[today])
+        #     html_body = render_to_string("../templates/emails/generic_event_email.html", generic_event[today])
 
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = settings.EMAIL_HOST_USER
-            message = EmailMultiAlternatives(subject, "text_body", email_from, [recipient_list])
-            message.attach_alternative(html_body, "text/html")
-            message.send()
+        #     email_from = settings.EMAIL_HOST_USER
+        #     recipient_list = settings.EMAIL_HOST_USER
+        #     message = EmailMultiAlternatives(subject, "text_body", email_from, [recipient_list])
+        #     message.attach_alternative(html_body, "text/html")
+        #     message.send()
 
         
             
