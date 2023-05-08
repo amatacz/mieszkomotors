@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand
 from mieszkomotors.models.events import *
 from mieszkomotors.models.base import RENEWAL_INTERVAL
 
-
+# ta metoda bedzie uruchamiana w cronie
 class Command(BaseCommand):
     def handle(self, *args, **options):
         today = date.today()
@@ -20,7 +20,7 @@ class Command(BaseCommand):
                 # tworzy obiekt event_email, ze statusem p i potem te obiekty zaciaga celery i je przetwarza
 
                 if hasattr(owner.client, 'individual_customer'):
-                    car_event_data = ({str(today): {
+                    car_event_data = {
                             'owner_first_name': owner.client.individual_customer.first_name,
                             'owner_last_name': owner.client.individual_customer.last_name,
                             'email': owner.client.individual_customer.email,
@@ -30,10 +30,10 @@ class Command(BaseCommand):
                             'license_plates': carevent.car.license_plates,
                             'current_car_review_date' : str(carevent.car.current_car_review_date),
                             'car_review_renewal_date': str(carevent.car.car_review_renewal_date)
-                        }})
+                        }
                     CarEventMail.objects.get_or_create(car_event = carevent, email_data = car_event_data)
                 elif hasattr(owner.client, 'self_employed_customer'):
-                    car_event_data = ({str(today): {
+                    car_event_data = {
                             'owner_first_name': owner.client.self_employed_customer.first_name,
                             'owner_last_name': owner.client.self_employed_customer.last_name,
                             'company_name': owner.client.self_employed_customer.company_name,
@@ -44,10 +44,10 @@ class Command(BaseCommand):
                             'license_plates': carevent.car.license_plates,
                             'current_car_review_date' : str(carevent.car.current_car_review_date),
                             'car_review_renewal_date': str(carevent.car.car_review_renewal_date)
-                        }})
+                        }
                     CarEventMail.objects.get_or_create(car_event = carevent, email_data = car_event_data)
                 elif hasattr(owner.client, 'enterprise_customer'):
-                    car_event_data = ({str(today): {
+                    car_event_data = {
                             'company_name': owner.client.enterprise_customer.company_name,
                             'email': owner.client.enterprise_customer.email,
                             'phone': str(owner.client.enterprise_customer.phone_number),
@@ -56,7 +56,7 @@ class Command(BaseCommand):
                             'license_plates': carevent.car.license_plates,
                             'current_car_review_date' : str(carevent.car.current_car_review_date),
                             'car_review_renewal_date': str(carevent.car.car_review_renewal_date)
-                        }})
+                        }
                     CarEventMail.objects.get_or_create(car_event = carevent, email_data = car_event_data)
                 else:
                     pass
