@@ -35,6 +35,7 @@
                 <li class="nav-item active mx-3">
                     <a href="https://mieszkomotors.com" target="_blank"><img src="/static/mieszkomotors/logo-horizontal-white.svg" width="170", height="19"></a>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item mx-3">
                     <a id="header-link" href="{% url 'home' %}">STRONA GŁÓWNA</a>
                 </li>
@@ -47,6 +48,7 @@
                 <li class="nav-item mx-3">
                     <a id="header-link" href="{% url 'insurance_list' %}">UBEZPIECZENIA</a>
                 </li>
+                {% endif %}
               </ul>
             </div>
             <div class="container-flex right mx-3">

@@ -23,7 +23,7 @@ class CarViewset(viewsets.ModelViewSet):
 
 class CarOwnerViewset(viewsets.ModelViewSet):
     queryset = CarOwner.objects.all()
-    serializer_class = CarOwnerSerializer # dodac filtry, np po statusie, po dacie?
+    serializer_class = CarOwnerSerializer
     permission_classes = [permissions.IsAuthenticated, IsStaffOrReadOnly]
     
 class InsuranceViewset(viewsets.ModelViewSet):

@@ -95,7 +95,7 @@ class SelfEmployedCustomer(ContactData):
 
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.company_name}'
+        return f'{self.company_name}'
     
 class EnterpriseCustomer(ContactData):
     CUSTOMER_TYPE = (

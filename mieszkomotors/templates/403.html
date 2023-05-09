@@ -1,0 +1,24 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Brak dostępu</title>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-between">
+    <div class="d-flex justify-content-left mx-3">
+        <div class="row row-centered pt-3">
+            <div class="col-12 col-centered">
+                <h1>Przykro mi, wstęp wzbroniony.</h1>
+                <div class="row row-centered pt-3 mt-2">
+                    <div class="col-12 col-centered">
+                        <a class="btn" href="{% url 'home'%}">Wróć na stronę główną</a></ul>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+{% endblock %}

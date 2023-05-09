@@ -65,8 +65,8 @@ class SelfEmployedCustomerCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('customers_list')
     success_message = 'Właściciel dodany do bazy'
 
-def get_initial(self):
-        return {"created_by": self.request.user}
+    def get_initial(self):
+            return {"created_by": self.request.user}
 
 class SelfEmployedCustomerDetail(LoginRequiredMixin, TemplateView):
     model = SelfEmployedCustomer
@@ -126,7 +126,6 @@ class EnterpriseCustomerDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('customers_list')
 
 
-
 # Customer Notes Views
 class CustomerNoteCreate(LoginRequiredMixin, CreateView):
     model = CustomerNote
@@ -134,7 +133,7 @@ class CustomerNoteCreate(LoginRequiredMixin, CreateView):
     form_class = CustomerNoteForm
 
     def get_success_url(self):
-        return reverse_lazy('enterprise_customer_detail', kwargs={'pk': self.object.customer_id})
+        return reverse_lazy('customers_list')
 
     def get_initial(self):
         return {"created_by": self.request.user}

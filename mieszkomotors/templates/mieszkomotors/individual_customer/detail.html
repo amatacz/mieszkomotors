@@ -17,12 +17,10 @@
                 {% endif %}
                 {{ individual_customer.city }} {{ individual_customer.zip_code }}
             </li>
-            <li class="m-2"> PESEL: {{ individual_customer.pesel }}</li>
-            <li class="m-2">
-                {% if self_employed_customer.driving_license_since %}
-                Prawo jazdy od: {{ individual_customer.driving_license_since }}
-                {% endif %}
-            </li>
+            <li class="m-2"> PESEL: {{ individual_customer.pesel }}</li>           
+            {% if individual_customer.driving_license_since %}
+            <li class="m-2"> Prawo jazdy od: {{ individual_customer.driving_license_since }} </li>
+            {% endif %}           
             <li class="m-2"> Klient od: {{ individual_customer.client_since }}</li>
                 
                 {% if forloop.last %}
@@ -41,11 +39,10 @@
             <p class="h1 py-3 mx-3">Pliki klienta</p>
             {% for attachment in attachments %}
                 <li class="m-2"><a download href="{{ attachment.attachment.url }}">{{ attachment.attachment.name }}</a></li>
-            {% empty %}
+            {% endfor %}
             <div class="py-3">
                 <ul class="m-2"><a class="btn" href="{% url 'customer_attachment_create' %}">Dodaj załącznik</a>
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
@@ -55,11 +52,11 @@
             <p class="h1 py-3 mx-3">Notatki klienta</p>
             {% for note in notes %}
                 <li class="m-2">{{ note.note|safe }}</li>
-            {% empty %}
+            {% endfor %}
             <div class="py-3">
                 <ul class="m-2"><a class="btn" href="{% url 'customer_note_create' %}">Dodaj notatkę</a>
             </div>
-            {% endfor %}
+
         </div>
     </div>
 </div>

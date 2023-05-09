@@ -8,7 +8,7 @@
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
                 {% for self_employed_customer in self_employed_customers %}
-                <p class="h1 py-3 mx-3">{{ self_employed_customer.first_name }} {{ self_employed_customer.last_name }}</p>
+                <p class="h1 py-3 mx-3">{{ self_employed_customer.company_name }}</p>
                 <li class="m-2"> Email: {{ self_employed_customer.email }}</li>
                 <li class="m-2"> Numer telefonu: {{ self_employed_customer.phone_number }}</li>
                 <li class="m-2"> Adres: {{self_employed_customer.address_prefix}}{{ self_employed_customer.street }}<br>{{ self_employed_customer.building }}
@@ -17,11 +17,11 @@
                     {% endif %}
                     {{ self_employed_customer.city }} {{ self_employed_customer.zip_code }}
                 </li>
-                <li class="m-2">
-                    {% if self_employed_customer.driving_license_since %}
-                    Prawo jazdy od: {{ self_employed_customer.driving_license_since }}
-                    {% endif %}
-                </li>
+                
+                {% if self_employed_customer.driving_license_since %}
+                <li class="m-2"> Prawo jazdy od: {{ self_employed_customer.driving_license_since }}</li>
+                {% endif %}
+                
                 <li class="m-2"> REGON: {{ self_employed_customer.regon }}</li>
                 <li class="m-2"> NIP: {{ self_employed_customer.nip }}</li>
                 <li class="m-2"> Klient od: {{ self_employed_customer.client_since }}</li>
@@ -43,11 +43,10 @@
                 <p class="h1 py-3 mx-3">Pliki klienta</p>
                 {% for attachment in attachments %}
                     <li class="m-2"><a download href="{{ attachment.attachment.url }}">{{ attachment.attachment.name }}</a></li>
-                {% empty %}
-                <div class="py-3">
-                    <ul class="m-2"><a class="btn" href="{% url 'customer_attachment_create' %}"> Dodaj plik</a>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                    <div class="py-3">
+                        <ul class="m-2"><a class="btn" href="{% url 'customer_attachment_create' %}"> Dodaj plik</a>
+                    </div>
             </div>
         </div>
     </div>
@@ -57,11 +56,10 @@
                 <p class="h1 py-3 mx-3">Notatki klienta</p>
                 {% for note in notes %}
                     <li class="m-2">{{ note.note|safe }}</li>
-                    {% empty %}
+                {% endfor %}
                     <div class="py-3">
                         <ul class="m-2"><a class="btn" href="{% url 'customer_note_create' %}">Dodaj notatkę</a>
                     </div>
-                {% endfor %}
             </div>
         </div>
     </div>
