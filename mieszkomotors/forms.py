@@ -15,7 +15,7 @@ from phonenumber_field.formfields import PhoneNumberField
 class IndividualCustomerForm(ModelForm):
     class Meta:
         model = IndividualCustomer
-        fields = ['created_by','first_name', 'last_name', 'email', 'phone_number', 'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'pesel', 'customer_type', 'client_since']
+        fields = ['created_by','first_name', 'last_name', 'email', 'phone_number', 'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'pesel', 'driving_license_since' ,'customer_type', 'client_since']
         widgets = {
             "created_by": forms.Select(attrs={
                 "class": "form-control",
@@ -76,6 +76,11 @@ class IndividualCustomerForm(ModelForm):
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "Pesel"
+            }),
+            'driving_license_since': DateInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "(YYYY-MM-DD)"
             }),
             'customer_type': Select(attrs={
                 "class": "form-control",
@@ -164,6 +169,11 @@ class SelfEmployedCustomerForm(ModelForm):
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "REGON"
+            }),
+            'driving_license_since': DateInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "(YYYY-MM-DD)"
             }),
             'customer_type': Select(attrs={
                 "class": "form-control",
