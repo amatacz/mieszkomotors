@@ -1,25 +1,27 @@
 from time import sleep
-from django.core.mail import EmailMessage, get_connection
-from django.conf import settings
-from django.core.management.base import BaseCommand
 from celery import shared_task
-from .management.commands import find_todays_events
+from core import celery_app
+
+from mieszkomotors.models.events import GenericEventMail, CarEventMail, InsuranceEventMail
 
 
-@shared_task
-def handle(self, *args, **options):  
-    events_data = find_todays_events.handle()      
-    subject = f"Zbliża się termin przeglądu dla auta {events_data['owner']}"
-    print(subject)
-    with get_connection(
-        host = settings.EMAIL_HOST,
-        port = settings.EMAIL_PORT,
-        username = settings.EMAIL_HOST_USER,
-        password = settings.EMAIL_HOST_PASSWORD,
-        use_tls = settings.EMAIL_USE_TLS
-    ) as connection:
-        subject = subject
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [settings.EMAIL_HOST_USER,]
-        message = "Elo, elo 520!"
-        EmailMessage(subject, message, email_from, recipient_list, connection=connection).send()
+@shared_task()
+def handle_car_task(car_email):
+    sleep(3)
+    obj = CarEventMail.objects.get(id=car_email)
+    print(obj)
+    obj.send_email()
+
+@shared_task()
+def handle_insurance_task(insurance_email):
+    sleep(3)
+    obj = InsuranceEventMail.objects.get(id=insurance_email)
+    print(obj)
+    obj.send_email()
+
+@shared_task()
+def handle_generic_task(generic_email):
+    sleep(3)
+    obj = GenericEventMail.objects.get(id=generic_email)
+    print(obj)
+    obj.send_email()

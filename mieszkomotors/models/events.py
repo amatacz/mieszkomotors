@@ -100,6 +100,7 @@ class InsuranceEventMail(PublicationTracker):
     status = models.CharField(max_length=1, choices = STATUSES, default='p')
     insurance_event = models.ForeignKey(InsuranceEvent, on_delete=models.CASCADE)
     email_data = models.JSONField()
+    created = models.DateField(auto_now_add=True, blank=True)
 
     def __str__(self) -> str:
         return f'Wiadomość dot. {self.insurance_event}'
@@ -109,7 +110,7 @@ class InsuranceEventMail(PublicationTracker):
         self.status = 'r'
         self.save()
 
-        subject = f"Zbliża się termin odnowienia ubezpieczenia dla auta {self.email_data['license_plates']}"
+        subject = f"Zbliża się termin odnowienia ubezpieczenia dla auta {self.email_data['car']}"
         html_body = render_to_string("../templates/emails/insurance_email.html", self.email_data)
         email_from = settings.EMAIL_HOST_USER
         recipient_list = self.email_data['email']
@@ -136,6 +137,7 @@ class GenericEventMail(PublicationTracker):
     generic_event = models.ForeignKey(GenericEvent, on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices = STATUSES, default='p') 
     email_data = models.JSONField()
+    created = models.DateField(auto_now_add=True, blank=True)
 
     def __str__(self) -> str:
         return f'Wiadomość dot. {self.generic_event}'
