@@ -51,9 +51,6 @@ class GenericEvent(PublicationTracker):
     def __str__(self) -> str:
         return f'{self.title} {self.start.strftime("%Y-%m-%d")}'
     
-
-# na kazdt event, mail obj + pole json (zaciaga słownik z crona), send mail
-
 class CarEventMail(PublicationTracker):
     STATUSES = (
         ('p', 'pending'),

@@ -17,9 +17,9 @@
                     {% endif %}
                     {{ self_employed_customer.city }} {{ self_employed_customer.zip_code }}
                 </li>
-                <li class="m-2"> Prawo jazdy od:
+                <li class="m-2">
                     {% if self_employed_customer.driving_license_since %}
-                    {{ self_employed_customer.driving_license_since }}
+                    Prawo jazdy od: {{ self_employed_customer.driving_license_since }}
                     {% endif %}
                 </li>
                 <li class="m-2"> REGON: {{ self_employed_customer.regon }}</li>
