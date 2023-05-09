@@ -17,6 +17,11 @@
                     {% endif %}
                     {{ self_employed_customer.city }} {{ self_employed_customer.zip_code }}
                 </li>
+                <li class="m-2"> Prawo jazdy od:
+                    {% if self_employed_customer.driving_license_since %}
+                    {{ self_employed_customer.driving_license_since }}
+                    {% endif %}
+                </li>
                 <li class="m-2"> REGON: {{ self_employed_customer.regon }}</li>
                 <li class="m-2"> NIP: {{ self_employed_customer.nip }}</li>
                 <li class="m-2"> Klient od: {{ self_employed_customer.client_since }}</li>
