@@ -77,7 +77,8 @@ class CarEventMail(PublicationTracker):
         subject = f"Zbliża się termin przeglądu dla auta {self.email_data['license_plates']}"
         html_body = render_to_string("../templates/emails/car_email.html", self.email_data)
         email_from = settings.EMAIL_HOST_USER
-        recipient_list = self.email_data['email']
+        recipient_list = settings.EMAIL_HOST_USER
+        #recipient_list = self.email_data['email']
 
         try:
             message = EmailMultiAlternatives(subject, "text_body", email_from, [recipient_list])
@@ -113,8 +114,8 @@ class InsuranceEventMail(PublicationTracker):
         subject = f"Zbliża się termin odnowienia ubezpieczenia dla auta {self.email_data['car']}"
         html_body = render_to_string("../templates/emails/insurance_email.html", self.email_data)
         email_from = settings.EMAIL_HOST_USER
-        recipient_list = self.email_data['email']
-
+        recipient_list = settings.EMAIL_HOST_USER
+        #recipient_list = self.email_data['email']
         try:
             message = EmailMultiAlternatives(subject, "text_body", email_from, [recipient_list])
             message.attach_alternative(html_body, "text/html")
