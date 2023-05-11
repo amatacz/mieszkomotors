@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-left mx-3">
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
-                <p class="h2 py-3">Wydarzenia ogólne</p>
+                <p class="h2 py-3 font-weight-bold">Wydarzenia ogólne</p>
                 {% for generic_event in generic_events %}
                     <li class="m-2 font-weight-bold"><a href="{% url 'generic_event_detail' generic_event.id %}">{{ generic_event }}</a></li>
                 {% endfor %} 
@@ -19,7 +19,7 @@
     <div class="d-flex justify-content-left mx-3">
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
-                <p class="h2 py-3">Przeglądy techniczne</p>
+                <p class="h2 py-3 font-weight-bold">Przeglądy techniczne</p>
                 {% for car_event in car_events %}
                     <li class="m-2 font-weight-bold"><a href="{% url 'car_event_detail' car_event.id %}">{{ car_event }}</a></li>
                 {% endfor %}
@@ -29,7 +29,7 @@
     <div class="d-flex justify-content-left mx-3">
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
-                <p class="h2 py-3">Ubezpieczenia</p>
+                <p class="h2 py-3 font-weight-bold">Ubezpieczenia</p>
                 {% for insurance_event in insurance_events %}
                     <li class="m-2 font-weight-bold"><a href="{% url 'insurance_event_detail' insurance_event.id %}">{{ insurance_event }}</a></li>
                 {% endfor %}      

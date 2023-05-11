@@ -40,7 +40,7 @@ class IndividualCustomerDetail(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['individual_customers'] = IndividualCustomer.objects.all().filter(id = self.kwargs['pk'])
         context['attachments'] = CustomerAttachment.objects.all().filter(customer = self.kwargs['pk'])
-        context['notes'] = CustomerNote.objects.all().filter(customer = self.kwargs['pk'])
+        context['notes'] = CustomerNote.objects.all().filter(customer__individual_customer = self.kwargs['pk'])
         return context
 
 class IndividualCustomerUpdate(LoginRequiredMixin, UpdateView):
@@ -76,8 +76,11 @@ class SelfEmployedCustomerDetail(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['self_employed_customers'] = SelfEmployedCustomer.objects.all().filter(id = self.kwargs['pk'])
-        context['attachments'] = CustomerAttachment.objects.all().filter(customer = self.kwargs['pk'])
-        context['notes'] = CustomerNote.objects.all().filter(customer = self.kwargs['pk'])
+        context['attachments'] = CustomerAttachment.objects.all().filter(customer__self_employed_customer = self.kwargs['pk'])
+        context['notes'] = CustomerNote.objects.all().filter(customer__self_employed_customer = self.kwargs['pk'])
+
+        self.request.session['customer_id'] = self.kwargs['pk']
+
         return context
 
 class SelfEmployedCustomerUpdate(LoginRequiredMixin, UpdateView):
@@ -110,8 +113,9 @@ class EnterpriseCustomerDetail(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['enterprise_customers'] = EnterpriseCustomer.objects.all().filter(id = self.kwargs['pk'])
-        context['attachments'] = CustomerAttachment.objects.all().filter(customer = self.kwargs['pk'])
-        context['notes'] = CustomerNote.objects.all().filter(customer = self.kwargs['pk'])
+        context['attachments'] = CustomerAttachment.objects.all().filter(customer__enterprise_customer = self.kwargs['pk'])
+        context['notes'] = CustomerNote.objects.all().filter(customer__enterprise_customer = self.kwargs['pk'])
+
         return context
 
 class EnterpriseCustomerUpdate(LoginRequiredMixin, UpdateView):
@@ -146,7 +150,7 @@ class CustomerNoteUpdate(LoginRequiredMixin, UpdateView):
     model = CustomerNote
     template_name = 'mieszkomotors/customer/notes/update.html'
     form_class = CustomerNoteForm
-    success_url = reverse_lazy('enterprise_customer_detail')
+    success_url = reverse_lazy('customers_list')
 
 class CustomerNoteList(LoginRequiredMixin, ListView):
     model = CustomerNote
@@ -155,7 +159,7 @@ class CustomerNoteList(LoginRequiredMixin, ListView):
 class CustomerNoteDelete(LoginRequiredMixin, DeleteView):
     model = CustomerNote
     template_name = 'mieszkomotors/customer/notes/delete.html'
-    success_url = reverse_lazy('enterprise_customer_detail')
+    success_url = reverse_lazy('customers_list')
 
 
 # Customer Attachments Views

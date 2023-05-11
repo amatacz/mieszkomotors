@@ -19,7 +19,7 @@ https://www.digitalocean.com/community/tutorials/how-to-host-a-website-using-clo
 https://flower.readthedocs.io/en/latest/
 https://www.aftermarket.pl/
 
-
+5. Gdzie zapisywać var do sessions? Na razie zapisałam get_context() w DetailView, ale in
 
 TO DO:
 test baza z bd iloscia dane biblioteka faker -> pip install django-faker

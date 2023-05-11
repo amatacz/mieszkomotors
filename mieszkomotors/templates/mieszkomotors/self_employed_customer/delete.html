@@ -13,7 +13,7 @@
         <div class="col-12 col-centered">
             <form method="post">
                 {% csrf_token %}
-                <p class="h2">Czy na pewno chcesz usunąć {{ selfemployedcustomer.company_name }}?</p>
+                <p class="h2 font-weight-bold">Czy na pewno chcesz usunąć {{ selfemployedcustomer.company_name }}?</p>
                 <button class="btn mt-3" type="submit">Usuń</button>
             </form>
         </div>

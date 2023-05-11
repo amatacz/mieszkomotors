@@ -4,18 +4,18 @@
 {% block content %}
 <div class="d-flex justify-between">
 
-<div class="d-flex justify-content-left mx-3">
+<div class="d-flex justify-content-left mx-3 min-vh-80">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
             {% for individual_customer in individual_customers %}
-            <p class="h1 py-3 mx-3">{{ individual_customer.first_name }} {{ individual_customer.last_name }}</p>
+            <p class="h1 py-3 mx-3 font-weight-bold">{{ individual_customer.first_name }} {{ individual_customer.last_name }}</p>
             <li class="m-2"> Email: {{ individual_customer.email }}</li>
             <li class="m-2"> Numer telefonu: {{ individual_customer.phone_number }}</li>
-            <li class="m-2"> Adres: {{individual_customer.address_prefix}}{{ individual_customer.street }}<br>{{ individual_customer.building }}
+            <li class="m-2"> Adres: {{individual_customer.address_prefix}}{{ individual_customer.street }} {{ individual_customer.building }} 
                 {% if individual_customer.apartment %}
-                    {{ individual_customer.apartment }}
-                {% endif %}
-                {{ individual_customer.city }} {{ individual_customer.zip_code }}
+                    m.{{ individual_customer.apartment }}
+                {% endif %} <br>
+                <p class="mx-4">{{ individual_customer.city }} {{ individual_customer.zip_code }}</p>
             </li>
             <li class="m-2"> PESEL: {{ individual_customer.pesel }}</li>           
             {% if individual_customer.driving_license_since %}
@@ -33,10 +33,10 @@
         </div>
     </div>
 </div>         
-<div class="d-flex justify-content-left mx-3">
+<div class="d-flex justify-content-left mx-3 mx-3 min-vh-80">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3 mx-3">Pliki klienta</p>
+            <p class="h1 py-3 mx-3 font-weight-bold">Pliki klienta</p>
             {% for attachment in attachments %}
                 <li class="m-2"><a download href="{{ attachment.attachment.url }}">{{ attachment.attachment.name }}</a></li>
             {% endfor %}
@@ -49,9 +49,9 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3 mx-3">Notatki klienta</p>
+            <p class="h1 py-3 mx-3 font-weight-bold">Notatki klienta</p>
             {% for note in notes %}
-                <li class="m-2">{{ note.note|safe }}</li>
+                <li class="m-2"><a href="{% url 'customer_note_update' note.pk %}">{{ note.note|safe }}</a></li>
             {% endfor %}
             <div class="py-3">
                 <ul class="m-2"><a class="btn" href="{% url 'customer_note_create' %}">Dodaj notatkę</a>

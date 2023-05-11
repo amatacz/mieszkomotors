@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">Klienci z działalnościa gospodarczą</p>
+            <p class="h1 py-3 font-weight-bold">Klienci z działalnościa gospodarczą</p>
             {% for individual_owner in individual_owners %}
                 <li class="m-2 font-weight-bold"><a href="{% url 'self_employed_customer_detail' selfemployedcustomer.id %}">{{ selfemployedcustomer }}</a></li>
             {% endfor %}

@@ -6,12 +6,12 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h2 py-3">Klienci indywidualni</p>
+            <p class="h2 py-3 font-weight-bold">Klienci indywidualni</p>
             {% for individual_customer in individual_customers %}
                 <li class="m-2 font-weight-bold"><a href="{% url 'individual_customer_detail' individual_customer.id %}">{{ individual_customer }}</a></li>
             {% endfor %}
             <div class="justify-between">
-                <a class="btn" href="{% url 'individual_customer_create'%}">Dodaj klienta indywidualnego</a>
+                <a class="btn mt-3" href="{% url 'individual_customer_create'%}">Dodaj klienta indywidualnego</a>
             </div>
         </div>
     </div>
@@ -19,11 +19,11 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h2 py-3">Klienci z działalnością gospodarczą</p>
+            <p class="h2 py-3 font-weight-bold">Klienci z działalnością gospodarczą</p>
             {% for self_employed_customer in self_employed_customers %}
                 <li class="m-2 font-weight-bold"><a href="{% url 'self_employed_customer_detail' self_employed_customer.id %}">{{ self_employed_customer }}</a></li>
             {% endfor %}   
-            <div class="justify-between">
+            <div class="justify-between mt-3">
                 <a class="btn" href="{% url 'self_employed_customer_create'%}">Dodaj klienta z działalnością gospodarczą</a>
             </div>     
         </div>
@@ -32,11 +32,11 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h2 py-3">Klienci firmowi</p>
+            <p class="h2 py-3 font-weight-bold">Klienci firmowi</p>
             {% for enterprise_customer in enterprise_customers %}
                 <li class="m-2 font-weight-bold"><a href="{% url 'enterprise_customer_detail' enterprise_customer.id %}">{{ enterprise_customer }}</a></li>
             {% endfor %} 
-            <div class="justify-between">
+            <div class="justify-between x">
                 <a class="btn" href="{% url 'enterprise_customer_create'%}">Dodaj klienta firmowego</a>
             </div>        
         </div>

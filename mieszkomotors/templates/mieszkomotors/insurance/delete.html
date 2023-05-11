@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-left">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3">Usuń ubezpieczenie</p>
+            <p class="h1 py-3 font-weight-bold">Usuń ubezpieczenie</p>
         </div>
     </div>
 </div>
@@ -13,7 +13,7 @@
         <div class="col-12 col-centered">
             <form method="post">
                 {% csrf_token %}
-                <p class="h3 py-3">Czy na pewno chcesz usunąć {{ insurance }}?</p>
+                <p class="h3 py-3 font-weight-bold">Czy na pewno chcesz usunąć {{ insurance }}?</p>
                 <button class="btn my-3" type="submit">Usuń</button>
             </form>
         </div>

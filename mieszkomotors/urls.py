@@ -38,13 +38,13 @@ urlpatterns = [
 
     # Customer attachment urls
     path('customer_attachment/create', owner.CustomerAttachmentCreate.as_view(), name='customer_attachment_create'),
-    path('customer_attachment/update', owner.CustomerAttachmentUpdate.as_view(), name='customer_attachment_update'),
+    path('customer_attachment/update/<pk>', owner.CustomerAttachmentUpdate.as_view(), name='customer_attachment_update'),
     path('customer_attachment_delete/<pk>', owner.CustomerAttachmentDelete.as_view(), name='customer_attachment_delete'),
     path('customer_attachment_detail/<pk>', owner.CustomerAttachmentDetail.as_view(), name='customer_attachment_detail'),
     
     # Customer notes urls
     path('customer_note/create', owner.CustomerNoteCreate.as_view(), name='customer_note_create'),
-    path('customer_note/update', owner.CustomerNoteUpdate.as_view(), name='customer_note_update'),
+    path('customer_note/update/<pk>', owner.CustomerNoteUpdate.as_view(), name='customer_note_update'),
     path('customer_note_delete/<pk>', owner.CustomerNoteDelete.as_view(), name='customer_note_delete'),
     path('customer_note_detail/<pk>', owner.CustomerNoteDetail.as_view(), name='customer_note_detail'),
 
