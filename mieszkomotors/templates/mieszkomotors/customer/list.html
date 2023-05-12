@@ -11,7 +11,7 @@
                 <li class="m-2 font-weight-bold"><a href="{% url 'individual_customer_detail' individual_customer.id %}">{{ individual_customer }}</a></li>
             {% endfor %}
             <div class="justify-between">
-                <a class="btn mt-3" href="{% url 'individual_customer_create'%}">Dodaj klienta indywidualnego</a>
+                <a class="btn mt-3" href="{% url 'individual_customer_create'%}">Dodaj klienta</a>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                 <li class="m-2 font-weight-bold"><a href="{% url 'self_employed_customer_detail' self_employed_customer.id %}">{{ self_employed_customer }}</a></li>
             {% endfor %}   
             <div class="justify-between mt-3">
-                <a class="btn" href="{% url 'self_employed_customer_create'%}">Dodaj klienta z działalnością gospodarczą</a>
+                <a class="btn" href="{% url 'self_employed_customer_create'%}">Dodaj klienta</a>
             </div>     
         </div>
     </div>
@@ -37,7 +37,7 @@
                 <li class="m-2 font-weight-bold"><a href="{% url 'enterprise_customer_detail' enterprise_customer.id %}">{{ enterprise_customer }}</a></li>
             {% endfor %} 
             <div class="justify-between x">
-                <a class="btn" href="{% url 'enterprise_customer_create'%}">Dodaj klienta firmowego</a>
+                <a class="btn" href="{% url 'enterprise_customer_create'%}">Dodaj klienta</a>
             </div>        
         </div>
     </div>

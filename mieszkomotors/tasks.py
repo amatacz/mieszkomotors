@@ -2,7 +2,7 @@ from time import sleep
 from celery import shared_task
 from core import celery_app
 
-from mieszkomotors.models.events import GenericEventMail, CarEventMail, InsuranceEventMail
+from mieszkomotors.models.events import *
 
 
 @shared_task()
@@ -23,5 +23,19 @@ def handle_insurance_task(insurance_email):
 def handle_generic_task(generic_email):
     sleep(3)
     obj = GenericEventMail.objects.get(id=generic_email)
+    print(obj)
+    obj.send_email()
+
+@shared_task()
+def handle_spring_tyres_task(spring_tyres_replacement_event_mail):
+    sleep(3)
+    obj = SpringTyresReplacementEventMail.objects.get(id=spring_tyres_replacement_event_mail)
+    print(obj)
+    obj.send_email()
+
+@shared_task()
+def handle_winter_tyres_task(winter_tyres_replacement_event_mail):
+    sleep(3)
+    obj = WinterTyresReplacementEventMail.objects.get(id=winter_tyres_replacement_event_mail)
     print(obj)
     obj.send_email()

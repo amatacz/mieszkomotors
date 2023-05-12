@@ -64,6 +64,7 @@ sitesettings.py
 db.sqlite3
 db.sqlite3-journal
 mieszkomotors/migrations/
+media/documents/*
 
 # Flask stuff:
 instance/

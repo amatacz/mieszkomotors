@@ -30,17 +30,23 @@ class InsuranceEvent(PublicationTracker):
     def __str__(self):
         return f'{self.insurance.car}: {self.start.strftime("%Y-%m-%d")}'
     
-class WinterTyresReplacement(PublicationTracker):
+class WinterTyresReplacementEvent(PublicationTracker):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='winter_tyres_replacement')
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
-    start = models.DateField(default='2023-11-12')
-    end = models.DateField(blank=True)
+    start = models.DateField(default='2023-11-15')
 
-class SpringTyresReplacement(PublicationTracker):
+    def __str__(self) -> str:
+        return f'{self.car.license_plates} - Sezon zima {self.start.year} - {self.title}'
+
+class SpringTyresReplacementEvent(PublicationTracker):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='spring_tyres_replacement')
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
     start = models.DateField(default='2023-03-15')
-    end = models.DateField(blank=True)
+
+    def __str__(self) -> str:
+        return f'{self.car.license_plates} - Sezon wiosna {self.start.year} - {self.title}'
 
 class GenericEvent(PublicationTracker):
     title = models.CharField(max_length=200)
@@ -161,6 +167,77 @@ class GenericEventMail(PublicationTracker):
             self.save()
 
 
+class SpringTyresReplacementEventMail(PublicationTracker):
+    STATUSES = (
+        ('p', 'pending'),
+        ('s', 'sent'),
+        ('r', 'running'),
+        ('e', 'error')
+    )
+    spring_tyres_replacement_event = models.ForeignKey(SpringTyresReplacementEvent, on_delete=models.CASCADE)
+    status = models.CharField(max_length=1, choices = STATUSES, default='p')
+    email_data = models.JSONField()
+    error_message = models.TextField(default='')
+    created = models.DateField(auto_now_add=True, blank=True)
 
-        
-            
+    def __str__(self) -> str:
+        return f'Wiadomość dot. {self.spring_tyres_replacement_event}'
+    
+    def send_email(self):
+        self.status = 'r'
+        self.save()
+
+        subject = f"Wymień opony na wiosenne."
+        html_body = render_to_string("../templates/emails/spring_tyres_replacement_email.html", self.email_data)
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = settings.EMAIL_HOST_USER
+        #recipient_list = self.email_data['email']
+
+        try:
+            message = EmailMultiAlternatives(subject, "text_body", email_from, [recipient_list])
+            message.attach_alternative(html_body, "text/html")
+            message.send()
+        except Exception as e:
+            self.status = 'e'
+            self.error_message = str(repr(e))
+        else:
+            self.status = 's'
+            self.save()
+
+
+class WinterTyresReplacementEventMail(PublicationTracker):
+    STATUSES = (
+        ('p', 'pending'),
+        ('s', 'sent'),
+        ('r', 'running'),
+        ('e', 'error')
+    )
+    winter_tyres_replacement_event = models.ForeignKey(WinterTyresReplacementEvent, on_delete=models.CASCADE)
+    status = models.CharField(max_length=1, choices = STATUSES, default='p')
+    email_data = models.JSONField()
+    error_message = models.TextField(default='')
+    created = models.DateField(auto_now_add=True, blank=True)
+
+    def __str__(self) -> str:
+        return f'Wiadomość dot. {self.winter_tyres_replacement_event}'
+    
+    def send_email(self):
+        self.status = 'r'
+        self.save()
+
+        subject = f"Wymień opony na zimowe."
+        html_body = render_to_string("../templates/emails/winter_tyres_replacement_email.html", self.email_data)
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = settings.EMAIL_HOST_USER
+        #recipient_list = self.email_data['email']
+
+        try:
+            message = EmailMultiAlternatives(subject, "text_body", email_from, [recipient_list])
+            message.attach_alternative(html_body, "text/html")
+            message.send()
+        except Exception as e:
+            self.status = 'e'
+            self.error_message = str(repr(e))
+        else:
+            self.status = 's'
+            self.save()

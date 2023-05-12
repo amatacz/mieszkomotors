@@ -39,7 +39,7 @@ class IndividualCustomerDetail(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['individual_customers'] = IndividualCustomer.objects.all().filter(id = self.kwargs['pk'])
-        context['attachments'] = CustomerAttachment.objects.all().filter(customer = self.kwargs['pk'])
+        context['attachments'] = CustomerAttachment.objects.all().filter(customer__individual_customer = self.kwargs['pk'])
         context['notes'] = CustomerNote.objects.all().filter(customer__individual_customer = self.kwargs['pk'])
         return context
 
@@ -169,7 +169,7 @@ class CustomerAttachmentCreate(LoginRequiredMixin, CreateView):
     form_class = CustomerAttachmentForm
 
     def get_success_url(self):
-        return reverse_lazy('enterprise_customer_detail', kwargs={'pk': self.object.customer_id})
+        return reverse_lazy('customers_list')
 
     def get_initial(self):
         return {"created_by": self.request.user}

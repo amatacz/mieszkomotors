@@ -1,8 +1,9 @@
 from django.db import models
 
-from .base import PublicationTracker, get_upload_path, get_upload_path_enterprise_owner
+from .base import PublicationTracker, get_upload_path, get_upload_path_enterprise_owner, get_file_name
 
 from phonenumber_field.modelfields import PhoneNumberField
+import os
 
 
 class Customer(PublicationTracker):
@@ -27,17 +28,17 @@ class CustomerAttachment(PublicationTracker):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='attachments')
     attachment = models.FileField(upload_to=get_upload_path, editable=True)
     created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
-
-    def __str__(self):
-	    return f'{self.customer}'
     
+    def __str__(self):
+        return f'{self.customer}'
+
 class CustomerNote(PublicationTracker):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='notes')
     note = models.TextField(max_length=500)
     created_by = models.ForeignKey("auth.User", on_delete=models.CASCADE, default="auth.User")
 
     def __str__(self):
-	    return f'Note: {self.customer} {self.publication_datetime.date()}'
+        return f'Note: {self.customer} {self.publication_datetime.date()}'
     
 class ContactData(PublicationTracker):
     ADDRES_PREFIXES = (

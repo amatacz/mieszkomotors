@@ -6,7 +6,7 @@ from django.dispatch import receiver
 
 from mieszkomotors.models.base import RENEWAL_INTERVAL
 from mieszkomotors.models.car import Car
-from mieszkomotors.models.events import CarEvent, InsuranceEvent
+from mieszkomotors.models.events import CarEvent, InsuranceEvent, SpringTyresReplacementEvent, WinterTyresReplacementEvent
 from mieszkomotors.models.insurance import Insurance, InsurancePartialPayments
 from mieszkomotors.models.owner import IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer, Customer
 
@@ -121,6 +121,35 @@ def change_car_event_dates(sender, instance, **kwargs):
             updated_car_event.save(update_fields=['start'])
     except CarEvent.DoesNotExist:
         return None
+
+# TYRES REPLACEMENT EVENTS
+
+# Create event when Car is created
+@receiver(post_save, sender=Car)
+def create_spring_tyres_replacement_event(sender, instance, created, **kwargs):
+    if created:
+        title = ''
+        description = ''
+        start = datetime.today()
+
+        spring_tyres_replacement_event = SpringTyresReplacementEvent.objects.create(car=instance, title=title, start=start)
+        spring_tyres_replacement_event.title = "Zmiana opon na letnie"
+        spring_tyres_replacement_event.description ="Przypominam o zmianie opon na letnie"
+        spring_tyres_replacement_event.start = f'{start.year}-03-15'
+        spring_tyres_replacement_event.save()
+
+@receiver(post_save, sender=Car)
+def create_winter_tyres_replacement_event(sender, instance, created, **kwargs):
+    if created:
+        title = ''
+        description = ''
+        start = datetime.today()
+
+        winter_tyres_replacement_event = WinterTyresReplacementEvent.objects.create(car=instance, title=title, start=start)
+        winter_tyres_replacement_event.title = "Zmiana opon na zimowe"
+        winter_tyres_replacement_event.description ="Przypominam o zmianie opon na zimowe"
+        winter_tyres_replacement_event.start = f'{start.year}-11-15'
+        winter_tyres_replacement_event.save()
 
 
 # CUSTOMER SIGNALS

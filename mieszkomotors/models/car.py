@@ -14,6 +14,7 @@ class Car(PublicationTracker):
     car_review_renewal_date = models.DateField(null=True, blank=True)
     purchase_date = models.DateField()
     in_mieszkomotors_since = models.DateField(auto_created=True, auto_now=True)
+    
 
     def __str__(self) -> str:
          return f'{self.brand} {self.model} ({self.license_plates})'

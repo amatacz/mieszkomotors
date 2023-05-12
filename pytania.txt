@@ -15,11 +15,15 @@ https://www.cybsecurity.org/pl/jak-zobaczyc-naglowki-wiadomosci-e-mail-na-roznyc
 
 	i usuwanie sygnalem na post_delete
 
-https://www.digitalocean.com/community/tutorials/how-to-host-a-website-using-cloudflare-and-nginx-on-ubuntu-22-04
-https://flower.readthedocs.io/en/latest/
-https://www.aftermarket.pl/
+    https://www.digitalocean.com/community/tutorials/how-to-host-a-website-using-cloudflare-and-nginx-on-ubuntu-22-04
+    https://flower.readthedocs.io/en/latest/
+    https://www.aftermarket.pl/
 
-5. Gdzie zapisywać var do sessions? Na razie zapisałam get_context() w DetailView, ale in
+5. Gdzie zapisywać var do sessions? Na razie zapisałam get_context() w DetailView
+6. zmienna w filtrze w template tag cut:"documents/{attachment.customer}"
+
+
+
 
 TO DO:
 test baza z bd iloscia dane biblioteka faker -> pip install django-faker

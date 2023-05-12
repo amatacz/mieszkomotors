@@ -6,8 +6,6 @@ from mieszkomotors.models.events import CarEventMail, InsuranceEventMail, Generi
 
 from datetime import date
 
-# ta komenda bedzie uruchamiana przez celery
-
 class Command(BaseCommand):
     def handle(self, *args, **options):
         today = date.today()

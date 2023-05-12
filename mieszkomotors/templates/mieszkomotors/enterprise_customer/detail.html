@@ -8,14 +8,14 @@
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
             {% for enterprise_customer in enterprise_customers %}
-            <p class="h1 py-3 mx-3 font-weight-bold">{{ enterprise_customer.company_name }}</p>
+            <p class="h2 py-3 mx-3 font-weight-bold">{{ enterprise_customer.company_name }}</p>
             <li class="m-2"> Email: {{ enterprise_customer.email }}</li>
             <li class="m-2"> Numer telefonu: {{ enterprise_customer.phone_number }}</li>
             <li class="m-2"> Adres: {{enterprise_customer.address_prefix}}{{ enterprise_customer.street }} {{ enterprise_customer.building }}
                 {% if enterprise_customer.apartment %}
                     m.{{ enterprise_customer.apartment }}
                 {% endif %}<br>
-                <p class="mx-4">{{ enterprise_customer.city }} {{ enterprise_customer.zip_code }}</p>
+                <p class="mx-4">{{ enterprise_customer.city }} {{ enterprise_customer.zip_code }}</ul>
             </li>
             <li class="m-2"> REGON: {{ enterprise_customer.regon }}</li>
             <li class="m-2"> NIP: {{ enterprise_customer.nip }}</li>
@@ -34,9 +34,13 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3 mx-3 font-weight-bold">Pliki klienta</p>
+            <p class="h2 py-3 mx-3 font-weight-bold">Pliki</p>
             {% for attachment in attachments %}
-                <li class="m-2"><a download href="{{ attachment.attachment.url }}">{{ attachment.attachment.name }}</a></li>
+                <li class="m-2">
+                    <a download href="{{ attachment.attachment.url }}">
+                        {{ attachment.attachment.name|cut:"documents/" }}
+                    </a>
+                </li>           
             {% endfor %}
             <div class="py-3">
                 <ul class="m-2"><a class="btn" href="{% url 'customer_attachment_create' %}">Dodaj załącznik</a>
@@ -47,7 +51,7 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3 mx-3 font-weight-bold">Notatki klienta</p>
+            <p class="h2 py-3 mx-3 font-weight-bold">Notatki</p>
             {% for note in notes %}
             <li class="m-2"><a href="{% url 'customer_note_update' note.pk %}">{{ note.note|safe }}</a></li>
             {% endfor %}

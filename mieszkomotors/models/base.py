@@ -13,6 +13,9 @@ def get_upload_path(instance, filename):
     return os.path.join("documents",
             f"{instance.customer}", filename
         )
+
+def get_file_name(filename):
+    return os.path.basename(filename)
              
 
 class PublicationTracker(models.Model):
