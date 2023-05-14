@@ -1,19 +1,13 @@
 2. Radio button do wybierania np załączników i usuwania ich hurtowo?
-    model pod customer attachment delete request -> kto usuwa, co i kiedy, txtfield str(info co to bylo) / stworzyc formularz, ktory zbierze id attachmentów i na success usuwac attachmenty po id
-    view funkcyjny, form zwykły -> lista attachmentów (petla) wsadzic ta petle w formularz i kazdy link jest input typu checkbox, a value dla form byłby obj.id i submit tego formularza wysyła formularz na viewsa funkcyjne, z self.request.post wezme id checkboxowane i potem na querystet usuwam
+    model pod customer attachment delete request -> kto usuwa, co i kiedy, txtfield str(info co to bylo) / stworzyc formularz, ktory zbierze id attachmentów 
+    i na success usuwac attachmenty po id
+    view funkcyjny, form zwykły -> lista attachmentów (petla) wsadzic ta petle w formularz i kazdy link jest input typu checkbox, 
+    a value dla form byłby obj.id i submit tego formularza wysyła formularz na viewsa funkcyjne, 
+    z self.request.post wezme id checkboxowane i potem na querystet usuwam
 
 3. Email -> dodac nagłówki weryfikacyjne?
 https://www.cybsecurity.org/pl/jak-zobaczyc-naglowki-wiadomosci-e-mail-na-roznych-pocztach/
 
-4. Jak ustawić powtarzające się eventy -> np wymiana opon (mam 2 modele Wiosenna Wymiana Opon i Zimowa, każdy powinien powtarzać się co rok)
-    Najlepiej byłoby w przyszłości to podpiąć pod jakieś pogodowe API, gdzie jak osiągana jest średnia temperatura przez ostatnie 2 tyg, te eventy się uruchamiaja?
-    
-    Metoda mgmt w cronie, ktora odpala sie raz na miesiac -> przypiac model oponiarski do samochodu 
-    i sprawdza czy taki obiekt istnieje dla danego auta i jesli nie, to get_or_create 
-    i te obiekty ew tworzy
-	ale albo wtedy, gdy tworzy sie klienta to sygnal na create
-
-	i usuwanie sygnalem na post_delete
 
     https://www.digitalocean.com/community/tutorials/how-to-host-a-website-using-cloudflare-and-nginx-on-ubuntu-22-04
     https://flower.readthedocs.io/en/latest/
@@ -29,3 +23,21 @@ TO DO:
 test baza z bd iloscia dane biblioteka faker -> pip install django-faker
 datatables django -> serializacja bedzie potrzebna
 potencjalny problem -> tabele z paginacjami
+
+
+
+
+2. Czy mogę umieścić zmienną w filtrze w templates? Bo na razie, gdy robię listę CustomerAttachmentów wyświetla mi się cała ścieżka do pliku.
+Doczytałam, że w templates jest ten filtr :cut"", ale te ścieżki sa tworzone dynamicznie, więc nie mogę na sztywno wpisać filtra.
+coś takiego by mi było potrzebne <cut:"documents/{attachment.customer}">
+Ale to nie działa, jak robie f-stringa to tez nie gra, na razie ucięłam tylko "documents", bo to jest stała.
+
+3. O tym juz rozmawialismy, ale potem nie wiedziałam jak to ugryźć.
+Chodzi mi o checkbox/radio button do zaznaczania notatek/plików i usuwania ich hurtowo.
+
+To moje notatki, które zapisałam do tego, ale myślałam o tym wczoraj i nie wiem, jak z tym ruszyć.
+"Zrobić model pod customer attachment delete request -> zeby zapisywać info, kto usuwa, co i kiedy, txtfield (info co to bylo/treść notatki).
+Stworzyc formularz, ktory zbierze id attachmentów i na success_url usuwac attachmenty po id.
+Zrobić view funkcyjny, form zwykły -> w nim lista attachmentów (petla) wsadzić ta petle w formularz i kazdy link jest input typu checkbox, 
+a value dla form byłby obj.id i submit tego formularza wysyła formularz na viewsa funkcyjnego, 
+z self.request.post wezme id checkboxowane i potem na querystet usuwam."

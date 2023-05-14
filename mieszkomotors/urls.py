@@ -1,4 +1,5 @@
 from django.urls import path, re_path
+
 from .views import home, calendar, car, owner, user, insurance, events
 
 urlpatterns = [

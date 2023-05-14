@@ -8,8 +8,6 @@ from mieszkomotors.models.events import GenericEvent
 from mieszkomotors.models.insurance import Insurance, InsuranceAttachment, InsuranceNote
 from mieszkomotors.models.owner import IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer, CustomerAttachment, CustomerNote
 
-from phonenumber_field.formfields import PhoneNumberField
-
 
 # Individual Owner Form
 class IndividualCustomerForm(ModelForm):

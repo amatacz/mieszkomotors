@@ -1,6 +1,6 @@
-from time import sleep
 from celery import shared_task
 from core import celery_app
+from time import sleep
 
 from mieszkomotors.models.events import *
 

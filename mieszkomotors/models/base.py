@@ -1,6 +1,7 @@
-from django.db import models
 import os
-from datetime import datetime
+
+from django.db import models
+
 
 RENEWAL_INTERVAL = 30
 

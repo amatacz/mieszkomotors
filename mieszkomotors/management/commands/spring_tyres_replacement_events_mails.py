@@ -1,16 +1,19 @@
-from django.core.management.base import BaseCommand
-from mieszkomotors.models.events import Car, CarOwner,SpringTyresReplacementEvent, SpringTyresReplacementEventMail
 from datetime import date
+
+from django.core.management.base import BaseCommand
+
+from mieszkomotors.models.events import Car, CarOwner,SpringTyresReplacementEvent, SpringTyresReplacementEventMail
 
 # ta komenda bedzie uruchamiana w cronie 15 marca raz w roku
 
-'''
-Command to create mail objects for each Spring Tyres Replacement Event (object assigned to each car).
-Method runs once for a year, March 15th and creates SpringTyresReplacementEventMail with car and car owner data.
-'''
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        '''
+        Command to create mail objects for each Spring Tyres Replacement Event (object assigned to each car).
+        Method runs once for a year, March 15th and creates SpringTyresReplacementEventMail with car and car owner data.
+        '''
         current_year = date.today().year
 
         spring_tyres_replacement_events = SpringTyresReplacementEvent.objects.filter(start__year = current_year)

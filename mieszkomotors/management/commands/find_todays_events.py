@@ -1,5 +1,4 @@
 from datetime import date
-import json
 
 from django.core.management.base import BaseCommand
 
@@ -10,6 +9,12 @@ from mieszkomotors.models.base import RENEWAL_INTERVAL
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+
+        """
+        Method to find events that occurs everyday.
+        Creates Mail objects that stores event data and sends reminder emails to customers.
+        """
+
         today = date.today()
         carevents = CarEvent.objects.all().filter(start=today)
         insurance_events = InsuranceEvent.objects.all().filter(start=today)

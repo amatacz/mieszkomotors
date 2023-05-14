@@ -1,7 +1,9 @@
 from django.db import models
+
+from mieszkomotors.models.base import PublicationTracker, get_upload_path, RENEWAL_INTERVAL
 from mieszkomotors.models.car import Car
 from mieszkomotors.models.owner import Customer
-from mieszkomotors.models.base import PublicationTracker, get_upload_path, RENEWAL_INTERVAL
+
 
 
 class Insurance(PublicationTracker):

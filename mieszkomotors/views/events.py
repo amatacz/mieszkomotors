@@ -1,9 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from mieszkomotors.models.events import CarEvent, InsuranceEvent, GenericEvent
 from mieszkomotors.forms import GenericEventForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 # All events list view
 class EventList(LoginRequiredMixin, ListView):

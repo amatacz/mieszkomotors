@@ -1,14 +1,13 @@
+from django.core.mail import EmailMultiAlternatives, get_connection
 from django.db import models
+from django.template.loader import render_to_string
 
 from core import settings
 from mieszkomotors.models.base import PublicationTracker, RENEWAL_INTERVAL
 from mieszkomotors.models.car import *
 from mieszkomotors.models.insurance import *
 
-from django.core.mail import EmailMultiAlternatives, get_connection
-from django.template.loader import render_to_string
-from datetime import datetime
-import json
+
 
 class CarEvent(PublicationTracker):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)

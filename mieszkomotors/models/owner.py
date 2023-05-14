@@ -1,9 +1,8 @@
+from phonenumber_field.modelfields import PhoneNumberField
+
 from django.db import models
 
 from .base import PublicationTracker, get_upload_path, get_upload_path_enterprise_owner, get_file_name
-
-from phonenumber_field.modelfields import PhoneNumberField
-import os
 
 
 class Customer(PublicationTracker):

@@ -1,10 +1,10 @@
 from rest_framework import viewsets, permissions
 
-from mieszkomotors.models.events import CarEvent, InsuranceEvent
 from mieszkomotors.models.car import Car, CarOwner
-from mieszkomotors.models.events import GenericEvent
-from mieszkomotors.serializers import *
+from mieszkomotors.models.events import CarEvent, InsuranceEvent, GenericEvent
 from mieszkomotors.permissions import IsStaffOrReadOnly
+from mieszkomotors.serializers import *
+
 
 class CarEventsViewset(viewsets.ModelViewSet):
     queryset = CarEvent.objects.all()

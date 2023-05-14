@@ -1,17 +1,17 @@
+from datetime import date
+
 from django.core.management.base import BaseCommand
 
 from mieszkomotors.models.events import Car, SpringTyresReplacementEvent, WinterTyresReplacementEvent
 
-from datetime import date
-
-'''
-Method to assure that spring and winter replacement events are present for each car
-or create one for object if not exist.
-Methon runs once for a month in cron.
-'''
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        '''
+        Method to assure that spring and winter replacement events are present for each car
+        or create one for object if not exist.
+        Method runs once for a month in cron.
+        '''
         current_year = date.today().year
 
         cars = Car.objects.all()

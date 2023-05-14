@@ -1,6 +1,8 @@
-from django.core.management.base import BaseCommand
-from mieszkomotors.models.events import Car, CarOwner, WinterTyresReplacementEvent, WinterTyresReplacementEventMail
 from datetime import date
+
+from django.core.management.base import BaseCommand
+
+from mieszkomotors.models.events import Car, CarOwner, WinterTyresReplacementEvent, WinterTyresReplacementEventMail
 
 # ta komenda bedzie uruchamiana w cronie 15 listopada raz w roku
 '''

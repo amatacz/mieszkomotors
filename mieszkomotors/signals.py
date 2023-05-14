@@ -1,8 +1,8 @@
-from dateutil.relativedelta import relativedelta
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
-from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
+from django.db.models.signals import post_save, pre_save, post_delete
 
 from mieszkomotors.models.base import RENEWAL_INTERVAL
 from mieszkomotors.models.car import Car

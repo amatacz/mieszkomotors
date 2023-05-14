@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from mieszkomotors.models.events import CarEvent, InsuranceEvent, GenericEvent
+
 from mieszkomotors.models.car import Car, CarOwner
+from mieszkomotors.models.events import CarEvent, InsuranceEvent, GenericEvent
 from mieszkomotors.models.insurance import Insurance
 from mieszkomotors.models.owner import Customer, IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer
 
