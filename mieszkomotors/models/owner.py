@@ -87,7 +87,7 @@ class SelfEmployedCustomer(ContactData):
     company_name = models.CharField(max_length=80)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=50)
-    pesel = models.CharField(max_length=11, unique=True, verbose_name="Identyfikator - PESEL", default="00000000000")
+    pesel = models.CharField(max_length=11, verbose_name="Identyfikator - PESEL", default="00000000000")
     nip = models.CharField(max_length=10, verbose_name='NIP')
     regon = models.CharField(max_length=11, unique=True, verbose_name="Identyfikator - REGON")
     driving_license_since = models.DateField(default='1970-01-01', null=True, blank=True)

@@ -96,7 +96,7 @@ class SelfEmployedCustomerForm(ModelForm):
     class Meta:
         model = SelfEmployedCustomer
         fields = ['created_by', 'company_name','first_name', 'last_name', 'email', 'phone_number', 
-                  'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'nip', 'regon', 'driving_license_since', 'customer_type', 'client_since']
+                  'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'pesel', 'nip', 'regon', 'driving_license_since', 'customer_type', 'client_since']
         widgets = {
             "created_by": forms.Select(attrs={
                 "class": "form-control",
@@ -157,6 +157,11 @@ class SelfEmployedCustomerForm(ModelForm):
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "Zip Code"
+            }),
+            'pesel': TextInput(attrs={
+                "class": "form-control",
+                "style": "max-width: 300px",
+                "placeholder": "PESEL"
             }),
             'nip': TextInput(attrs={
                 "class": "form-control",
