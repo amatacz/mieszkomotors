@@ -7,6 +7,7 @@ from django.views.generic import ListView, TemplateView
 
 from mieszkomotors.models.owner import Customer, CustomerAttachment, CustomerNote, IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer
 from mieszkomotors.forms import *
+from django.shortcuts import redirect
 
 
 # All customers list view
@@ -32,15 +33,15 @@ class IndividualCustomerCreate(LoginRequiredMixin, CreateView):
 def get_initial(self):
         return {"created_by": self.request.user}
 
-class IndividualCustomerDetail(LoginRequiredMixin, TemplateView):
+class IndividualCustomerDetail(LoginRequiredMixin, DetailView):
     model = IndividualCustomer
     template_name = 'mieszkomotors/individual_customer/detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['individual_customers'] = IndividualCustomer.objects.all().filter(id = self.kwargs['pk'])
-        context['attachments'] = CustomerAttachment.objects.all().filter(customer__individual_customer = self.kwargs['pk'])
-        context['notes'] = CustomerNote.objects.all().filter(customer__individual_customer = self.kwargs['pk'])
+        context['individual_customers'] = IndividualCustomer.objects.filter(id = self.kwargs['pk'])
+        context['attachments'] = CustomerAttachment.objects.filter(customer__individual_customer = self.kwargs['pk'])
+        context['notes'] = CustomerNote.objects.filter(customer__individual_customer = self.kwargs['pk'])
         return context
 
 class IndividualCustomerUpdate(LoginRequiredMixin, UpdateView):
@@ -68,19 +69,16 @@ class SelfEmployedCustomerCreate(LoginRequiredMixin, CreateView):
     def get_initial(self):
             return {"created_by": self.request.user}
 
-class SelfEmployedCustomerDetail(LoginRequiredMixin, TemplateView):
+class SelfEmployedCustomerDetail(LoginRequiredMixin, DetailView):
     model = SelfEmployedCustomer
     context_object_name = 'customer'
     template_name = 'mieszkomotors/self_employed_customer/detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['self_employed_customers'] = SelfEmployedCustomer.objects.all().filter(id = self.kwargs['pk'])
-        context['attachments'] = CustomerAttachment.objects.all().filter(customer__self_employed_customer = self.kwargs['pk'])
-        context['notes'] = CustomerNote.objects.all().filter(customer__self_employed_customer = self.kwargs['pk'])
-
-        self.request.session['customer_id'] = self.kwargs['pk']
-
+        context['self_employed_customers'] = SelfEmployedCustomer.objects.filter(id = self.kwargs['pk'])
+        context['attachments'] = CustomerAttachment.objects.filter(customer__self_employed_customer = self.kwargs['pk'])
+        context['notes'] = CustomerNote.objects.filter(customer__self_employed_customer = self.kwargs['pk'])
         return context
 
 class SelfEmployedCustomerUpdate(LoginRequiredMixin, UpdateView):
@@ -105,16 +103,16 @@ class EnterpriseCustomerCreate(LoginRequiredMixin, CreateView):
 def get_initial(self):
         return {"created_by": self.request.user}
 
-class EnterpriseCustomerDetail(LoginRequiredMixin, TemplateView):
+class EnterpriseCustomerDetail(LoginRequiredMixin, DetailView):
     model = EnterpriseCustomer
     context_object_name = 'customer'
     template_name = 'mieszkomotors/enterprise_customer/detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['enterprise_customers'] = EnterpriseCustomer.objects.all().filter(id = self.kwargs['pk'])
-        context['attachments'] = CustomerAttachment.objects.all().filter(customer__enterprise_customer = self.kwargs['pk'])
-        context['notes'] = CustomerNote.objects.all().filter(customer__enterprise_customer = self.kwargs['pk'])
+        context['enterprise_customers'] = EnterpriseCustomer.objects.filter(id = self.kwargs['pk'])
+        context['attachments'] = CustomerAttachment.objects.filter(customer__enterprise_customer = self.kwargs['pk'])
+        context['notes'] = CustomerNote.objects.filter(customer__enterprise_customer = self.kwargs['pk'])
 
         return context
 
@@ -136,11 +134,30 @@ class CustomerNoteCreate(LoginRequiredMixin, CreateView):
     template_name = 'mieszkomotors/customer/notes/create.html'
     form_class = CustomerNoteForm
 
+    def get_name(self):
+        if self.kwargs['customer_type'] == 'individual':
+            return 'individual'
+        if self.kwargs['customer_type'] == 'selfemployed':
+            return 'selfemployed'
+        if self.kwargs['customer_type'] == 'enterprise':
+            return 'enterprise'
+
+    def get_cancel_url(self):
+        return self.get_success_url()
+
     def get_success_url(self):
-        return reverse_lazy('customers_list')
+        return reverse_lazy(f'{self.get_name()}_customer_detail', args=[self.kwargs['customer_id']])
+ 
+    def get_customer(self):
+        if self.kwargs['customer_type'] == 'individual':
+            return IndividualCustomer.objects.get(id=self.kwargs['customer_id'])
+        if self.kwargs['customer_type'] == 'selfemployed':
+            return SelfEmployedCustomer.objects.get(id=self.kwargs['customer_id'])
+        if self.kwargs['customer_type'] == 'enterprise':
+            return EnterpriseCustomer.objects.get(id=self.kwargs['customer_id'])
 
     def get_initial(self):
-        return {"created_by": self.request.user}
+        return {"created_by": self.request.user, 'customer': self.get_customer().customer}
 
 class CustomerNoteDetail(LoginRequiredMixin, DetailView):
     model = CustomerNote
@@ -150,7 +167,20 @@ class CustomerNoteUpdate(LoginRequiredMixin, UpdateView):
     model = CustomerNote
     template_name = 'mieszkomotors/customer/notes/update.html'
     form_class = CustomerNoteForm
-    success_url = reverse_lazy('customers_list')
+
+    def get_name(self):
+        if self.kwargs['customer_type'] == 'individual':
+            return 'individual'
+        if self.kwargs['customer_type'] == 'selfemployed':
+            return 'selfemployed'
+        if self.kwargs['customer_type'] == 'enterprise':
+            return 'enterprise'
+
+    def get_cancel_url(self):
+        return self.get_success_url()
+
+    def get_success_url(self):
+        return reverse_lazy(f'{self.get_name()}_customer_detail', args=[self.kwargs['customer_id']])
 
 class CustomerNoteList(LoginRequiredMixin, ListView):
     model = CustomerNote
@@ -161,6 +191,21 @@ class CustomerNoteDelete(LoginRequiredMixin, DeleteView):
     template_name = 'mieszkomotors/customer/notes/delete.html'
     success_url = reverse_lazy('customers_list')
 
+def note_delete(request, customer_id, customer_type):
+    print(request.POST.keys())
+
+    to_remove = list(request.POST.keys())[1:]
+
+    if customer_type == 'individual':
+        customer_type = 'individual'
+    if customer_type == 'selfemployed':
+        customer_type = 'selfemployed'
+    if customer_type == 'enterprise':
+        customer_type = 'enterprise'
+
+    CustomerNote.objects.filter(id__in = to_remove).delete()
+    return redirect(reverse_lazy(f'{customer_type}_customer_detail', args=[customer_id]))
+
 
 # Customer Attachments Views
 class CustomerAttachmentCreate(LoginRequiredMixin, CreateView):
@@ -168,12 +213,31 @@ class CustomerAttachmentCreate(LoginRequiredMixin, CreateView):
     template_name = 'mieszkomotors/customer/attachments/create.html'
     form_class = CustomerAttachmentForm
 
+    def get_name(self):
+        if self.kwargs['customer_type'] == 'individual':
+            return 'individual'
+        if self.kwargs['customer_type'] == 'selfemployed':
+            return 'selfemployed'
+        if self.kwargs['customer_type'] == 'enterprise':
+            return 'enterprise'
+
+    def get_cancel_url(self):
+        return self.get_success_url()
+
     def get_success_url(self):
-        return reverse_lazy('customers_list')
+        return reverse_lazy(f'{self.get_name()}_customer_detail', args=[self.kwargs['customer_id']])
+ 
+    def get_customer(self):
+        if self.kwargs['customer_type'] == 'individual':
+            return IndividualCustomer.objects.get(id=self.kwargs['customer_id'])
+        if self.kwargs['customer_type'] == 'selfemployed':
+            return SelfEmployedCustomer.objects.get(id=self.kwargs['customer_id'])
+        if self.kwargs['customer_type'] == 'enterprise':
+            return EnterpriseCustomer.objects.get(id=self.kwargs['customer_id'])
 
     def get_initial(self):
-        return {"created_by": self.request.user}
-
+        return {"created_by": self.request.user, 'customer': self.get_customer().customer}
+    
 class CustomerAttachmentDetail(LoginRequiredMixin, DetailView):
     model = CustomerAttachment
     template_name = 'mieszkomotors/customer/attachments/detail.html'
@@ -192,3 +256,18 @@ class CustomerAttachmentDelete(LoginRequiredMixin, DeleteView):
     model = CustomerAttachment
     template_name = 'mieszkomotors/customer/attachments/delete.html'
     success_url = reverse_lazy('enterprise_customer_detail')
+
+def attachment_delete(request, customer_id, customer_type):
+    to_remove = list(request.POST.keys())[1:]
+
+    if customer_type == 'individual':
+        customer_type = 'individual'
+
+    if customer_type == 'selfemployed':
+        customer_type = 'selfemployed'
+
+    if customer_type == 'enterprise':
+        customer_type = 'enterprise'
+        
+    CustomerAttachment.objects.filter(id__in = to_remove).delete()
+    return redirect(reverse_lazy(f'{customer_type}_customer_detail', args=[customer_id]))

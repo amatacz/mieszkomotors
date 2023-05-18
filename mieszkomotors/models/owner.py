@@ -30,6 +30,9 @@ class CustomerAttachment(PublicationTracker):
     
     def __str__(self):
         return f'{self.customer}'
+    
+    def get_name(self):
+        return self.attachment.name.split("/")[-1]
 
 class CustomerNote(PublicationTracker):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='notes')

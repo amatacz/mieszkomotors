@@ -3,69 +3,74 @@
 
 {% block content %}
 <div class="d-flex justify-between">
-
-    <div class="d-flex justify-content-left mx-3">
-        <div class="row row-centered pt-3">
-            <div class="col-12 col-centered">
-                {% for self_employed_customer in self_employed_customers %}
-                <p class="h2 py-3 mx-3 font-weight-bold">{{ self_employed_customer.company_name }}</p>
-                <li class="m-2"> Email: {{ self_employed_customer.email }}</li>
-                <li class="m-2"> Numer telefonu: {{ self_employed_customer.phone_number }}</li>
-                <li class="m-2"> Adres: {{self_employed_customer.address_prefix}}{{ self_employed_customer.street }} {{ self_employed_customer.building }}
-                    {% if self_employed_customer.apartment %}
-                        m.{{ self_employed_customer.apartment }}
-                    {% endif %}
-                    <p class="mx-4">{{ self_employed_customer.city }} {{ self_employed_customer.zip_code }}</p>
-                </li>
-                
-                {% if self_employed_customer.driving_license_since %}
-                <li class="m-2"> Prawo jazdy od: {{ self_employed_customer.driving_license_since }}</li>
-                {% endif %}
-                <li class="m-2"> PESEL: {{ self_employed_customer.pesel }}</li>                
-                <li class="m-2"> REGON: {{ self_employed_customer.regon }}</li>
-                <li class="m-2"> NIP: {{ self_employed_customer.nip }}</li>
-                <li class="m-2"> Klient od: {{ self_employed_customer.client_since }}</li>
+        <div class="d-flex justify-content-left mx-3 vw-33">
+            <div class="row row-centered pt-3">
+                <div class="col-12 col-centered">
+                    {% for self_employed_customer in self_employed_customers %}
+                    <p class="h2 py-3 mx-3 font-weight-bold">{{ self_employed_customer.company_name|safe }}</p>
+                    <li class="m-2">Email: {{ self_employed_customer.email }}</li>
+                    <li class="m-2">Numer telefonu: {{ self_employed_customer.phone_number }}</li>
+                    <li class="m-2">Adres: {{self_employed_customer.address_prefix}}{{ self_employed_customer.street }} {{ self_employed_customer.building }}
+                        {% if self_employed_customer.apartment %}
+                            m.{{ self_employed_customer.apartment }}
+                        {% endif %} <br>
+                        <p class="mx-4">{{ self_employed_customer.city }} {{ self_employed_customer.zip_code }}</p>
+                    </li>
+                    <li class="m-2">PESEL: {{ self_employed_customer.pesel }}</li>  
+                    <li class="m-2"> REGON: {{ self_employed_customer.regon }}</li>
+                    <li class="m-2"> NIP: {{ self_employed_customer.nip }}</li>
+                    <li class="m-2">Prawo jazdy od: {{ self_employed_customer.driving_license_since }} </li>
+                    <li class="m-2"> Klient od: {{ self_employed_customer.client_since }}</li>
                     
                     {% if forloop.last %}
                     <div class="py-3">
                         <ul class="my-2">
-                            <a class="btn mt-3" href="{% url 'self_employed_customer_update' self_employed_customer.id %}"> Zaktualizuj dane </a>
-                            <a class="btn mt-3" href="{% url 'self_employed_customer_delete' self_employed_customer.id %}"> Usuń klienta </a>
+                            <a class="btn mt-3" href="{% url 'self_employed_customer_update' self_employed_customer.id %}">Zaktualizuj dane</a>
+                            <a class="btn mt-3" href="{% url 'self_employed_customer_update' self_employed_customer.pk %}"> Usuń klienta</a>
                         </ul>
                     </div>
                     {% endif %}
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </div> 
-
-    <div class="d-flex justify-content-left mx-3">
+        </div> 
+    <div class="d-flex justify-content-left mx-3 max-vw-33">
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
                 <p class="h2 py-3 mx-3 font-weight-bold">Pliki</p>
-                {% for attachment in attachments %}
-                    <li class="m-2">
-                        <a download href="{{ attachment.attachment.url }}">
-                            {{ attachment.attachment.name|cut:"documents/"}}
-                        </a>
-                    </li>
+                <form action="{% url 'customer_attachment_delete' object.customer_type object.id %}" method="post">
+                    {% csrf_token %}
+                    {% for attachment in attachments %}
+                    <ul class="m-2">
+                        <input type="checkbox" name="{{ attachment.id }}">
+                        <a download href="{{ attachment.attachment.url }}">{{ attachment.get_name|truncatechars:25 }}</a>
+                    </ul>
                     {% endfor %}
-                    <div class="py-3">
-                        <ul class="m-2"><a class="btn" href="{% url 'customer_attachment_create' %}"> Dodaj plik</a>
-                    </div>
+                    <button type="submit" class="btn mt-3 mx-4">Usuń plik</button>
+                </form>
+                <div class="py-3">
+                    <ul class="my-2"><a class="btn" href="{% url 'customer_attachment_create' object.customer_type  object.id %}">Dodaj załącznik</a></ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-left mx-3">
+    <div class="d-flex justify-content-left mx-3 max-vw-33">
         <div class="row row-centered pt-3">
             <div class="col-12 col-centered">
                 <p class="h2 py-3 mx-3 font-weight-bold">Notatki</p>
+                <form action="{% url 'customer_note_delete' object.customer_type object.id %}" method="post">
+                {% csrf_token %}
                 {% for note in notes %}
-                <li class="m-2"><a href="{% url 'customer_note_update' note.pk %}">{{ note.note|safe }}</a></li>
+                    <ul class="m-2">
+                        <input type="checkbox" name="{{ note.id }}">
+                        <a href="{% url 'customer_note_update' object.customer_type object.id note.pk %}">{{ note.note|truncatechars:25 }}</a>
+                    </ul>
                 {% endfor %}
-                    <div class="py-3">
-                        <ul class="m-2"><a class="btn" href="{% url 'customer_note_create' %}">Dodaj notatkę</a>
-                    </div>
+                <button type="submit" class="btn mt-3 mx-4">Usuń notatkę</button>
+                </form>
+                <div class="py-3">
+                    <ul class="my-2"><a class="btn" href="{% url 'customer_note_create' object.customer_type object.id %}">Dodaj notatkę</a>
+                </div>
             </div>
         </div>
     </div>
@@ -73,11 +78,12 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <ul><a class="btn" href="{% url 'customers_list'%}"> Wróć do listy klientów</a>
-            <a class="btn" href="{% url 'home'%}"> Wróć na stronę główną</a></ul>
+            <ul><a class="btn" href="{% url 'customers_list'%}">Wróć do listy klientów</a>
+            <a class="btn" href="{% url 'home'%}">Wróć na stronę główną</a></ul>
         </div>
     </div>
 </div>
+
 
 {% endblock %}
 

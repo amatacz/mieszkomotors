@@ -273,16 +273,8 @@ class CustomerAttachmentForm(ModelForm):
         model = CustomerAttachment
         fields = ['created_by', 'customer', 'attachment']
         widgets = {
-            "created_by": forms.Select(attrs={
-                "class": "form-control",
-                "style": "max-width: 300px",
-                "placeholder": "Created By"
-            }),
-            'customer': forms.Select(attrs={
-                "class": "form-control",
-                "style": "max-width: 300px",
-                "placeholder": "Customer"
-                }),
+            'created_by': forms.HiddenInput(),
+            'customer': forms.HiddenInput(),
             'attachment': FileInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
@@ -295,16 +287,8 @@ class CustomerNoteForm(ModelForm):
         model = CustomerNote
         fields = ['created_by','customer', 'note']
         widgets = {
-            "created_by": forms.Select(attrs={
-                "class": "form-control",
-                "style": "max-width: 300px",
-                "placeholder": "Created By"
-            }),
-            'customer': forms.Select(attrs={
-                "class": "form-control",
-                "style": "max-width: 300px",
-                "placeholder": "Customer"
-                }),
+            'created_by': forms.HiddenInput(),
+            'customer': forms.HiddenInput(),
             'note': forms.Textarea(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
@@ -596,4 +580,5 @@ class LoginForm(AuthenticationForm):
                 "placeholder": "Password"
             })
         }
+
 

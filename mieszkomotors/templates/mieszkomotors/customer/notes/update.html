@@ -15,7 +15,6 @@
                 {% csrf_token %}
                 {{form.as_p}}
                 <button class="btn mt-3" type="submit">Zapisz</button>
-                <a class="btn mt-3" href="{% url 'customer_note_delete' customernote.id %}"> Usuń notatkę </a>
             </form>
         </div>
     </div>
