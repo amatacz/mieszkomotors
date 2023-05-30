@@ -4,13 +4,18 @@
     <div class="d-flex justify-content-center align-items-center" >
         <div class="row row-centered pt-5">
             <div class="col-12 col-centered">
-                <img src="https://drive.google.com/uc?export=view&id=15OaArbk9oBITPwdFmb0i-4LpvZJw_bGX" style="max-width: 450px; max-height: auto;" alt="logo MieszkoMotors">
+                <!-- logo visible below md -->
+                <img class="d-none d-lg-block img-fluid w-100" src="https://drive.google.com/uc?export=view&id=15OaArbk9oBITPwdFmb0i-4LpvZJw_bGX" style="max-width: 450px; max-height: auto;" alt="logo MieszkoMotors">
+                <!-- logo visible on md -->
+                <img class="d-none d-md-block d-lg-none img-fluid w-100" src="https://drive.google.com/uc?export=view&id=15OaArbk9oBITPwdFmb0i-4LpvZJw_bGX" style="max-width: 450px; max-height: auto;" alt="logo MieszkoMotors">
+                <!-- logo visible on lg -->                
+                <img class="d-md-none img-fluid w-100" src="https://drive.google.com/uc?export=view&id=1OtSBxTQ2tJnHe11t4VITxiMRY-iSF78w" style="max-width: 1000px; max-height: auto;" alt="logo MieszkoMotors">
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row pt-5 col-12">
-            <a href="{% url 'login' %}" class="btn btn-lg" role="button">Zaloguj się</a>
+            <a href="{% url 'login' %}" class="btn" role="button">Zaloguj się</a>
         </div>
     </div>
 {% endblock %}
