@@ -1,19 +1,26 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.forms import ModelForm, TextInput, EmailInput, FileInput, NumberInput, DateInput, Select
+from django.forms import ModelForm, TextInput, EmailInput, FileInput, \
+    NumberInput, DateInput, Select
 
 from mieszkomotors.models.car import Car, CarNote, CarAttachment, CarOwner
 from mieszkomotors.models.events import GenericEvent
-from mieszkomotors.models.insurance import Insurance, InsuranceAttachment, InsuranceNote
-from mieszkomotors.models.owner import IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer, CustomerAttachment, CustomerNote
+from mieszkomotors.models.insurance import Insurance, InsuranceAttachment, \
+    InsuranceNote
+from mieszkomotors.models.owner import IndividualCustomer, \
+    SelfEmployedCustomer, EnterpriseCustomer, CustomerAttachment, CustomerNote
 
 
 # Individual Owner Form
 class IndividualCustomerForm(ModelForm):
     class Meta:
         model = IndividualCustomer
-        fields = ['created_by','first_name', 'last_name', 'email', 'phone_number', 'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'pesel', 'driving_license_since' ,'customer_type', 'client_since']
+        fields = ['created_by', 'first_name', 'last_name', 'email',
+                  'phone_number', 'address_prefix', 'street', 'building',
+                  'apartment', 'city', 'zip_code', 'pesel',
+                  'driving_license_since', 'customer_type',
+                  'client_since']
         widgets = {
             "created_by": forms.Select(attrs={
                 "class": "form-control",
@@ -60,7 +67,7 @@ class IndividualCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Apartment"
             }),
-            'city' : TextInput(attrs={
+            'city': TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "City"
@@ -85,24 +92,28 @@ class IndividualCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Customer Type"
             }),
-            'client_since' : DateInput(attrs={
+            'client_since': DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "(YYYY-MM-DD)"
             }),
         }
 
+
 class SelfEmployedCustomerForm(ModelForm):
     class Meta:
         model = SelfEmployedCustomer
-        fields = ['created_by', 'company_name','first_name', 'last_name', 'email', 'phone_number', 
-                  'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'pesel', 'nip', 'regon', 'driving_license_since', 'customer_type', 'client_since']
+        fields = ['created_by', 'company_name', 'first_name', 'last_name',
+                  'email', 'phone_number',
+                  'address_prefix', 'street', 'building', 'apartment', 'city',
+                  'zip_code', 'pesel', 'nip', 'regon', 'driving_license_since',
+                  'customer_type', 'client_since']
         widgets = {
             "created_by": forms.Select(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "Created By"
-            }),            
+            }),
             "company_name": TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
@@ -148,7 +159,7 @@ class SelfEmployedCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Apartment"
             }),
-            'city' : TextInput(attrs={
+            'city': TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "City"
@@ -183,24 +194,26 @@ class SelfEmployedCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Customer Type"
             }),
-            'client_since' : DateInput(attrs={
+            'client_since': DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "(YYYY-MM-DD)"
             }),
         }
 
+
 class EnterpriseCustomerForm(ModelForm):
     class Meta:
         model = EnterpriseCustomer
-        fields = ['created_by', 'company_name', 'email', 'phone_number', 
-                  'address_prefix', 'street', 'building', 'apartment', 'city', 'zip_code', 'nip', 'regon', 'customer_type', 'client_since']
+        fields = ['created_by', 'company_name', 'email', 'phone_number',
+                  'address_prefix', 'street', 'building', 'apartment', 'city',
+                  'zip_code', 'nip', 'regon', 'customer_type', 'client_since']
         widgets = {
             "created_by": forms.Select(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "Created By"
-            }),            
+            }),
             "company_name": TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
@@ -236,7 +249,7 @@ class EnterpriseCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Apartment"
             }),
-            'city' : TextInput(attrs={
+            'city': TextInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "City"
@@ -261,12 +274,13 @@ class EnterpriseCustomerForm(ModelForm):
                 "style": "max-width: 300px",
                 "placeholder": "Customer Type"
             }),
-            'client_since' : DateInput(attrs={
+            'client_since': DateInput(attrs={
                 "class": "form-control",
                 "style": "max-width: 300px",
                 "placeholder": "(YYYY-MM-DD)"
             }),
         }
+
 
 class CustomerAttachmentForm(ModelForm):
     class Meta:
@@ -282,10 +296,11 @@ class CustomerAttachmentForm(ModelForm):
             })
         }
 
+
 class CustomerNoteForm(ModelForm):
     class Meta:
         model = CustomerNote
-        fields = ['created_by','customer', 'note']
+        fields = ['created_by', 'customer', 'note']
         widgets = {
             'created_by': forms.HiddenInput(),
             'customer': forms.HiddenInput(),
@@ -297,6 +312,7 @@ class CustomerNoteForm(ModelForm):
         }
 
 # Insurance forms
+
 
 class InsuranceForm(ModelForm):
     class Meta:
@@ -330,6 +346,7 @@ class InsuranceForm(ModelForm):
             })
         }
 
+
 class InsuranceAttachmentForm(ModelForm):
     class Meta:
         model = InsuranceAttachment
@@ -352,10 +369,11 @@ class InsuranceAttachmentForm(ModelForm):
             })
         }
 
+
 class InsuranceNoteForm(ModelForm):
     class Meta:
         model = InsuranceNote
-        fields = ['created_by','insurance', 'note']
+        fields = ['created_by', 'insurance', 'note']
         widgets = {
             "created_by": forms.Select(attrs={
                 "class": "form-control",
@@ -374,11 +392,14 @@ class InsuranceNoteForm(ModelForm):
             })
         }
 
+
 # Car Forms
 class CarForm(ModelForm):
     class Meta:
         model = Car
-        fields = ['brand', 'model', 'vin', 'license_plates', 'insurance', 'current_car_review_date', 'car_review_renewal_date' ,'purchase_date']
+        fields = ['brand', 'model', 'vin', 'license_plates', 'insurance',
+                  'current_car_review_date', 'car_review_renewal_date',
+                  'purchase_date']
         widgets = {
             "brand": TextInput(attrs={
                 "class": "form-control",
@@ -421,6 +442,7 @@ class CarForm(ModelForm):
                 "placeholder": "(YYYY-MM-DD)"
             }),
         }
+
 
 class CarOwnerForm(ModelForm):
     class Meta:
@@ -466,10 +488,12 @@ class CarAttachmentForm(ModelForm):
                 "placeholder": "Attachment"
             })
         }
+
+
 class CarNoteForm(ModelForm):
     class Meta:
         model = CarNote
-        fields = ['created_by','car', 'note']
+        fields = ['created_by', 'car', 'note']
         widgets = {
             "created_by": forms.Select(attrs={
                 "class": "form-control",
@@ -488,8 +512,8 @@ class CarNoteForm(ModelForm):
             })
         }
 
-# GenericEvent Form
 
+# GenericEvent Form
 class GenericEventForm(ModelForm):
     class Meta:
         model = GenericEvent
@@ -517,19 +541,22 @@ class GenericEventForm(ModelForm):
             })
         }
 
-# SignUpForm is not used 16.03.2023
 
+# SignUpForm is not used 16.03.2023
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=150, label="Username")
     first_name = forms.CharField(max_length=150, label="First Name")
-    last_name = forms.CharField(max_length=150, label = "Last Name")
+    last_name = forms.CharField(max_length=150, label="Last Name")
     email = forms.EmailInput()
-    password1 = forms.CharField(widget=forms.PasswordInput, label="Password")
-    password2 = forms.CharField(widget=forms.PasswordInput, label="Password confirm")
+    password1 = forms.CharField(widget=forms.PasswordInput,
+                                label="Password")
+    password2 = forms.CharField(widget=forms.PasswordInput,
+                                label="Password confirm")
 
     class Meta:
         model = User
-        fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
+        fields = ["username", "first_name", "last_name",
+                  "email", "password1", "password2"]
         widget = {
             "username": TextInput(attrs={
                 "class": "form-control",
@@ -564,6 +591,7 @@ class SignUpForm(UserCreationForm):
             }),
         }
 
+
 class LoginForm(AuthenticationForm):
     class Meta:
         model = User
@@ -580,5 +608,3 @@ class LoginForm(AuthenticationForm):
                 "placeholder": "Password"
             })
         }
-
-

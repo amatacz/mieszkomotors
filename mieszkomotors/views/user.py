@@ -15,14 +15,13 @@ class signUp(View):
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
-    
+
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            user = form.save()
-
+            form.save()
             return redirect('login')
-        return render(request, self.template_name, {'form': form })
+        return render(request, self.template_name, {'form': form})
 
 
 class loginView(View):
@@ -32,10 +31,10 @@ class loginView(View):
     def get(self, request):
         form = self.form_class
         return render(request, self.template_name, {'form': form})
-    
+
     def post(self, request):
         if request.method == "POST":
-            form = LoginForm(request, data = request.POST)
+            form = LoginForm(request, data=request.POST)
             if form.is_valid():
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password')
@@ -51,10 +50,11 @@ class loginView(View):
                 else:
                     messages.error(request, "Błąd")
             else:
-                messages.error(request, "Nieprawidłowa nazwa użytkownika lub hasło")
+                messages.error(request, "Nieprawidłowa nazwa użytkownika \
+                               lub hasło")
         form = LoginForm()
         return render(request, 'registration/login.html', {'form': form})
-    
+
 
 class logoutView(View):
     def get(self, request):

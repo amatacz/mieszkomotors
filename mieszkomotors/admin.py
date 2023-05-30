@@ -1,10 +1,13 @@
 from django.contrib import admin
 
 from mieszkomotors.models.car import Car, CarOwner
-from mieszkomotors.models.events import *
+from mieszkomotors.models.events import CarEvent, InsuranceEvent, \
+    GenericEvent, WinterTyresReplacementEvent, \
+    SpringTyresReplacementEvent, CarEventMail, \
+    InsuranceEventMail, GenericEventMail
 from mieszkomotors.models.insurance import Insurance, InsurancePartialPayments
-from mieszkomotors.models.owner import Customer, CustomerAttachment, CustomerNote, EnterpriseCustomer, SelfEmployedCustomer, IndividualCustomer
-
+from mieszkomotors.models.owner import Customer, CustomerAttachment, \
+    CustomerNote, EnterpriseCustomer, SelfEmployedCustomer, IndividualCustomer
 
 
 admin.site.register(Car)
