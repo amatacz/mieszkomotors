@@ -14,12 +14,18 @@
   nav {
     background:transparent;
   }
+
+  .nav-item.dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+  }
   footer {
     background: transparent;
   }
 
   #main-container {
-    background-color: #ffffff;
+    background-color: e1eff1;
     margin-top: 15px;
     margin-bottom: 15px;
     padding-left: 45px;
@@ -39,6 +45,12 @@
   }
 
   #header-link {
+    color: #e1eff1;
+    font-size: 21px;
+    text-decoration: none;
+  }
+
+  #navbarDropdown {
     color: #e1eff1;
     font-size: 21px;
     text-decoration: none;
@@ -69,4 +81,11 @@
 
   p {
     font-weight: normal !important;
+  }
+
+  .dropdown-item:hover {
+    background-color: #ffd400;
+  }
+  .dropdown-item {
+    background-color: white;
   }
