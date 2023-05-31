@@ -29,45 +29,50 @@
 
     <body class="d-flex flex-column min-vh-100">
         <!-- Nav bar -->
-        <nav class="navbar navbar-expand-lg py-4">
-            <div class="collapse navbar-collapse align-items-center" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item active mx-3">
-                    <a href="https://mieszkomotors.com" target="_blank"><img src="/static/mieszkomotors/logo-horizontal-white.svg" width="170", height="19"></a>
+          <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <li class="nav-item">
+                    <a href="https://mieszkomotors.com" target="_blank">
+                        <img src="/static/mieszkomotors/logo-horizontal-white.svg" width="170", height="19">
+                    </a>
                 </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item mx-3">
-                    <a id="header-link" href="{% url 'home' %}">STRONA GŁÓWNA</a>
-                </li>
-                <li class="nav-item mx-3">
-                    <a id="header-link" href="{% url 'customers_list' %}">KLIENCI</a>
-                </li>
-                <li class="nav-item mx-3">
-                    <a id="header-link" href="{% url 'car_list' %}">SAMOCHODY</a>
-                </li>
-                <li class="nav-item mx-3">
-                    <a id="header-link" href="{% url 'insurance_list' %}">UBEZPIECZENIA</a>
-                </li>
-                {% endif %}
-              </ul>
-            </div>
-            <div class="container-flex right mx-3">
-                {% if user.is_authenticated %}
-                <ul class="navbar-nav">
-                    <li class="nav-item mx-3">
-                        <a id="header-link" href="{% url 'logout'%}">WYLOGUJ SIĘ</a>
-                    </li>
-                </ul>
-                {% else %}
-                <ul class="navbar-nav mx-3">
-                    <li class="nav-item">
-                        <a id="header-link" href="{% url 'login' %}">ZALOGUJ SIĘ</a>
-                    </li>
-                </ul>
-                {% endif %}
+                <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    class="navbar-toggler navbar-dark" aria-controls="navbarNav" aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse mt-1" id="navbarNav">
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item mx-3">
+                            <a id="header-link" href="{% url 'home' %}">STRONA GŁÓWNA</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a id="header-link" href="{% url 'customers_list' %}">KLIENCI</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a id="header-link" href="{% url 'car_list' %}">SAMOCHODY</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a id="header-link" href="{% url 'insurance_list' %}">UBEZPIECZENIA</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item mx-3">
+                            <a id="header-link" href="{% url 'logout'%}">WYLOGUJ SIĘ</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a id="header-link" href="{% url 'login' %}">ZALOGUJ SIĘ</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
           </nav>
-
+          
         <!-- Content section -->
         <div class="container bg-body rounded min-vh-80" id="main-container">
             <div class="row pt-5">
