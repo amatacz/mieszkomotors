@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'localhost', '64.227.120.12', '127.0.0.1' ]
+ALLOWED_HOSTS = ['localhost', '64.227.120.12', '127.0.0.1']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'phonenumber_field',
     'django_browser_reload',
+    'import_export',
 
 ]
 

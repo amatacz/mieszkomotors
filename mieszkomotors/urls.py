@@ -48,6 +48,9 @@ urlpatterns = [
     path('individual_customer/detail/<int:pk>',
          owner.IndividualCustomerDetail.as_view(),
          name='individual_customer_detail'),
+    path('individual_customer/list/',
+         owner.IndividualCustomersListView.as_view(),
+         name='individual_customer_list'),
 
     # Self Employeed Customers urls
     path('self_employed_customer/create',
@@ -62,6 +65,9 @@ urlpatterns = [
     path('self_employed_customer/detail/<int:pk>',
          owner.SelfEmployedCustomerDetail.as_view(),
          name='selfemployed_customer_detail'),
+    path('self_employed_customer/list/',
+         owner.SelfEmployedCustomersListView.as_view(),
+         name='self_employed_customer_list'),
 
     # Enterprise Customers urls
     path('enterprise_customer/create',
@@ -76,6 +82,9 @@ urlpatterns = [
     path('enterprise_customer/detail/<int:pk>',
          owner.EnterpriseCustomerDetail.as_view(),
          name='enterprise_customer_detail'),
+    path('enterprise_customer/list/',
+         owner.EnterpriseCustomersListView.as_view(),
+         name='enterprise_customer_list'),
 
     # Customer attachment urls
     path('customer_attachment/create/<str:customer_type>/<int:customer_id>',

@@ -4,20 +4,38 @@
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
         <div class="col-12 col-centered">
-            <p class="h1 py-3 font-weight-bold">Klienci z działalnościa gospodarczą</p>
-            {% for individual_owner in individual_owners %}
-                <li class="m-2 font-weight-bold"><a href="{% url 'self_employed_customer_detail' selfemployedcustomer.id %}">{{ selfemployedcustomer }}</a></li>
+            <p class="h1 py-3 font-weight-bold">Klienci z działalnością gospodarczą</p>
+
+            {% for obj in object_list %}
+                <li class="m-2 font-weight-bold">{{ obj }}</li>
             {% endfor %}
-            <div class="py-3 justify-between">
-                <a class="btn" href="{% url 'self_employed_customer_create'%}"> Dodaj klienta z działalnościa gospodarczą </a>
-            </div>
         </div>
     </div>
 </div>
 <div class="d-flex justify-content-left mx-3">
     <div class="row row-centered pt-3">
-        <div class="col-12 col-centered">
-            <a class="btn" href="{% url 'home'%}"> Wróć na stronę główną</a>
+        <!-- trigger modal -->
+        <button type="button" class="btn" data-bs-toggle="modal"
+            data-bs-target="#download-modal">Zapisz dane do pliku</button>
+        <!-- end of trigger modal -->
+
+        <!-- modal -->
+        <div class="modal fade" id="download-modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Wybierz format pliku</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn">Zapisz dane do pliku</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,21 +1,28 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, FormView
+
 
 from mieszkomotors.models.owner import Customer, CustomerAttachment, \
     CustomerNote, IndividualCustomer, SelfEmployedCustomer, EnterpriseCustomer
 from mieszkomotors.forms import IndividualCustomerForm, \
     SelfEmployedCustomerForm, EnterpriseCustomerForm, CustomerNoteForm, \
     CustomerAttachmentForm
-from django.shortcuts import redirect
+
+from mieszkomotors.forms import FormatForm
+from mieszkomotors.admin import IndividualCustomerResource, \
+    SelfEmployedCustomerResource, EnterpriseCustomerResource
 
 
 # All customers list view
-class CustomersList(LoginRequiredMixin, TemplateView):
+class CustomersList(LoginRequiredMixin, TemplateView, FormView):
     model = Customer
     template_name = 'mieszkomotors/customer/list.html'
+    form_class = FormatForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -325,3 +332,81 @@ def attachment_delete(request, customer_id, customer_type):
     CustomerAttachment.objects.filter(id__in=to_remove).delete()
     return redirect(reverse_lazy(f'{customer_type}_customer_detail',
                                  args=[customer_id]))
+
+
+# Download Views
+
+class IndividualCustomersListView(ListView, FormView):
+    model = IndividualCustomer
+    template_name = 'mieszkomotors/individual_customer/list.html'
+    form_class = FormatForm
+
+    def post(self, request, **kwargs):
+        qs = self.get_queryset()
+        dataset = IndividualCustomerResource().export(qs)
+
+        format = request.POST.get('format')
+
+        if format == 'xls':
+            ds = dataset.xls
+        elif format == 'csv':
+            ds = dataset.csv
+        else:
+            ds = dataset.json
+
+        response = HttpResponse(ds, content_type=f'{format}')
+        response['Content-Disposition'] = f'attachment; \
+            filename=individual_customers.{format}'
+
+        return response
+
+
+class SelfEmployedCustomersListView(ListView, FormView):
+    model = SelfEmployedCustomer
+    template_name = 'mieszkomotors/self_employed_customer/list.html'
+    form_class = FormatForm
+
+    def post(self, request, **kwargs):
+        qs = self.get_queryset()
+        dataset = SelfEmployedCustomerResource().export(qs)
+
+        format = request.POST.get('format')
+
+        if format == 'xls':
+            ds = dataset.xls
+        elif format == 'csv':
+            ds = dataset.csv
+        else:
+            ds = dataset.json
+
+        response = HttpResponse(ds, content_type=f'{format}')
+        response['Content-Disposition'] = f'attachment; \
+            filename=self_employed_customers.{format}'
+
+        return response
+
+
+class EnterpriseCustomersListView(ListView, FormView):
+    model = EnterpriseCustomer
+    template_name = 'mieszkomotors/enterprise_customer/list.html'
+    form_class = FormatForm
+
+    def post(self, request, **kwargs):
+        qs = self.get_queryset()
+        dataset = EnterpriseCustomerResource().export(qs)
+
+        format = request.POST.get('format')
+
+        if format == 'xls':
+            ds = dataset.xls
+        elif format == 'csv':
+            ds = dataset.csv
+        else:
+            ds = dataset.json
+
+        response = HttpResponse(ds, content_type=f'{format}')
+        response['Content-Disposition'] = f'attachment; \
+            filename=enterprise_customers.{format}'
+
+        return response
+
