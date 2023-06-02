@@ -7,7 +7,7 @@
             <p class="h1 py-3 font-weight-bold">Klienci z działalnością gospodarczą</p>
 
             {% for obj in object_list %}
-                <li class="m-2 font-weight-bold">{{ obj }}</li>
+                <li class="m-2 font-weight-bold"><a href="{% url 'selfemployed_customer_detail' obj.id %}">{{ obj }}</a></li>
             {% endfor %}
         </div>
     </div>
